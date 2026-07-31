@@ -25,7 +25,7 @@ public class Requirement {
     private String description;
 
     @Column(name = "measurable")
-    private boolean measurable;
+    private boolean measurable = false;
 
     @Column(name = "scope")
     @Enumerated(EnumType.STRING)

@@ -30,7 +30,7 @@ public class Stage {
     private int stageOrder;
 
     @Column(name = "tax_applies")
-    private boolean taxApplies;
+    private boolean taxApplies = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "challenge_id")

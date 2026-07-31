@@ -32,7 +32,7 @@ public class Sim {
     private LifeStage lifeStage;
 
     @Column(name = "alive")
-    private boolean alive;
+    private boolean alive = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "run_id")

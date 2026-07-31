@@ -25,7 +25,7 @@ public class Career {
     private String name;
 
     @Column(name = "level_cap")
-    private int levelCap;
+    private int levelCap = 10;
 
     @OneToMany(mappedBy = "career")
     private Set<CareerBranch> careerBranches;
