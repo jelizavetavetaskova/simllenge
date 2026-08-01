@@ -1,5 +1,6 @@
 package dev.vulpden.simllenge.career.model;
 
+import dev.vulpden.simllenge.career.model.enums.CareerType;
 import dev.vulpden.simllenge.sim.model.Trait;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -24,8 +25,9 @@ public class Career {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "level_cap")
-    private int levelCap = 10;
+    @Column(name = "career_type")
+    @Enumerated(EnumType.STRING)
+    private CareerType careerType;
 
     @OneToMany(mappedBy = "career")
     private Set<CareerBranch> careerBranches;
