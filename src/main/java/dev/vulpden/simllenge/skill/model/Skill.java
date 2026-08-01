@@ -24,6 +24,9 @@ public class Skill {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "level_cap")
+    private int levelCap = 10;
+
     @OneToMany(mappedBy = "skill")
     Set<SimSkill> skills;
 }
