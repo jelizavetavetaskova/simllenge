@@ -3,6 +3,7 @@ package dev.vulpden.simllenge.requirement.model;
 import dev.vulpden.simllenge.career.model.CareerBranch;
 import dev.vulpden.simllenge.requirement.model.enums.MetricType;
 import dev.vulpden.simllenge.requirement.model.enums.Scope;
+import dev.vulpden.simllenge.sim.model.enums.LifeStage;
 import dev.vulpden.simllenge.skill.model.Skill;
 import dev.vulpden.simllenge.stage.model.Stage;
 import jakarta.persistence.*;
@@ -38,6 +39,10 @@ public class Requirement {
 
     @Column(name = "target")
     private String target;
+
+    @Column(name = "min_life_stage")
+    @Enumerated(EnumType.STRING)
+    private LifeStage minLifeStage;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stage_id")
