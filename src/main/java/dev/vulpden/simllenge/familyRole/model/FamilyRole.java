@@ -1,5 +1,6 @@
 package dev.vulpden.simllenge.familyRole.model;
 
+import dev.vulpden.simllenge.requirement.model.Requirement;
 import dev.vulpden.simllenge.sim.model.Sim;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -26,4 +27,7 @@ public class FamilyRole {
 
     @OneToMany(mappedBy = "familyRole")
     private Set<Sim> sims;
+
+    @OneToMany(mappedBy = "role")
+    private Set<Requirement> requirements;
 }

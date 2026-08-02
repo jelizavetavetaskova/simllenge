@@ -1,6 +1,7 @@
 package dev.vulpden.simllenge.requirement.model;
 
 import dev.vulpden.simllenge.career.model.CareerBranch;
+import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.requirement.model.enums.MetricType;
 import dev.vulpden.simllenge.requirement.model.enums.Scope;
 import dev.vulpden.simllenge.sim.model.enums.LifeStage;
@@ -59,4 +60,8 @@ public class Requirement {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "career_branch_id")
     private CareerBranch careerBranch;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private FamilyRole role;
 }
