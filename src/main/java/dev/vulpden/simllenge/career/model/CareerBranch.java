@@ -1,10 +1,13 @@
 package dev.vulpden.simllenge.career.model;
 
+import dev.vulpden.simllenge.requirement.model.Requirement;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "career_branch")
@@ -24,4 +27,7 @@ public class CareerBranch {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "career_id")
     private Career career;
+
+    @OneToMany(mappedBy = "careerBranch")
+    private Set<Requirement> requirements;
 }

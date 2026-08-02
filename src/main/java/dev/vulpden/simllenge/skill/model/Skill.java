@@ -1,5 +1,6 @@
 package dev.vulpden.simllenge.skill.model;
 
+import dev.vulpden.simllenge.requirement.model.Requirement;
 import dev.vulpden.simllenge.sim.model.SimSkill;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -29,4 +30,7 @@ public class Skill {
 
     @OneToMany(mappedBy = "skill")
     Set<SimSkill> skills;
+
+    @ManyToMany(mappedBy = "skills")
+    Set<Requirement> requirements;
 }

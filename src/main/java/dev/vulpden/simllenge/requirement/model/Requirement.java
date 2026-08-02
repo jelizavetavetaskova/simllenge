@@ -1,13 +1,17 @@
 package dev.vulpden.simllenge.requirement.model;
 
+import dev.vulpden.simllenge.career.model.CareerBranch;
 import dev.vulpden.simllenge.requirement.model.enums.MetricType;
 import dev.vulpden.simllenge.requirement.model.enums.Scope;
+import dev.vulpden.simllenge.skill.model.Skill;
 import dev.vulpden.simllenge.stage.model.Stage;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "requirement")
@@ -24,9 +28,6 @@ public class Requirement {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "measurable")
-    private boolean measurable = false;
-
     @Column(name = "scope")
     @Enumerated(EnumType.STRING)
     private Scope scope;
@@ -41,4 +42,16 @@ public class Requirement {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stage_id")
     private Stage stage;
+
+    @ManyToMany
+    @JoinTable(
+            name = "requirement_skill",
+            joinColumns = @JoinColumn(name = "requirement_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private Set<Skill> skills;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "career_branch_id")
+    private CareerBranch careerBranch;
 }
