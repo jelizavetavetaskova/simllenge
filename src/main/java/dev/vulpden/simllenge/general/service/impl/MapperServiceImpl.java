@@ -1,5 +1,7 @@
 package dev.vulpden.simllenge.general.service.impl;
 
+import dev.vulpden.simllenge.familyRole.dto.FamilyRoleDto;
+import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.general.service.MapperService;
 import dev.vulpden.simllenge.skill.dto.SkillDto;
 import dev.vulpden.simllenge.skill.model.Skill;
@@ -35,6 +37,14 @@ public class MapperServiceImpl implements MapperService {
         TraitDto dto = new TraitDto();
         dto.setTraitId(trait.getTraitId());
         dto.setName(trait.getName());
+        return dto;
+    }
+
+    @Override
+    public FamilyRoleDto familyRoleToDto(FamilyRole familyRole) {
+        FamilyRoleDto dto = new FamilyRoleDto();
+        dto.setFamilyRoleId(familyRole.getFamilyRoleId());
+        dto.setName(familyRole.getName());
         return dto;
     }
 }
