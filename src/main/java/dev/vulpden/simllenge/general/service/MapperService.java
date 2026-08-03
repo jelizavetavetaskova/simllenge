@@ -1,5 +1,9 @@
 package dev.vulpden.simllenge.general.service;
 
+import dev.vulpden.simllenge.career.dto.CareerBranchDto;
+import dev.vulpden.simllenge.career.dto.CareerDto;
+import dev.vulpden.simllenge.career.model.Career;
+import dev.vulpden.simllenge.career.model.CareerBranch;
 import dev.vulpden.simllenge.familyRole.dto.FamilyRoleDto;
 import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.skill.dto.SkillDto;
@@ -17,4 +21,8 @@ public interface MapperService {
     TraitDto traitToDto(Trait trait);
 
     FamilyRoleDto familyRoleToDto(FamilyRole familyRole);
+
+    CareerDto careerToDto(Career career);
+
+    CareerBranchDto careerBranchToDto(CareerBranch careerBranch);
 }

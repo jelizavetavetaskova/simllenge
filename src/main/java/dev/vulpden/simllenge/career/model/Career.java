@@ -30,6 +30,7 @@ public class Career {
     private CareerType careerType;
 
     @OneToMany(mappedBy = "career")
+    @OrderBy("careerBranchId")
     private Set<CareerBranch> careerBranches;
 
     @ManyToMany
