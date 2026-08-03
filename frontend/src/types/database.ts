@@ -15,3 +15,8 @@ export type Trait = {
     traitId: number;
     name: string;
 }
+
+export type FamilyRole = {
+    familyRoleId: number;
+    name: string;
+}
