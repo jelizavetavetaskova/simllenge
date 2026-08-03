@@ -1,8 +1,8 @@
-import StagesView from "./ui/stage/StagesView.tsx";
+import TraitsView from "./ui/trait/TraitsView.tsx";
 
 const App = () => {
     return (
-        <StagesView />
+        <TraitsView />
     );
 }
 

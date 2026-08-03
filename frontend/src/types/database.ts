@@ -10,3 +10,8 @@ export type Stage = {
     stageOrder: number;
     taxApplies: boolean;
 }
+
+export type Trait = {
+    traitId: number;
+    name: string;
+}
