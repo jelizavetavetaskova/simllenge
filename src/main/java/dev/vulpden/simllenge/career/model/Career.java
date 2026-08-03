@@ -1,7 +1,7 @@
 package dev.vulpden.simllenge.career.model;
 
 import dev.vulpden.simllenge.career.model.enums.CareerType;
-import dev.vulpden.simllenge.sim.model.Trait;
+import dev.vulpden.simllenge.trait.model.Trait;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

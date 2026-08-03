@@ -4,6 +4,7 @@ import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.run.model.Run;
 import dev.vulpden.simllenge.sim.model.enums.LifeStage;
 import dev.vulpden.simllenge.stage.model.Stage;
+import dev.vulpden.simllenge.trait.model.Trait;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

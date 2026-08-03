@@ -5,6 +5,8 @@ import dev.vulpden.simllenge.skill.dto.SkillDto;
 import dev.vulpden.simllenge.skill.model.Skill;
 import dev.vulpden.simllenge.stage.dto.StageDto;
 import dev.vulpden.simllenge.stage.model.Stage;
+import dev.vulpden.simllenge.trait.dto.TraitDto;
+import dev.vulpden.simllenge.trait.model.Trait;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,6 +27,14 @@ public class MapperServiceImpl implements MapperService {
         dto.setName(stage.getName());
         dto.setStageOrder(stage.getStageOrder());
         dto.setTaxApplies(stage.isTaxApplies());
+        return dto;
+    }
+
+    @Override
+    public TraitDto traitToDto(Trait trait) {
+        TraitDto dto = new TraitDto();
+        dto.setTraitId(trait.getTraitId());
+        dto.setName(trait.getName());
         return dto;
     }
 }
