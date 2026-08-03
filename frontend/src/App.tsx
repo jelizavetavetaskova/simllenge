@@ -1,8 +1,8 @@
-import SkillsView from "./ui/skills/SkillsView.tsx";
+import StagesView from "./ui/stage/StagesView.tsx";
 
 const App = () => {
     return (
-        <SkillsView />
+        <StagesView />
     );
 }
 
