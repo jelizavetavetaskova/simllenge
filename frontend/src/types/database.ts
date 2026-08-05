@@ -32,3 +32,8 @@ export type CareerBranch = {
     careerBranchId: number;
     name: string;
 }
+
+export type Run = {
+    runId: number;
+    budget: number;
+}

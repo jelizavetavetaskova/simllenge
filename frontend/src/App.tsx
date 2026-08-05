@@ -1,6 +1,8 @@
+import RunPage from "./ui/pages/RunPage.tsx";
+
 const App = () => {
     return (
-        <div></div>
+        <RunPage />
     );
 }
 
