@@ -1,8 +1,8 @@
 import type {CreateRun} from "../types/app.ts";
 import type {Run} from "../types/database.ts";
 
-export const createRun = async (run: CreateRun) => {
-    const res = await fetch(`/api/challenges/1/runs`, { // TODO change to real id
+export const createRun = async (challengeId: string, run: CreateRun) => {
+    const res = await fetch(`/api/challenges/${challengeId}/runs`, {
         method: "POST",
         body: JSON.stringify(run),
         headers: {
