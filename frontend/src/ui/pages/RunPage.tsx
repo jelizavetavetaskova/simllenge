@@ -1,59 +1,67 @@
-import {useState, type SubmitEvent} from "react";
-import type {CreateRun} from "../../types/app.ts";
-import {createRun} from "../../service/runService.ts";
+import {useEffect, useState} from "react";
+import type {Run} from "../../types/database.ts";
 import {useParams} from "react-router-dom";
+import {getChallengeRuns} from "../../service/runService.ts";
 
 const RunPage = () => {
-    const [budget, setBudget] = useState("");
+    const [runs, setRuns] = useState<Run[]>([]);
 
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const {challengeId} = useParams();
 
-    const saveRun = async (e: SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const getRuns = async () => {
         setError("");
-        setSuccess("");
 
-        if (!budget) {
-            setError("Budget is required");
-            return;
-        }
         if (!challengeId) {
             setError("Challenge id is required");
             return;
         }
 
-        const run: CreateRun = {budget: Number(budget)}
-
         try {
-            await createRun(challengeId, run);
-            setBudget("");
-            setSuccess("Run created successfully");
+            setLoading(true);
+            setRuns(await getChallengeRuns(challengeId));
         } catch (e) {
             (e instanceof Error) ? setError(e.message) : setError(String(e));
+        } finally {
+            setLoading(false);
         }
+    }
+
+    useEffect(() => {
+        getRuns();
+    }, [challengeId]);
+
+    const renderContent = () => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>{error}</p>;
+        if (runs.length === 0) return <p>No runs</p>;
+        return (
+            <table>
+                <thead>
+                <tr>
+                    <th>Run ID</th>
+                    <th>Budget</th>
+                </tr>
+                </thead>
+                <tbody>
+                {runs.map(run => (
+                    <tr key={run.runId}>
+                        <td>{run.runId}</td>
+                        <td>{run.budget}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        )
+
     }
 
     return (
         <div>
-            <h1>Create a run</h1>
-
-            <form onSubmit={saveRun}>
-                <label htmlFor="budget">Budget: </label>
-                <input
-                    type="number"
-                    placeholder="5000"
-                    value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
-                />
-
-                <button type="submit">Save run</button>
-            </form>
-
-            {error && <p>{error}</p>}
-            {success && <p>{success}</p>}
+            <h1>Runs</h1>
+            {renderContent()}
         </div>
     )
 }
