@@ -1,20 +1,21 @@
 import {useState, type SubmitEvent} from "react";
-import {useParams} from "react-router-dom";
 import {createRun} from "../../service/runService.ts";
 import type {CreateRun} from "../../types/app.ts";
 
-const CreateRunForm = () => {
+interface CreateRunFormProps {
+    challengeId?: string;
+    onSuccess: () => Promise<void>;
+    onClose: () => void;
+}
+
+const CreateRunForm = ({challengeId, onSuccess, onClose}: CreateRunFormProps) => {
     const [budget, setBudget] = useState("");
 
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
-
-    const {challengeId} = useParams();
 
     const saveRun = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError("");
-        setSuccess("");
 
         if (!budget) {
             setError("Budget is required");
@@ -29,8 +30,10 @@ const CreateRunForm = () => {
 
         try {
             await createRun(challengeId, run);
+            await onSuccess();
+
             setBudget("");
-            setSuccess("Run created successfully");
+            onClose();
         } catch (e) {
             (e instanceof Error) ? setError(e.message) : setError(String(e));
         }
@@ -41,6 +44,7 @@ const CreateRunForm = () => {
             <form onSubmit={saveRun}>
                 <label htmlFor="budget">Budget: </label>
                 <input
+                    id="budget"
                     type="number"
                     placeholder="5000"
                     value={budget}
@@ -51,7 +55,6 @@ const CreateRunForm = () => {
             </form>
 
             {error && <p>{error}</p>}
-            {success && <p>{success}</p>}
         </>
     )
 }

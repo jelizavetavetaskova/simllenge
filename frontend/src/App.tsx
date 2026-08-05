@@ -5,7 +5,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/challenges/:challengeId/runs/new" element={<RunPage />} />
+                <Route path="/challenges/:challengeId/runs" element={<RunPage />} />
             </Routes>
         </BrowserRouter>
     );
