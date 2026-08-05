@@ -1,6 +1,13 @@
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import RunPage from "./ui/pages/RunPage.tsx";
+
 const App = () => {
     return (
-        <div></div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/challenges/:challengeId/runs" element={<RunPage />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
