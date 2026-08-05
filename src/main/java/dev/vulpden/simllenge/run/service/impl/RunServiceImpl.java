@@ -10,6 +10,7 @@ import dev.vulpden.simllenge.run.repo.RunRepo;
 import dev.vulpden.simllenge.run.service.RunService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -23,6 +24,16 @@ public class RunServiceImpl implements RunService {
         this.challengeRepo = challengeRepo;
         this.runRepo = runRepo;
         this.mapperService = mapperService;
+    }
+
+    @Override
+    public List<RunDto> getChallengeRuns(int challengeId) {
+        if (!challengeRepo.existsById(challengeId)) throw new NoSuchElementException("Challenge does not exist");
+
+        return runRepo.findAllByChallengeChallengeId(challengeId)
+                .stream()
+                .map(mapperService::runToDto)
+                .toList();
     }
 
     @Override

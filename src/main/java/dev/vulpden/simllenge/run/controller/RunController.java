@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/challenges/{challengeId}/runs")
 public class RunController {
@@ -15,6 +17,12 @@ public class RunController {
 
     public RunController(RunService runService) {
         this.runService = runService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<RunDto>> getRuns(@PathVariable int challengeId) {
+        List<RunDto> runs = runService.getChallengeRuns(challengeId);
+        return ResponseEntity.ok(runs);
     }
 
     @PostMapping
