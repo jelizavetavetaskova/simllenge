@@ -7,6 +7,8 @@ import dev.vulpden.simllenge.career.model.CareerBranch;
 import dev.vulpden.simllenge.familyRole.dto.FamilyRoleDto;
 import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.general.service.MapperService;
+import dev.vulpden.simllenge.run.dto.RunDto;
+import dev.vulpden.simllenge.run.model.Run;
 import dev.vulpden.simllenge.skill.dto.SkillDto;
 import dev.vulpden.simllenge.skill.model.Skill;
 import dev.vulpden.simllenge.stage.dto.StageDto;
@@ -70,6 +72,14 @@ public class MapperServiceImpl implements MapperService {
         CareerBranchDto dto = new CareerBranchDto();
         dto.setCareerBranchId(careerBranch.getCareerBranchId());
         dto.setName(careerBranch.getName());
+        return dto;
+    }
+
+    @Override
+    public RunDto runToDto(Run run) {
+        RunDto dto = new RunDto();
+        dto.setRunId(run.getRunId());
+        dto.setBudget(run.getBudget());
         return dto;
     }
 }
