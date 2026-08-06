@@ -2,7 +2,7 @@ package dev.vulpden.simllenge.stage.model;
 
 import dev.vulpden.simllenge.challenge.model.Challenge;
 import dev.vulpden.simllenge.requirement.model.Requirement;
-import dev.vulpden.simllenge.sim.model.Sim;
+import dev.vulpden.simllenge.run.model.Run;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -40,5 +40,5 @@ public class Stage {
     private Set<Requirement> requirements;
 
     @OneToMany(mappedBy = "stage")
-    private Set<Sim> sims;
+    private Set<Run> runs;
 }

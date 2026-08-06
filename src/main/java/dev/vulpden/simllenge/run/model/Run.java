@@ -2,6 +2,7 @@ package dev.vulpden.simllenge.run.model;
 
 import dev.vulpden.simllenge.challenge.model.Challenge;
 import dev.vulpden.simllenge.sim.model.Sim;
+import dev.vulpden.simllenge.stage.model.Stage;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -31,4 +32,8 @@ public class Run {
 
     @OneToMany(mappedBy = "run")
     private Set<Sim> sims;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stage_id")
+    private Stage stage;
 }
