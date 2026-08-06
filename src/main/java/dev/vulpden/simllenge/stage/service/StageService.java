@@ -5,5 +5,5 @@ import dev.vulpden.simllenge.stage.dto.StageDto;
 import java.util.List;
 
 public interface StageService {
-    List<StageDto> getAllStages();
+    List<StageDto> getChallengeStages(int challengeId);
 }
