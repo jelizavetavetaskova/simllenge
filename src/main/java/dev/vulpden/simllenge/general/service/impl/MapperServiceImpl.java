@@ -80,6 +80,7 @@ public class MapperServiceImpl implements MapperService {
         RunDto dto = new RunDto();
         dto.setRunId(run.getRunId());
         dto.setBudget(run.getBudget());
+        dto.setStage(stageToDto(run.getStage()));
         return dto;
     }
 }
