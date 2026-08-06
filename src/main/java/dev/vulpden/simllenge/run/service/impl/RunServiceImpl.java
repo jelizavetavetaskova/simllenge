@@ -8,6 +8,8 @@ import dev.vulpden.simllenge.run.dto.RunDto;
 import dev.vulpden.simllenge.run.model.Run;
 import dev.vulpden.simllenge.run.repo.RunRepo;
 import dev.vulpden.simllenge.run.service.RunService;
+import dev.vulpden.simllenge.stage.model.Stage;
+import dev.vulpden.simllenge.stage.repo.StageRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +19,14 @@ import java.util.NoSuchElementException;
 public class RunServiceImpl implements RunService {
     private final ChallengeRepo challengeRepo;
     private final RunRepo runRepo;
+    private final StageRepo stageRepo;
 
     private final MapperService mapperService;
 
-    public RunServiceImpl(ChallengeRepo challengeRepo, RunRepo runRepo, MapperService mapperService) {
+    public RunServiceImpl(ChallengeRepo challengeRepo, RunRepo runRepo, StageRepo stageRepo, MapperService mapperService) {
         this.challengeRepo = challengeRepo;
         this.runRepo = runRepo;
+        this.stageRepo = stageRepo;
         this.mapperService = mapperService;
     }
 
@@ -37,13 +41,25 @@ public class RunServiceImpl implements RunService {
     }
 
     @Override
+    public RunDto getRunById(int runId) {
+        Run run = runRepo.findById(runId)
+                .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
+
+        return mapperService.runToDto(run);
+    }
+
+    @Override
     public RunDto createRun(int challengeId, CreateRunDto runDto) {
         Challenge challenge = challengeRepo.findById(challengeId)
                 .orElseThrow(() -> new NoSuchElementException("Challenge does not exist"));
 
+        Stage stage = stageRepo.findById(runDto.getStageId())
+                .orElseThrow(() -> new NoSuchElementException("Stage does not exist"));
+
         Run run = new Run();
         run.setChallenge(challenge);
         run.setBudget(runDto.getBudget());
+        run.setStage(stage);
 
         return mapperService.runToDto(runRepo.save(run));
     }

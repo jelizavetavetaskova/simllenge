@@ -9,5 +9,7 @@ import java.util.List;
 public interface RunService {
     List<RunDto> getChallengeRuns(int challengeId);
 
+    RunDto getRunById(int runId);
+
     RunDto createRun(int challengeId, CreateRunDto runDto);
 }
