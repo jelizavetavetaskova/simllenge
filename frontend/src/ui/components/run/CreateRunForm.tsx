@@ -2,7 +2,7 @@ import {useState, type SubmitEvent, useEffect} from "react";
 import {createRun} from "../../../service/runService.ts";
 import type {CreateRun} from "../../../types/app.ts";
 import type {Stage} from "../../../types/database.ts";
-import {getAllStages} from "../../../service/stageService.ts";
+import {getChallengeStages} from "../../../service/stageService.ts";
 
 interface CreateRunFormProps {
     challengeId?: string;
@@ -19,15 +19,20 @@ const CreateRunForm = ({challengeId, onSuccess, onClose}: CreateRunFormProps) =>
 
     useEffect(() => {
         const fetchStages = async () => {
+            if (!challengeId) {
+                setError("Challenge id is required");
+                return;
+            }
+
             try {
-                setStages(await getAllStages());
+                setStages(await getChallengeStages(challengeId));
             } catch (e) {
                 (e instanceof Error) ? setError(e.message) : setError(String(e));
             }
         }
 
         fetchStages();
-    }, []);
+    }, [challengeId]);
 
     const saveRun = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();

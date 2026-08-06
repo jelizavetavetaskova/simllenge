@@ -1,7 +1,7 @@
 import type {Stage} from "../types/database.ts";
 
-export const getAllStages = async () => {
-    const res = await fetch("/api/stages");
+export const getChallengeStages = async (challengeId: string) => {
+    const res = await fetch(`/api/challenges/${challengeId}/stages`);
 
     if (!res.ok) throw Error(await res.text());
 
