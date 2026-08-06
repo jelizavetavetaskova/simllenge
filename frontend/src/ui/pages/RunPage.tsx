@@ -3,7 +3,7 @@ import type {Run} from "../../types/database.ts";
 import {useParams} from "react-router-dom";
 import {getChallengeRuns} from "../../service/runService.ts";
 import * as Dialog from "@radix-ui/react-dialog";
-import CreateRunForm from "../components/CreateRunForm.tsx";
+import CreateRunForm from "../components/run/CreateRunForm.tsx";
 import {X} from "lucide-react";
 import styles from "./RunPage.module.css"
 
@@ -55,6 +55,7 @@ const RunPage = () => {
                     <tr>
                         <th>Run ID</th>
                         <th>Budget</th>
+                        <th>Stage</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,7 @@ const RunPage = () => {
                         <tr key={run.runId}>
                             <td>{run.runId}</td>
                             <td>{run.budget}</td>
+                            <td>{run.stage.name}</td>
                         </tr>
                     ))}
                     </tbody>

@@ -36,4 +36,5 @@ export type CareerBranch = {
 export type Run = {
     runId: number;
     budget: number;
+    stage: Stage;
 }
