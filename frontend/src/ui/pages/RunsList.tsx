@@ -5,7 +5,6 @@ import {getChallengeRuns} from "../../service/runService.ts";
 import * as Dialog from "@radix-ui/react-dialog";
 import CreateRunForm from "../components/run/CreateRunForm.tsx";
 import {ArrowRight, X} from "lucide-react";
-import styles from "./RunsList.module.css"
 
 const RunsList = () => {
     const [runs, setRuns] = useState<Run[]>([]);
@@ -76,13 +75,13 @@ const RunsList = () => {
 
             <Dialog.Root open={isModalOpen} onOpenChange={setModalOpen}>
                 <Dialog.Portal>
-                    <Dialog.Overlay className={styles.overlay} />
+                    <Dialog.Overlay className="overlay" />
 
-                    <Dialog.Content className={styles.content}>
+                    <Dialog.Content className="content">
                         <Dialog.Close asChild>
                             <button><X size={15}/></button>
                         </Dialog.Close>
-                        <Dialog.Title>Create run</Dialog.Title>
+                        <Dialog.Title>Create a run</Dialog.Title>
                         <CreateRunForm challengeId={challengeId} onSuccess={getRuns} onClose={() => setModalOpen(false)}/>
                     </Dialog.Content>
 
