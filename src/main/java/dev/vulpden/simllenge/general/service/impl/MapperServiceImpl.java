@@ -9,6 +9,8 @@ import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.general.service.MapperService;
 import dev.vulpden.simllenge.run.dto.RunDto;
 import dev.vulpden.simllenge.run.model.Run;
+import dev.vulpden.simllenge.sim.dto.SimDto;
+import dev.vulpden.simllenge.sim.model.Sim;
 import dev.vulpden.simllenge.skill.dto.SkillDto;
 import dev.vulpden.simllenge.skill.model.Skill;
 import dev.vulpden.simllenge.stage.dto.StageDto;
@@ -81,6 +83,17 @@ public class MapperServiceImpl implements MapperService {
         dto.setRunId(run.getRunId());
         dto.setBudget(run.getBudget());
         dto.setStage(stageToDto(run.getStage()));
+        return dto;
+    }
+
+    @Override
+    public SimDto simToDto(Sim sim) {
+        SimDto dto = new SimDto();
+        dto.setSimId(sim.getSimId());
+        dto.setName(sim.getName());
+        dto.setFamilyRole(familyRoleToDto(sim.getFamilyRole()));
+        dto.setLifeStage(sim.getLifeStage());
+        dto.setAlive(sim.isAlive());
         return dto;
     }
 }
