@@ -22,6 +22,9 @@ const RunPage = () => {
 
     const {runId} = useParams();
 
+    const alive: Sim[] = sims.filter(sim => sim.alive);
+    const dead: Sim[] = sims.filter(sim => !sim.alive);
+
     const fetchSims = async () => {
         setError("");
 
@@ -91,8 +94,16 @@ const RunPage = () => {
                 <>
                     <h1>Run: {run.stage.name}, {run.budget}</h1>
 
+                    <button onClick={() => {
+                        setEditingSim(null);
+                        setModalOpen(true);
+                    }}>
+                        Add a sim
+                    </button>
+
                     <div>
-                        {sims.map(sim => (
+                        <h2>Family</h2>
+                        {alive.map(sim => (
                             <SimCard
                                 key={sim.simId}
                                 sim={sim}
@@ -103,12 +114,16 @@ const RunPage = () => {
                         ))}
                     </div>
 
-                    <button onClick={() => {
-                        setEditingSim(null);
-                        setModalOpen(true);
-                    }}>
-                        Add a sim
-                    </button>
+                    {dead.length > 0 &&
+                        <div>
+                            <h2>Deceased</h2>
+                            {dead.map(sim => (
+                                <SimCard key={sim.simId} sim={sim}/>
+                            ))}
+                        </div>
+                    }
+
+
 
                     <Dialog.Root open={modalOpen} onOpenChange={setModalOpen}>
                         <Dialog.Portal>

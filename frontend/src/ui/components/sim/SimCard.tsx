@@ -3,9 +3,9 @@ import {Cake, Pencil, Skull} from "lucide-react";
 
 interface SimCardProps {
     sim: Sim;
-    onEdit: (sim: Sim) => void;
-    onAgeUp: (simId: number) => void;
-    onDeath: (simId: number) => void;
+    onEdit?: (sim: Sim) => void;
+    onAgeUp?: (simId: number) => void;
+    onDeath?: (simId: number) => void;
 }
 
 const SimCard = ({sim, onEdit, onAgeUp, onDeath}: SimCardProps) => {
@@ -16,9 +16,13 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath}: SimCardProps) => {
             <p>{sim.lifeStage}</p>
             <p>{sim.alive ? "Alive" : "Dead"}</p>
 
-            <button onClick={() => onEdit(sim)}><Pencil/></button>
-            <button onClick={() => onAgeUp(sim.simId)} disabled={!sim.alive || sim.lifeStage === "ELDER"}><Cake/></button>
-            <button onClick={() => onDeath(sim.simId)} disabled={!sim.alive}><Skull/></button>
+            {sim.alive &&
+                <div>
+                    <button onClick={() => onEdit?.(sim)}><Pencil/></button>
+                    <button onClick={() => onAgeUp?.(sim.simId)} disabled={sim.lifeStage === "ELDER"}><Cake/></button>
+                    <button onClick={() => onDeath?.(sim.simId)}><Skull/></button>
+                </div>
+            }
         </div>
     )
 }
