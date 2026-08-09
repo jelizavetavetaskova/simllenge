@@ -70,4 +70,15 @@ public class SimServiceImpl implements SimService {
         sim.setFamilyRole(familyRole);
         return mapperService.simToDto(simRepo.save(sim));
     }
+
+    @Override
+    public SimDto markSimAsDead(int simId) {
+        Sim sim = simRepo.findById(simId)
+                .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+
+        if (!sim.isAlive()) return mapperService.simToDto(sim);
+
+        sim.setAlive(false);
+        return mapperService.simToDto(simRepo.save(sim));
+    }
 }

@@ -117,7 +117,7 @@ const RunPage = () => {
                                         setModalOpen(false);
                                         setEditingSim(null);
                                     }}
-                                    sim={editingSim}
+                                    sim={editingSim ?? undefined}
                                 />
                             </Dialog.Content>
                         </Dialog.Portal>

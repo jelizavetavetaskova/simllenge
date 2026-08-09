@@ -21,4 +21,10 @@ public class SimController {
         SimDto updatedSim = simService.updateSim(simId, simDto);
         return ResponseEntity.ok(updatedSim);
     }
+
+    @PostMapping("/{simId}/kill")
+    public ResponseEntity<SimDto> killSim(@PathVariable int simId) {
+        SimDto killed = simService.markSimAsDead(simId);
+        return ResponseEntity.ok(killed);
+    }
 }

@@ -12,4 +12,6 @@ public interface SimService {
     SimDto createSim(int runId, CreateSimDto simDto);
 
     SimDto updateSim(int simId, UpdateSimDto simDto);
+
+    SimDto markSimAsDead(int simId);
 }
