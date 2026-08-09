@@ -27,4 +27,10 @@ public class SimController {
         SimDto killed = simService.markSimAsDead(simId);
         return ResponseEntity.ok(killed);
     }
+
+    @PostMapping("/{simId}/age-up")
+    public ResponseEntity<SimDto> ageUp(@PathVariable int simId) {
+        SimDto aged = simService.ageUp(simId);
+        return ResponseEntity.ok(aged);
+    }
 }

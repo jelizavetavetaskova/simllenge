@@ -14,4 +14,6 @@ public interface SimService {
     SimDto updateSim(int simId, UpdateSimDto simDto);
 
     SimDto markSimAsDead(int simId);
+
+    SimDto ageUp(int simId);
 }

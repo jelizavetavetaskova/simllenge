@@ -9,6 +9,7 @@ import dev.vulpden.simllenge.sim.dto.CreateSimDto;
 import dev.vulpden.simllenge.sim.dto.SimDto;
 import dev.vulpden.simllenge.sim.dto.UpdateSimDto;
 import dev.vulpden.simllenge.sim.model.Sim;
+import dev.vulpden.simllenge.sim.model.enums.LifeStage;
 import dev.vulpden.simllenge.sim.repo.SimRepo;
 import dev.vulpden.simllenge.sim.service.SimService;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,17 @@ public class SimServiceImpl implements SimService {
         if (!sim.isAlive()) return mapperService.simToDto(sim);
 
         sim.setAlive(false);
+        return mapperService.simToDto(simRepo.save(sim));
+    }
+
+    @Override
+    public SimDto ageUp(int simId) {
+        Sim sim = simRepo.findById(simId)
+                .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+
+        if (!sim.isAlive()) throw new IllegalStateException("Dead sim cannot age up");
+
+        sim.setLifeStage(sim.getLifeStage().next());
         return mapperService.simToDto(simRepo.save(sim));
     }
 }
