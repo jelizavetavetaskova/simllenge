@@ -7,6 +7,7 @@ import dev.vulpden.simllenge.run.model.Run;
 import dev.vulpden.simllenge.run.repo.RunRepo;
 import dev.vulpden.simllenge.sim.dto.CreateSimDto;
 import dev.vulpden.simllenge.sim.dto.SimDto;
+import dev.vulpden.simllenge.sim.dto.UpdateSimDto;
 import dev.vulpden.simllenge.sim.model.Sim;
 import dev.vulpden.simllenge.sim.repo.SimRepo;
 import dev.vulpden.simllenge.sim.service.SimService;
@@ -54,6 +55,19 @@ public class SimServiceImpl implements SimService {
         sim.setFamilyRole(familyRole);
         sim.setLifeStage(simDto.getLifeStage());
 
+        return mapperService.simToDto(simRepo.save(sim));
+    }
+
+    @Override
+    public SimDto updateSim(int simId, UpdateSimDto simDto) {
+        Sim sim = simRepo.findById(simId)
+                .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+        FamilyRole familyRole = familyRoleRepo.findById(simDto.getFamilyRoleId())
+                        .orElseThrow(() -> new NoSuchElementException("Family role does not exist"));
+
+        sim.setName(simDto.getName());
+        sim.setLifeStage(simDto.getLifeStage());
+        sim.setFamilyRole(familyRole);
         return mapperService.simToDto(simRepo.save(sim));
     }
 }
