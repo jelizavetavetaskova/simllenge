@@ -31,8 +31,12 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public List<SimDto> getSimsByRun(int runId) {
-        if (!runRepo.existsById(runId)) throw new NoSuchElementException("Run does not exist");
+    public List<SimDto> getSimsByRun(int challengeId, int runId) {
+        Run run = runRepo.findById(runId)
+                .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
+
+        if (run.getChallenge().getChallengeId() != challengeId)
+            throw new NoSuchElementException("Run not found in this challenge");
 
         return simRepo.findAllByRunRunId(runId)
                 .stream()
@@ -41,9 +45,11 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public SimDto createSim(int runId, CreateSimDto simDto) {
+    public SimDto createSim(int challengeId, int runId, CreateSimDto simDto) {
         Run run = runRepo.findById(runId)
                 .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
+        if (run.getChallenge().getChallengeId() != challengeId)
+            throw new NoSuchElementException("Run not found in this challenge");
         FamilyRole familyRole = familyRoleRepo.findById(simDto.getFamilyRoleId())
                 .orElseThrow(() -> new NoSuchElementException("Family role does not exist"));
 

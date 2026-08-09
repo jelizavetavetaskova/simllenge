@@ -26,8 +26,8 @@ public class RunController {
     }
 
     @GetMapping("/{runId}")
-    public ResponseEntity<RunDto> getRun(@PathVariable int runId) {
-        return ResponseEntity.ok(runService.getRunById(runId));
+    public ResponseEntity<RunDto> getRun(@PathVariable int challengeId, @PathVariable int runId) {
+        return ResponseEntity.ok(runService.getRunById(challengeId, runId));
     }
 
     @PostMapping

@@ -6,7 +6,7 @@ import dev.vulpden.simllenge.sim.dto.SimDto;
 import java.util.List;
 
 public interface SimService {
-    List<SimDto> getSimsByRun(int runId);
+    List<SimDto> getSimsByRun(int challengeId, int runId);
 
-    SimDto createSim(int runId, CreateSimDto simDto);
+    SimDto createSim(int challengeId, int runId, CreateSimDto simDto);
 }
