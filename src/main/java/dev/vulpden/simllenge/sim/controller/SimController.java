@@ -13,21 +13,5 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/runs/{runId}/sims")
 public class SimController {
-    private final SimService simService;
 
-    public SimController(SimService simService) {
-        this.simService = simService;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<SimDto>> getSims(@PathVariable int runId) {
-        List<SimDto> sims = simService.getSimsByRun(runId);
-        return ResponseEntity.ok(sims);
-    }
-
-    @PostMapping
-    public ResponseEntity<SimDto> createSim(@PathVariable int challengeId, @PathVariable int runId, @Valid @RequestBody CreateSimDto simDto) {
-        SimDto sim = simService.createSim(challengeId, runId, simDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(sim);
-    }
 }

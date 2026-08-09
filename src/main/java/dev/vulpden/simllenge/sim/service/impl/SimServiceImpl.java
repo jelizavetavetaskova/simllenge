@@ -41,11 +41,9 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public SimDto createSim(int challengeId, int runId, CreateSimDto simDto) {
+    public SimDto createSim(int runId, CreateSimDto simDto) {
         Run run = runRepo.findById(runId)
                 .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
-        if (run.getChallenge().getChallengeId() != challengeId)
-            throw new NoSuchElementException("Run not found in this challenge");
         FamilyRole familyRole = familyRoleRepo.findById(simDto.getFamilyRoleId())
                 .orElseThrow(() -> new NoSuchElementException("Family role does not exist"));
 

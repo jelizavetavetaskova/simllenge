@@ -8,5 +8,5 @@ import java.util.List;
 public interface SimService {
     List<SimDto> getSimsByRun(int runId);
 
-    SimDto createSim(int challengeId, int runId, CreateSimDto simDto);
+    SimDto createSim(int runId, CreateSimDto simDto);
 }
