@@ -5,7 +5,7 @@ import {getRunById} from "../../service/runService.ts";
 import * as Dialog from "@radix-ui/react-dialog";
 import {X} from "lucide-react";
 import SimForm from "../components/sim/SimForm.tsx";
-import {getSimsByRun} from "../../service/simService.ts";
+import {getSimsByRun, markSimAsDead} from "../../service/simService.ts";
 import SimCard from "../components/sim/SimCard.tsx";
 
 
@@ -46,8 +46,13 @@ const RunPage = () => {
 
     }
 
-    const handleDeath = (simId: number) => {
-
+    const handleDeath = async (simId: number) => {
+        try {
+            await markSimAsDead(simId);
+            await fetchSims();
+        } catch (e) {
+            (e instanceof Error) ? setError(e.message) : setError(String(e));
+        }
     }
 
     useEffect(() => {

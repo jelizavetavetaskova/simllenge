@@ -39,3 +39,14 @@ export const updateSim = async (simId: number, sim: UpdateSim) => {
     const data: Sim = await res.json();
     return data;
 }
+
+export const markSimAsDead = async (simId: number) => {
+    const res = await fetch(`/api/sims/${simId}/kill`, {
+        method: "POST"
+    });
+
+    if (!res.ok) throw Error(await res.text());
+
+    const data: Sim = await res.json();
+    return data;
+}
