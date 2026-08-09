@@ -50,3 +50,14 @@ export const markSimAsDead = async (simId: number) => {
     const data: Sim = await res.json();
     return data;
 }
+
+export const ageUp = async (simId: number) => {
+    const res = await fetch(`/api/sims/${simId}/age-up`, {
+        method: "POST"
+    });
+
+    if (!res.ok) throw Error(await res.text());
+
+    const data: Sim = await res.json();
+    return data;
+}

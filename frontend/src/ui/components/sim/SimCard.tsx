@@ -17,7 +17,7 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath}: SimCardProps) => {
             <p>{sim.alive ? "Alive" : "Dead"}</p>
 
             <button onClick={() => onEdit(sim)}><Pencil/></button>
-            <button onClick={() => onAgeUp(sim.simId)} disabled={!sim.alive}><Cake/></button>
+            <button onClick={() => onAgeUp(sim.simId)} disabled={!sim.alive || sim.lifeStage === "ELDER"}><Cake/></button>
             <button onClick={() => onDeath(sim.simId)} disabled={!sim.alive}><Skull/></button>
         </div>
     )

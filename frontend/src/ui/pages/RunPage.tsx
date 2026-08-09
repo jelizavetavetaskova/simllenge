@@ -5,7 +5,7 @@ import {getRunById} from "../../service/runService.ts";
 import * as Dialog from "@radix-ui/react-dialog";
 import {X} from "lucide-react";
 import SimForm from "../components/sim/SimForm.tsx";
-import {getSimsByRun, markSimAsDead} from "../../service/simService.ts";
+import {ageUp, getSimsByRun, markSimAsDead} from "../../service/simService.ts";
 import SimCard from "../components/sim/SimCard.tsx";
 
 
@@ -42,8 +42,13 @@ const RunPage = () => {
         setModalOpen(true);
     }
 
-    const handleAgeUp = (simId: number) => {
-
+    const handleAgeUp = async (simId: number) => {
+        try {
+            await ageUp(simId);
+            await fetchSims();
+        } catch (e) {
+            (e instanceof Error) ? setError(e.message) : setError(String(e));
+        }
     }
 
     const handleDeath = async (simId: number) => {
