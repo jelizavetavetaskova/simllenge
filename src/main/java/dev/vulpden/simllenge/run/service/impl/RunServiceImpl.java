@@ -41,11 +41,9 @@ public class RunServiceImpl implements RunService {
     }
 
     @Override
-    public RunDto getRunById(int challengeId, int runId) {
+    public RunDto getRunById(int runId) {
         Run run = runRepo.findById(runId)
                 .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
-        if (run.getChallenge().getChallengeId() != challengeId)
-            throw new NoSuchElementException("Run not found in this challenge");
 
         return mapperService.runToDto(run);
     }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/challenges/{challengeId}/runs/{runId}/sims")
+@RequestMapping("/api/runs/{runId}/sims")
 public class SimController {
     private final SimService simService;
 
@@ -20,8 +20,8 @@ public class SimController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SimDto>> getSims(@PathVariable int challengeId, @PathVariable int runId) {
-        List<SimDto> sims = simService.getSimsByRun(challengeId, runId);
+    public ResponseEntity<List<SimDto>> getSims(@PathVariable int runId) {
+        List<SimDto> sims = simService.getSimsByRun(runId);
         return ResponseEntity.ok(sims);
     }
 

@@ -48,7 +48,7 @@ const CreateSimForm = ({challengeId, runId, onSuccess, onClose}: CreateSimFormPr
         }
 
         try {
-            await createSim(challengeId, runId, formData);
+            await createSim(runId, formData);
             await onSuccess();
 
             setFormData({

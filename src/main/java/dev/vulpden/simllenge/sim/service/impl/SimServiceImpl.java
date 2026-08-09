@@ -31,12 +31,8 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public List<SimDto> getSimsByRun(int challengeId, int runId) {
-        Run run = runRepo.findById(runId)
-                .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
-
-        if (run.getChallenge().getChallengeId() != challengeId)
-            throw new NoSuchElementException("Run not found in this challenge");
+    public List<SimDto> getSimsByRun(int runId) {
+        if (!runRepo.existsById(runId)) throw new NoSuchElementException("Run does not exist");
 
         return simRepo.findAllByRunRunId(runId)
                 .stream()

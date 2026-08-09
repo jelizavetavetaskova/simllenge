@@ -34,7 +34,7 @@ const RunPage = () => {
         }
 
         try {
-            setSims(await getSimsByRun(challengeId, runId));
+            setSims(await getSimsByRun(runId));
         } catch (e) {
             (e instanceof Error) ? setError(e.message) : setError(String(e));
         }
@@ -53,8 +53,8 @@ const RunPage = () => {
 
             try {
                 setLoading(true);
-                setRun(await getRunById(challengeId, runId));
-                setSims(await getSimsByRun(challengeId, runId));
+                setRun(await getRunById(runId));
+                setSims(await getSimsByRun(runId));
             } catch (e) {
                 (e instanceof Error) ? setError(e.message) : setError(String(e));
             } finally {

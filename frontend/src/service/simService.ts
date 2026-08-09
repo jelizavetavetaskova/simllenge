@@ -1,8 +1,8 @@
 import type {Sim} from "../types/database.ts";
 import type {CreateSim} from "../types/app.ts";
 
-export const getSimsByRun = async (challengeId: string, runId: string) => {
-    const res = await fetch(`/api/challenges/${challengeId}/runs/${runId}/sims`);
+export const getSimsByRun = async (runId: string) => {
+    const res = await fetch(`/api/runs/${runId}/sims`);
 
     if (!res.ok) throw Error(await res.text());
 
@@ -10,8 +10,8 @@ export const getSimsByRun = async (challengeId: string, runId: string) => {
     return data;
 }
 
-export const createSim = async (challengeId: string, runId: string, sim: CreateSim) => {
-    const res = await fetch(`/api/challenges/${challengeId}/runs/${runId}/sims`, {
+export const createSim = async (runId: string, sim: CreateSim) => {
+    const res = await fetch(`/api/runs/${runId}/sims`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
