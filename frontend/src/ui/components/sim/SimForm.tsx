@@ -1,21 +1,21 @@
 import {useState, type SubmitEvent, type ChangeEvent, useEffect} from "react";
 import type {CreateSim} from "../../../types/app.ts";
-import {type FamilyRole, LIFE_STAGES} from "../../../types/database.ts";
+import {type FamilyRole, LIFE_STAGES, type Sim} from "../../../types/database.ts";
 import {getAllFamilyRoles} from "../../../service/familyRoleService.ts";
-import {createSim} from "../../../service/simService.ts";
+import {createSim, updateSim} from "../../../service/simService.ts";
 
 interface CreateSimFormProps {
-    challengeId?: string;
+    sim?: Sim
     runId?: string;
     onSuccess: () => Promise<void>;
     onClose: () => void;
 }
 
-const CreateSimForm = ({challengeId, runId, onSuccess, onClose}: CreateSimFormProps) => {
+const SimForm = ({sim, runId, onSuccess, onClose}: CreateSimFormProps) => {
     const [formData, setFormData] = useState<CreateSim>({
-        name: "",
-        familyRoleId: 3,
-        lifeStage: "NEWBORN"
+        name: sim?.name ?? "",
+        familyRoleId: sim?.familyRole.familyRoleId ?? 3, // Member
+        lifeStage: sim?.lifeStage ?? "NEWBORN"
     });
 
     const [familyRoles, setFamilyRoles] = useState<FamilyRole[]>([]);
@@ -38,17 +38,17 @@ const CreateSimForm = ({challengeId, runId, onSuccess, onClose}: CreateSimFormPr
         e.preventDefault();
         setError("");
 
-        if (!challengeId) {
-            setError("Challenge id is required");
-            return;
-        }
         if (!runId) {
             setError("Run id is required");
             return;
         }
 
         try {
-            await createSim(runId, formData);
+            if (sim) {
+                await updateSim(sim.simId, formData);
+            } else {
+                await createSim(runId, formData);
+            }
             await onSuccess();
 
             setFormData({
@@ -98,4 +98,4 @@ const CreateSimForm = ({challengeId, runId, onSuccess, onClose}: CreateSimFormPr
     )
 }
 
-export default CreateSimForm;
+export default SimForm;

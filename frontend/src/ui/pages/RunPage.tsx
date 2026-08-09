@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {getRunById} from "../../service/runService.ts";
 import * as Dialog from "@radix-ui/react-dialog";
 import {X} from "lucide-react";
-import CreateSimForm from "../components/sim/CreateSimForm.tsx";
+import SimForm from "../components/sim/SimForm.tsx";
 import {getSimsByRun} from "../../service/simService.ts";
 import SimCard from "../components/sim/SimCard.tsx";
 
@@ -13,21 +13,18 @@ const RunPage = () => {
     const [run, setRun] = useState<Run|null>(null);
 
     const [sims, setSims] = useState<Sim[]>([]);
+    const [editingSim, setEditingSim] = useState<Sim|null>(null);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const {challengeId, runId} = useParams();
+    const {runId} = useParams();
 
     const fetchSims = async () => {
         setError("");
 
-        if (!challengeId) {
-            setError("Challenge id is required");
-            return;
-        }
         if (!runId) {
             setError("Run id is required");
             return;
@@ -40,14 +37,23 @@ const RunPage = () => {
         }
     }
 
+    const handleEdit = (sim: Sim) => {
+        setEditingSim(sim);
+        setModalOpen(true);
+    }
+
+    const handleAgeUp = (simId: number) => {
+
+    }
+
+    const handleDeath = (simId: number) => {
+
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             if (!runId) {
                 setError("Run id is required");
-                return;
-            }
-            if (!challengeId) {
-                setError("Challenge id is required");
                 return;
             }
 
@@ -63,9 +69,7 @@ const RunPage = () => {
         }
 
         fetchData();
-    }, [challengeId, runId]);
-
-
+    }, [runId]);
 
     return (
         <div>
@@ -79,11 +83,22 @@ const RunPage = () => {
 
                     <div>
                         {sims.map(sim => (
-                            <SimCard sim={sim} key={sim.simId} />
+                            <SimCard
+                                key={sim.simId}
+                                sim={sim}
+                                onEdit={() => handleEdit(sim)}
+                                onAgeUp={handleAgeUp}
+                                onDeath={handleDeath}
+                            />
                         ))}
                     </div>
 
-                    <button onClick={() => setModalOpen(true)}>Add a sim</button>
+                    <button onClick={() => {
+                        setEditingSim(null);
+                        setModalOpen(true);
+                    }}>
+                        Add a sim
+                    </button>
 
                     <Dialog.Root open={modalOpen} onOpenChange={setModalOpen}>
                         <Dialog.Portal>
@@ -94,8 +109,16 @@ const RunPage = () => {
                                     <button><X size={15}/></button>
                                 </Dialog.Close>
 
-                                <Dialog.Title>Create a sim</Dialog.Title>
-                                <CreateSimForm challengeId={challengeId} runId={runId} onSuccess={fetchSims} onClose={() => setModalOpen(false)}/>
+                                <Dialog.Title>{editingSim ? "Edit sim" : "Create a sim"}</Dialog.Title>
+                                <SimForm
+                                    runId={runId}
+                                    onSuccess={fetchSims}
+                                    onClose={() => {
+                                        setModalOpen(false);
+                                        setEditingSim(null);
+                                    }}
+                                    sim={editingSim}
+                                />
                             </Dialog.Content>
                         </Dialog.Portal>
                     </Dialog.Root>

@@ -10,3 +10,9 @@ export interface CreateSim {
     familyRoleId: number;
     lifeStage: LifeStage;
 }
+
+export interface UpdateSim {
+    name: string;
+    familyRoleId: number;
+    lifeStage: LifeStage;
+}
