@@ -1,5 +1,6 @@
 import type {Sim} from "../../../types/database.ts";
-import {Cake, Pencil, Skull} from "lucide-react";
+import {Cake, Clock, Pencil, PersonStanding, Skull} from "lucide-react";
+import styles from "./SimCard.module.css";
 
 interface SimCardProps {
     sim: Sim;
@@ -10,17 +11,16 @@ interface SimCardProps {
 
 const SimCard = ({sim, onEdit, onAgeUp, onDeath}: SimCardProps) => {
     return (
-        <div>
-            <h3>{sim.name}</h3>
-            <h4>{sim.familyRole.name}</h4>
-            <p>{sim.lifeStage}</p>
-            <p>{sim.alive ? "Alive" : "Dead"}</p>
+        <div className={styles.card}>
+            <h3 className={styles.name}>{sim.name}</h3>
+            <h4 className={styles.role}><PersonStanding/>{sim.familyRole.name}</h4>
+            <p className={styles.age}><Clock/>{sim.lifeStage}</p>
 
             {sim.alive &&
-                <div>
+                <div className={styles.actions}>
                     <button onClick={() => onEdit?.(sim)}><Pencil/></button>
                     <button onClick={() => onAgeUp?.(sim.simId)} disabled={sim.lifeStage === "ELDER"}><Cake/></button>
-                    <button onClick={() => onDeath?.(sim.simId)}><Skull/></button>
+                    <button onClick={() => onDeath?.(sim.simId)} className={styles.death}><Skull/></button>
                 </div>
             }
         </div>
