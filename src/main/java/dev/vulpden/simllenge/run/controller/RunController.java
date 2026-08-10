@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/challenges/{challengeId}/runs")
+@RequestMapping("/api/runs")
 public class RunController {
     private final RunService runService;
 
@@ -19,20 +19,8 @@ public class RunController {
         this.runService = runService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<RunDto>> getRuns(@PathVariable int challengeId) {
-        List<RunDto> runs = runService.getChallengeRuns(challengeId);
-        return ResponseEntity.ok(runs);
-    }
-
     @GetMapping("/{runId}")
     public ResponseEntity<RunDto> getRun(@PathVariable int runId) {
         return ResponseEntity.ok(runService.getRunById(runId));
-    }
-
-    @PostMapping
-    public ResponseEntity<Object> createRun(@PathVariable int challengeId, @Valid @RequestBody CreateRunDto runDto) {
-        RunDto createdRun = runService.createRun(challengeId, runDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdRun);
     }
 }

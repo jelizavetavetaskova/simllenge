@@ -10,8 +10,8 @@ export const getChallengeRuns = async (challengeId: string) => {
     return data;
 }
 
-export const getRunById = async (challengeId: string, runId: string) => {
-    const res = await fetch(`/api/challenges/${challengeId}/runs/${runId}`);
+export const getRunById = async (runId: string) => {
+    const res = await fetch(`/api/runs/${runId}`);
 
     if (!res.ok) throw Error(await res.text());
 
