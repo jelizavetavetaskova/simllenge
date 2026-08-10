@@ -5,6 +5,7 @@ import {getChallengeRuns} from "../../service/runService.ts";
 import * as Dialog from "@radix-ui/react-dialog";
 import CreateRunForm from "../components/run/CreateRunForm.tsx";
 import {ArrowRight, X} from "lucide-react";
+import styles from "./RunsList.module.css";
 
 const RunsList = () => {
     const [runs, setRuns] = useState<Run[]>([]);
@@ -39,8 +40,11 @@ const RunsList = () => {
     }, [challengeId]);
 
     return (
-        <div>
-            <h1>Runs</h1>
+        <div className={styles.page}>
+            <div className={styles.run}>
+                <h1>Runs</h1>
+                <button onClick={() => setModalOpen(true)} className={styles.btn}>+ Create a run</button>
+            </div>
 
             {loading ? (
                 <p>Loading...</p>
@@ -52,7 +56,7 @@ const RunsList = () => {
                 <table>
                     <thead>
                     <tr>
-                        <th>Run ID</th>
+                        <th>ID</th>
                         <th>Budget</th>
                         <th>Stage</th>
                         <th></th>
@@ -61,8 +65,8 @@ const RunsList = () => {
                     <tbody>
                     {runs.map(run => (
                         <tr key={run.runId}>
-                            <td>{run.runId}</td>
-                            <td>{run.budget}</td>
+                            <td>#{run.runId}</td>
+                            <td>${run.budget}</td>
                             <td>{run.stage.name}</td>
                             <td><Link to={`/challenges/${challengeId}/runs/${run.runId}`}><ArrowRight /></Link></td>
                         </tr>
@@ -70,8 +74,6 @@ const RunsList = () => {
                     </tbody>
                 </table>
             )}
-
-            <button onClick={() => setModalOpen(true)}>Create run</button>
 
             <Dialog.Root open={isModalOpen} onOpenChange={setModalOpen}>
                 <Dialog.Portal>
