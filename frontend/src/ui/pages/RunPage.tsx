@@ -7,6 +7,7 @@ import {X} from "lucide-react";
 import SimForm from "../components/sim/SimForm.tsx";
 import {ageUp, getSimsByRun, markSimAsDead} from "../../service/simService.ts";
 import SimCard from "../components/sim/SimCard.tsx";
+import styles from "./RunPage.module.css";
 
 
 const RunPage = () => {
@@ -85,41 +86,51 @@ const RunPage = () => {
     }, [runId]);
 
     return (
-        <div>
+        <div className={styles.page}>
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : run && (
-                <>
-                    <h1>Run: {run.stage.name}, {run.budget}</h1>
+                <div>
+                    <h1>Run: {run.stage.name}</h1>
 
-                    <button onClick={() => {
-                        setEditingSim(null);
-                        setModalOpen(true);
-                    }}>
-                        Add a sim
-                    </button>
+                    <div className={styles.run}>
+                        <p className={styles.budget}>Budget: ${run.budget}</p>
+                        <button
+                            onClick={() => {
+                                setEditingSim(null);
+                                setModalOpen(true);
+                            }}
+                            className={styles.btn}
+                        >
+                            + Add a sim
+                        </button>
+                    </div>
 
-                    <div>
+                    <div className={styles.sim_block}>
                         <h2>Family</h2>
-                        {alive.map(sim => (
-                            <SimCard
-                                key={sim.simId}
-                                sim={sim}
-                                onEdit={() => handleEdit(sim)}
-                                onAgeUp={handleAgeUp}
-                                onDeath={handleDeath}
-                            />
-                        ))}
+                        <div className={styles.cards}>
+                            {alive.map(sim => (
+                                <SimCard
+                                    key={sim.simId}
+                                    sim={sim}
+                                    onEdit={() => handleEdit(sim)}
+                                    onAgeUp={handleAgeUp}
+                                    onDeath={handleDeath}
+                                />
+                            ))}
+                        </div>
                     </div>
 
                     {dead.length > 0 &&
-                        <div>
+                        <div className={styles.sim_block}>
                             <h2>Deceased</h2>
-                            {dead.map(sim => (
-                                <SimCard key={sim.simId} sim={sim}/>
-                            ))}
+                            <div className={`${styles.cards} ${styles.dead}`}>
+                                {dead.map(sim => (
+                                    <SimCard key={sim.simId} sim={sim}/>
+                                ))}
+                            </div>
                         </div>
                     }
 
@@ -147,7 +158,7 @@ const RunPage = () => {
                             </Dialog.Content>
                         </Dialog.Portal>
                     </Dialog.Root>
-                </>
+                </div>
             )
             }
         </div>

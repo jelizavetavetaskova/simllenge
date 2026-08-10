@@ -4,7 +4,9 @@
     --text: #1a2e2e;
     --text-muted: #5a7575;
     --accent: #16c79a;
+    --accent-soft: #dcf6ef;
     --accent-blue: #2d9cdb;
+    --accent-blue-soft: #dcedf7;
     --border: #d0e0e0;
     --danger: #e5556e;
 }
@@ -14,7 +16,9 @@
     --text: #e0f0f0;
     --text-muted: #7a9595;
     --accent: #1de9b6;
+    --accent-soft: #173a34;
     --accent-blue: #4db8e8;
+    --accent-blue-soft: #1c3540;
     --border: #2a3f40;
     --danger: #ff6b81;
 }
