@@ -3,6 +3,7 @@ import {createRun} from "../../../service/runService.ts";
 import type {CreateRun} from "../../../types/app.ts";
 import type {Stage} from "../../../types/database.ts";
 import {getChallengeStages} from "../../../service/stageService.ts";
+import styles from "./CreateRunForm.module.css";
 
 interface CreateRunFormProps {
     challengeId?: string;
@@ -65,29 +66,36 @@ const CreateRunForm = ({challengeId, onSuccess, onClose}: CreateRunFormProps) =>
 
     return (
         <>
-            <form onSubmit={saveRun}>
-                <label htmlFor="budget">Budget: </label>
-                <input
-                    id="budget"
-                    type="number"
-                    placeholder="5000"
-                    value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
-                />
+            <form onSubmit={saveRun} className={styles.form}>
+                <div className={styles.field}>
+                    <label htmlFor="budget">Budget: </label>
+                    <input
+                        id="budget"
+                        type="number"
+                        placeholder="5000"
+                        value={budget}
+                        onChange={(e) => setBudget(e.target.value)}
+                    />
+                </div>
 
-                <label htmlFor="stage">Stage: </label>
-                <select
-                    name="stage"
-                    id="stage"
-                    value={selectedStage}
-                    onChange={(e) => setSelectedStage(Number(e.target.value))}
-                >
-                    {stages.map(stage => (
-                        <option value={stage.stageId} key={stage.stageId}>{stage.name}</option>
-                    ))}
-                </select>
+                <div className={styles.field}>
+                    <label htmlFor="stage">Stage: </label>
+                    <select
+                        name="stage"
+                        id="stage"
+                        value={selectedStage}
+                        onChange={(e) => setSelectedStage(Number(e.target.value))}
+                    >
+                        {stages.map(stage => (
+                            <option value={stage.stageId} key={stage.stageId}>{stage.name}</option>
+                        ))}
+                    </select>
+                </div>
 
-                <button type="submit">Save run</button>
+                <div className={styles.buttons}>
+                    <button type="button" onClick={onClose} className={styles.cancel_btn}>Cancel</button>
+                    <button type="submit" className={styles.save_btn}>Save run</button>
+                </div>
             </form>
 
             {error && <p>{error}</p>}

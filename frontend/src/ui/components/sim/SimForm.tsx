@@ -3,6 +3,7 @@ import type {CreateSim} from "../../../types/app.ts";
 import {type FamilyRole, LIFE_STAGES, type Sim} from "../../../types/database.ts";
 import {getAllFamilyRoles} from "../../../service/familyRoleService.ts";
 import {createSim, updateSim} from "../../../service/simService.ts";
+import styles from "./SimForm.module.css";
 
 interface CreateSimFormProps {
     sim?: Sim
@@ -73,24 +74,33 @@ const SimForm = ({sim, runId, onSuccess, onClose}: CreateSimFormProps) => {
     return (
         <>
             <form onSubmit={saveSim}>
-                <label htmlFor="name">Name: </label>
-                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
+                <div className={styles.field}>
+                    <label htmlFor="name">Name: </label>
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
+                </div>
 
-                <label htmlFor="lifeStage">Life stage: </label>
-                <select name="lifeStage" id="lifeStage" value={formData.lifeStage} onChange={handleChange}>
-                    {LIFE_STAGES.map(stage => (
-                        <option value={stage} key={stage}>{stage}</option>
-                    ))}
-                </select>
+                <div className={styles.field}>
+                    <label htmlFor="lifeStage">Life stage: </label>
+                    <select name="lifeStage" id="lifeStage" value={formData.lifeStage} onChange={handleChange}>
+                        {LIFE_STAGES.map(stage => (
+                            <option value={stage} key={stage}>{stage}</option>
+                        ))}
+                    </select>
+                </div>
 
-                <label htmlFor="familyRole">Family role:</label>
-                <select name="familyRoleId" id="familyRole" value={formData.familyRoleId} onChange={handleChange}>
-                    {familyRoles.map(role => (
-                        <option value={role.familyRoleId} key={role.familyRoleId}>{role.name}</option>
-                    ))}
-                </select>
+                <div className={styles.field}>
+                    <label htmlFor="familyRole">Family role:</label>
+                    <select name="familyRoleId" id="familyRole" value={formData.familyRoleId} onChange={handleChange}>
+                        {familyRoles.map(role => (
+                            <option value={role.familyRoleId} key={role.familyRoleId}>{role.name}</option>
+                        ))}
+                    </select>
+                </div>
 
-                <button type="submit">Save sim</button>
+                <div className={styles.buttons}>
+                    <button type="button" onClick={onClose} className={styles.cancel_btn}>Cancel</button>
+                    <button type="submit" className={styles.save_btn}>Save sim</button>
+                </div>
             </form>
 
             {error && <p>{error}</p>}

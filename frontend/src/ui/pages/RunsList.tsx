@@ -80,10 +80,12 @@ const RunsList = () => {
                     <Dialog.Overlay className="overlay" />
 
                     <Dialog.Content className="content">
-                        <Dialog.Close asChild>
-                            <button><X size={15}/></button>
-                        </Dialog.Close>
-                        <Dialog.Title>Create a run</Dialog.Title>
+                        <div className={styles.header}>
+                            <Dialog.Title>Create a run</Dialog.Title>
+                            <Dialog.Close asChild>
+                                <button className={styles.close}><X size={15}/></button>
+                            </Dialog.Close>
+                        </div>
                         <CreateRunForm challengeId={challengeId} onSuccess={getRuns} onClose={() => setModalOpen(false)}/>
                     </Dialog.Content>
 

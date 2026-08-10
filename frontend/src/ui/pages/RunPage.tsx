@@ -141,11 +141,13 @@ const RunPage = () => {
                             <Dialog.Overlay className="overlay" />
 
                             <Dialog.Content className="content">
-                                <Dialog.Close asChild>
-                                    <button><X size={15}/></button>
-                                </Dialog.Close>
+                                <div className={styles.header}>
+                                    <Dialog.Title>{editingSim ? "Edit sim" : "Create a sim"}</Dialog.Title>
+                                    <Dialog.Close asChild>
+                                        <button className={styles.close}><X size={15}/></button>
+                                    </Dialog.Close>
+                                </div>
 
-                                <Dialog.Title>{editingSim ? "Edit sim" : "Create a sim"}</Dialog.Title>
                                 <SimForm
                                     runId={runId}
                                     onSuccess={fetchSims}

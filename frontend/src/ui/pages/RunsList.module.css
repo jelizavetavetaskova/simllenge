@@ -26,6 +26,10 @@
     margin-right: 130px;
 }
 
+.page .btn:hover {
+    cursor: pointer;
+}
+
 .page tr, .page th, .page td {
     border-bottom: 1px solid var(--border);
 }
@@ -57,3 +61,19 @@
     color: var(--text);
 }
 
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .close {
+    border: none;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.header .close:hover {
+    cursor: pointer;
+}
