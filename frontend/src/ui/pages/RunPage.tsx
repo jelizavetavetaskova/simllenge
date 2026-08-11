@@ -8,6 +8,7 @@ import SimForm from "../components/sim/SimForm.tsx";
 import {ageUp, getSimsByRun, markSimAsDead} from "../../service/simService.ts";
 import SimCard from "../components/sim/SimCard.tsx";
 import styles from "./RunPage.module.css";
+import Button from "../components/shared/Button.tsx";
 
 
 const RunPage = () => {
@@ -97,15 +98,16 @@ const RunPage = () => {
 
                     <div className={styles.run}>
                         <p className={styles.budget}>Budget: ${run.budget}</p>
-                        <button
+                        <Button
+                            variant="primary"
+                            type="button"
                             onClick={() => {
                                 setEditingSim(null);
                                 setModalOpen(true);
                             }}
-                            className={styles.btn}
                         >
                             + Add a sim
-                        </button>
+                        </Button>
                     </div>
 
                     <div className={styles.sim_block}>

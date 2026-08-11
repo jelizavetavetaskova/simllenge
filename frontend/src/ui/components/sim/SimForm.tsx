@@ -4,6 +4,7 @@ import {type FamilyRole, LIFE_STAGES, type Sim} from "../../../types/database.ts
 import {getAllFamilyRoles} from "../../../service/familyRoleService.ts";
 import {createSim, updateSim} from "../../../service/simService.ts";
 import styles from "./SimForm.module.css";
+import Button from "../shared/Button.tsx";
 
 interface CreateSimFormProps {
     sim?: Sim
@@ -98,8 +99,8 @@ const SimForm = ({sim, runId, onSuccess, onClose}: CreateSimFormProps) => {
                 </div>
 
                 <div className={styles.buttons}>
-                    <button type="button" onClick={onClose} className={styles.cancel_btn}>Cancel</button>
-                    <button type="submit" className={styles.save_btn}>Save sim</button>
+                    <Button variant="secondary" onClick={onClose} type="button">Cancel</Button>
+                    <Button variant="primary" type="submit">Save sim</Button>
                 </div>
             </form>
 

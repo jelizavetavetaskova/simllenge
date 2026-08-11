@@ -4,6 +4,7 @@ import type {CreateRun} from "../../../types/app.ts";
 import type {Stage} from "../../../types/database.ts";
 import {getChallengeStages} from "../../../service/stageService.ts";
 import styles from "./CreateRunForm.module.css";
+import Button from "../shared/Button.tsx";
 
 interface CreateRunFormProps {
     challengeId?: string;
@@ -93,8 +94,8 @@ const CreateRunForm = ({challengeId, onSuccess, onClose}: CreateRunFormProps) =>
                 </div>
 
                 <div className={styles.buttons}>
-                    <button type="button" onClick={onClose} className={styles.cancel_btn}>Cancel</button>
-                    <button type="submit" className={styles.save_btn}>Save run</button>
+                    <Button variant="secondary" onClick={onClose} type="button">Cancel</Button>
+                    <Button variant="primary" type="submit">Save run</Button>
                 </div>
             </form>
 

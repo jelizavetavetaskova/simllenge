@@ -6,6 +6,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import CreateRunForm from "../components/run/CreateRunForm.tsx";
 import {ArrowRight, X} from "lucide-react";
 import styles from "./RunsList.module.css";
+import Button from "../components/shared/Button.tsx";
 
 const RunsList = () => {
     const [runs, setRuns] = useState<Run[]>([]);
@@ -43,7 +44,13 @@ const RunsList = () => {
         <div className={styles.page}>
             <div className={styles.run}>
                 <h1>Runs</h1>
-                <button onClick={() => setModalOpen(true)} className={styles.btn}>+ Create a run</button>
+                <Button
+                    variant="primary"
+                    type="button"
+                    onClick={() => setModalOpen(true)}
+                >
+                    + Create a run
+                </Button>
             </div>
 
             {loading ? (

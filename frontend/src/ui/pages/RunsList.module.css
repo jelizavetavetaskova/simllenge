@@ -4,7 +4,6 @@
 
 .page h1 {
     text-align: center;
-    margin-left: 130px;
 }
 
 .page .run {
@@ -13,21 +12,6 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-}
-
-.page .btn {
-    padding: 10px 15px;
-    font-size: 15px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    background: var(--accent);
-    margin-right: 130px;
-}
-
-.page .btn:hover {
-    cursor: pointer;
 }
 
 .page tr, .page th, .page td {

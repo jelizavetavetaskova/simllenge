@@ -2,7 +2,6 @@ form {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 form .field {
@@ -29,31 +28,6 @@ form .field input, form .field select {
 form .buttons {
     display: flex;
     flex-direction: row;
-    gap: 5px
-}
-
-form .buttons button {
-    padding: 10px 10px;
+    gap: 5px;
     margin-top: 10px;
-    font-size: 15px;
-    width: 50%;
-}
-
-form .buttons button:hover {
-    cursor: pointer;
-}
-
-form .buttons .cancel_btn {
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-}
-
-form .buttons .save_btn {
-    border: none;
-    background: var(--accent);
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
 }

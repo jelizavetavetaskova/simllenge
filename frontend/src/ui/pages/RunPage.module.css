@@ -23,21 +23,6 @@
     margin-bottom: 10px;
 }
 
-.page .btn {
-    padding: 10px 15px;
-    font-size: 15px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    background: var(--accent);
-}
-
-.page .btn:hover {
-    filter: brightness(1.1);
-    cursor: pointer;
-}
-
 .page .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
