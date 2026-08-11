@@ -34,21 +34,3 @@ body {
     color: var(--text);
 
 }
-
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--surface);
-    color: var(--text);
-    padding: 24px;
-    border-radius: 12px;
-    min-width: 400px;
-}

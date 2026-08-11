@@ -2,13 +2,12 @@ import {useEffect, useState} from "react";
 import type {Run, Sim} from "../../types/database.ts";
 import {useParams} from "react-router-dom";
 import {getRunById} from "../../service/runService.ts";
-import * as Dialog from "@radix-ui/react-dialog";
-import {X} from "lucide-react";
 import SimForm from "../components/sim/SimForm.tsx";
 import {ageUp, getSimsByRun, markSimAsDead} from "../../service/simService.ts";
 import SimCard from "../components/sim/SimCard.tsx";
 import styles from "./RunPage.module.css";
 import Button from "../components/shared/Button.tsx";
+import Modal from "../components/shared/Modal.tsx";
 
 
 const RunPage = () => {
@@ -136,32 +135,17 @@ const RunPage = () => {
                         </div>
                     }
 
-
-
-                    <Dialog.Root open={modalOpen} onOpenChange={setModalOpen}>
-                        <Dialog.Portal>
-                            <Dialog.Overlay className="overlay" />
-
-                            <Dialog.Content className="content">
-                                <div className={styles.header}>
-                                    <Dialog.Title>{editingSim ? "Edit sim" : "Create a sim"}</Dialog.Title>
-                                    <Dialog.Close asChild>
-                                        <button className={styles.close}><X size={15}/></button>
-                                    </Dialog.Close>
-                                </div>
-
-                                <SimForm
-                                    runId={runId}
-                                    onSuccess={fetchSims}
-                                    onClose={() => {
-                                        setModalOpen(false);
-                                        setEditingSim(null);
-                                    }}
-                                    sim={editingSim ?? undefined}
-                                />
-                            </Dialog.Content>
-                        </Dialog.Portal>
-                    </Dialog.Root>
+                    <Modal open={modalOpen} onOpenChange={setModalOpen} title={editingSim ? "Edit sim" : "Create a sim"}>
+                        <SimForm
+                            runId={runId}
+                            onSuccess={fetchSims}
+                            onClose={() => {
+                                setModalOpen(false);
+                                setEditingSim(null);
+                            }}
+                            sim={editingSim ?? undefined}
+                        />
+                    </Modal>
                 </div>
             )
             }

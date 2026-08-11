@@ -40,19 +40,3 @@
 .page .sim_block h2 {
     margin-bottom: 10px;
 }
-
-.header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.header .close {
-    border: none;
-    background: var(--surface);
-    color: var(--text);
-}
-
-.header .close:hover {
-    cursor: pointer;
-}

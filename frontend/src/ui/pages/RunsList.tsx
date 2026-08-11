@@ -2,11 +2,11 @@ import {useEffect, useState} from "react";
 import type {Run} from "../../types/database.ts";
 import {Link, useParams} from "react-router-dom";
 import {getChallengeRuns} from "../../service/runService.ts";
-import * as Dialog from "@radix-ui/react-dialog";
 import CreateRunForm from "../components/run/CreateRunForm.tsx";
-import {ArrowRight, X} from "lucide-react";
+import {ArrowRight} from "lucide-react";
 import styles from "./RunsList.module.css";
 import Button from "../components/shared/Button.tsx";
+import Modal from "../components/shared/Modal.tsx";
 
 const RunsList = () => {
     const [runs, setRuns] = useState<Run[]>([]);
@@ -82,22 +82,13 @@ const RunsList = () => {
                 </table>
             )}
 
-            <Dialog.Root open={isModalOpen} onOpenChange={setModalOpen}>
-                <Dialog.Portal>
-                    <Dialog.Overlay className="overlay" />
-
-                    <Dialog.Content className="content">
-                        <div className={styles.header}>
-                            <Dialog.Title>Create a run</Dialog.Title>
-                            <Dialog.Close asChild>
-                                <button className={styles.close}><X size={15}/></button>
-                            </Dialog.Close>
-                        </div>
-                        <CreateRunForm challengeId={challengeId} onSuccess={getRuns} onClose={() => setModalOpen(false)}/>
-                    </Dialog.Content>
-
-                </Dialog.Portal>
-            </Dialog.Root>
+            <Modal open={isModalOpen} onOpenChange={setModalOpen} title="Create a run">
+                <CreateRunForm
+                    challengeId={challengeId}
+                    onSuccess={getRuns}
+                    onClose={() => setModalOpen(false)}
+                />
+            </Modal>
         </div>
     )
 }
