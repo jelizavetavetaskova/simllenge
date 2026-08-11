@@ -1,0 +1,70 @@
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+.card .data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card .name {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.card .role {
+    margin: 10px 0;
+}
+
+.card .age {
+    font-size: 15px;
+    color: var(--accent-blue);
+    background: var(--accent-blue-soft);
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.card .actions {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.card .actions button {
+    outline: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.card .actions .edit {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.card .actions .age_up {
+    background: var(--accent);
+}
+
+.card .actions button:hover {
+    filter: brightness(1.1);
+}
+
+.card .actions .death {
+    background: var(--danger);
+}
+
+.card .actions button:disabled {
+    background: var(--surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    cursor: auto;
+}
+

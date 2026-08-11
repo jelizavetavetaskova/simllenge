@@ -2,9 +2,11 @@ import {useEffect, useState} from "react";
 import type {Run} from "../../types/database.ts";
 import {Link, useParams} from "react-router-dom";
 import {getChallengeRuns} from "../../service/runService.ts";
-import * as Dialog from "@radix-ui/react-dialog";
 import CreateRunForm from "../components/run/CreateRunForm.tsx";
-import {ArrowRight, X} from "lucide-react";
+import {ArrowRight} from "lucide-react";
+import styles from "./RunsList.module.css";
+import Button from "../components/shared/Button.tsx";
+import Modal from "../components/shared/Modal.tsx";
 
 const RunsList = () => {
     const [runs, setRuns] = useState<Run[]>([]);
@@ -39,8 +41,17 @@ const RunsList = () => {
     }, [challengeId]);
 
     return (
-        <div>
-            <h1>Runs</h1>
+        <div className={styles.page}>
+            <div className={styles.run}>
+                <h1>Runs</h1>
+                <Button
+                    variant="primary"
+                    type="button"
+                    onClick={() => setModalOpen(true)}
+                >
+                    + Create a run
+                </Button>
+            </div>
 
             {loading ? (
                 <p>Loading...</p>
@@ -52,7 +63,7 @@ const RunsList = () => {
                 <table>
                     <thead>
                     <tr>
-                        <th>Run ID</th>
+                        <th>ID</th>
                         <th>Budget</th>
                         <th>Stage</th>
                         <th></th>
@@ -61,8 +72,8 @@ const RunsList = () => {
                     <tbody>
                     {runs.map(run => (
                         <tr key={run.runId}>
-                            <td>{run.runId}</td>
-                            <td>{run.budget}</td>
+                            <td>#{run.runId}</td>
+                            <td>${run.budget}</td>
                             <td>{run.stage.name}</td>
                             <td><Link to={`/challenges/${challengeId}/runs/${run.runId}`}><ArrowRight /></Link></td>
                         </tr>
@@ -71,22 +82,13 @@ const RunsList = () => {
                 </table>
             )}
 
-            <button onClick={() => setModalOpen(true)}>Create run</button>
-
-            <Dialog.Root open={isModalOpen} onOpenChange={setModalOpen}>
-                <Dialog.Portal>
-                    <Dialog.Overlay className="overlay" />
-
-                    <Dialog.Content className="content">
-                        <Dialog.Close asChild>
-                            <button><X size={15}/></button>
-                        </Dialog.Close>
-                        <Dialog.Title>Create a run</Dialog.Title>
-                        <CreateRunForm challengeId={challengeId} onSuccess={getRuns} onClose={() => setModalOpen(false)}/>
-                    </Dialog.Content>
-
-                </Dialog.Portal>
-            </Dialog.Root>
+            <Modal open={isModalOpen} onOpenChange={setModalOpen} title="Create a run">
+                <CreateRunForm
+                    challengeId={challengeId}
+                    onSuccess={getRuns}
+                    onClose={() => setModalOpen(false)}
+                />
+            </Modal>
         </div>
     )
 }

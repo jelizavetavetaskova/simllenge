@@ -1,0 +1,63 @@
+.page {
+    margin: 20px;
+}
+
+.page h1 {
+    text-align: center;
+}
+
+.page .run {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page tr, .page th, .page td {
+    border-bottom: 1px solid var(--border);
+}
+
+.page table {
+    width: 80%;
+    margin: 10px auto;
+    font-size: 20px;
+    background: var(--surface);
+    padding: 0 15px;
+    border-radius: 15px;
+}
+
+.page tr:last-child td {
+    border: none;
+}
+
+.page table tr th {
+    padding: 10px;
+    text-align: left;
+}
+
+.page td {
+    padding: 10px 5px;
+    color: var(--text);
+}
+
+.page td a {
+    color: var(--text);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .close {
+    border: none;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.header .close:hover {
+    cursor: pointer;
+}

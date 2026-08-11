@@ -3,6 +3,10 @@ import {createRun} from "../../../service/runService.ts";
 import type {CreateRun} from "../../../types/app.ts";
 import type {Stage} from "../../../types/database.ts";
 import {getChallengeStages} from "../../../service/stageService.ts";
+import styles from "./CreateRunForm.module.css";
+import Button from "../shared/Button.tsx";
+import InputField from "../shared/InputField.tsx";
+import SelectField from "../shared/SelectField.tsx";
 
 interface CreateRunFormProps {
     challengeId?: string;
@@ -65,29 +69,31 @@ const CreateRunForm = ({challengeId, onSuccess, onClose}: CreateRunFormProps) =>
 
     return (
         <>
-            <form onSubmit={saveRun}>
-                <label htmlFor="budget">Budget: </label>
-                <input
+            <form onSubmit={saveRun} className={styles.form}>
+                <InputField
                     id="budget"
-                    type="number"
+                    label="Budget: "
+                    inputType="number"
                     placeholder="5000"
                     value={budget}
                     onChange={(e) => setBudget(e.target.value)}
                 />
 
-                <label htmlFor="stage">Stage: </label>
-                <select
-                    name="stage"
+                <SelectField
                     id="stage"
+                    label="Stage: "
                     value={selectedStage}
                     onChange={(e) => setSelectedStage(Number(e.target.value))}
                 >
                     {stages.map(stage => (
                         <option value={stage.stageId} key={stage.stageId}>{stage.name}</option>
                     ))}
-                </select>
+                </SelectField>
 
-                <button type="submit">Save run</button>
+                <div className={styles.buttons}>
+                    <Button variant="secondary" onClick={onClose} type="button">Cancel</Button>
+                    <Button variant="primary" type="submit">Save run</Button>
+                </div>
             </form>
 
             {error && <p>{error}</p>}

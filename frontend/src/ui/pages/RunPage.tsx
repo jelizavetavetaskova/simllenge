@@ -2,11 +2,12 @@ import {useEffect, useState} from "react";
 import type {Run, Sim} from "../../types/database.ts";
 import {useParams} from "react-router-dom";
 import {getRunById} from "../../service/runService.ts";
-import * as Dialog from "@radix-ui/react-dialog";
-import {X} from "lucide-react";
 import SimForm from "../components/sim/SimForm.tsx";
 import {ageUp, getSimsByRun, markSimAsDead} from "../../service/simService.ts";
 import SimCard from "../components/sim/SimCard.tsx";
+import styles from "./RunPage.module.css";
+import Button from "../components/shared/Button.tsx";
+import Modal from "../components/shared/Modal.tsx";
 
 
 const RunPage = () => {
@@ -85,69 +86,67 @@ const RunPage = () => {
     }, [runId]);
 
     return (
-        <div>
+        <div className={styles.page}>
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : run && (
-                <>
-                    <h1>Run: {run.stage.name}, {run.budget}</h1>
+                <div>
+                    <h1>Run: {run.stage.name}</h1>
 
-                    <button onClick={() => {
-                        setEditingSim(null);
-                        setModalOpen(true);
-                    }}>
-                        Add a sim
-                    </button>
+                    <div className={styles.run}>
+                        <p className={styles.budget}>Budget: ${run.budget}</p>
+                        <Button
+                            variant="primary"
+                            type="button"
+                            onClick={() => {
+                                setEditingSim(null);
+                                setModalOpen(true);
+                            }}
+                        >
+                            + Add a sim
+                        </Button>
+                    </div>
 
-                    <div>
+                    <div className={styles.sim_block}>
                         <h2>Family</h2>
-                        {alive.map(sim => (
-                            <SimCard
-                                key={sim.simId}
-                                sim={sim}
-                                onEdit={() => handleEdit(sim)}
-                                onAgeUp={handleAgeUp}
-                                onDeath={handleDeath}
-                            />
-                        ))}
+                        <div className={styles.cards}>
+                            {alive.map(sim => (
+                                <SimCard
+                                    key={sim.simId}
+                                    sim={sim}
+                                    onEdit={() => handleEdit(sim)}
+                                    onAgeUp={handleAgeUp}
+                                    onDeath={handleDeath}
+                                />
+                            ))}
+                        </div>
                     </div>
 
                     {dead.length > 0 &&
-                        <div>
+                        <div className={styles.sim_block}>
                             <h2>Deceased</h2>
-                            {dead.map(sim => (
-                                <SimCard key={sim.simId} sim={sim}/>
-                            ))}
+                            <div className={`${styles.cards} ${styles.dead}`}>
+                                {dead.map(sim => (
+                                    <SimCard key={sim.simId} sim={sim}/>
+                                ))}
+                            </div>
                         </div>
                     }
 
-
-
-                    <Dialog.Root open={modalOpen} onOpenChange={setModalOpen}>
-                        <Dialog.Portal>
-                            <Dialog.Overlay className="overlay" />
-
-                            <Dialog.Content className="content">
-                                <Dialog.Close asChild>
-                                    <button><X size={15}/></button>
-                                </Dialog.Close>
-
-                                <Dialog.Title>{editingSim ? "Edit sim" : "Create a sim"}</Dialog.Title>
-                                <SimForm
-                                    runId={runId}
-                                    onSuccess={fetchSims}
-                                    onClose={() => {
-                                        setModalOpen(false);
-                                        setEditingSim(null);
-                                    }}
-                                    sim={editingSim ?? undefined}
-                                />
-                            </Dialog.Content>
-                        </Dialog.Portal>
-                    </Dialog.Root>
-                </>
+                    <Modal open={modalOpen} onOpenChange={setModalOpen} title={editingSim ? "Edit sim" : "Create a sim"}>
+                        <SimForm
+                            runId={runId}
+                            onSuccess={fetchSims}
+                            onClose={() => {
+                                setModalOpen(false);
+                                setEditingSim(null);
+                            }}
+                            sim={editingSim ?? undefined}
+                        />
+                    </Modal>
+                </div>
             )
             }
         </div>
