@@ -5,6 +5,8 @@ import {getAllFamilyRoles} from "../../../service/familyRoleService.ts";
 import {createSim, updateSim} from "../../../service/simService.ts";
 import styles from "./SimForm.module.css";
 import Button from "../shared/Button.tsx";
+import InputField from "../shared/InputField.tsx";
+import SelectField from "../shared/SelectField.tsx";
 
 interface CreateSimFormProps {
     sim?: Sim
@@ -75,28 +77,38 @@ const SimForm = ({sim, runId, onSuccess, onClose}: CreateSimFormProps) => {
     return (
         <>
             <form onSubmit={saveSim}>
-                <div className={styles.field}>
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
-                </div>
+                <InputField
+                    id="name"
+                    name="name"
+                    label="Name: "
+                    inputType="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                />
 
-                <div className={styles.field}>
-                    <label htmlFor="lifeStage">Life stage: </label>
-                    <select name="lifeStage" id="lifeStage" value={formData.lifeStage} onChange={handleChange}>
-                        {LIFE_STAGES.map(stage => (
-                            <option value={stage} key={stage}>{stage}</option>
-                        ))}
-                    </select>
-                </div>
+                <SelectField
+                    id="lifeStage"
+                    name="lifeStage"
+                    label="Life stage: "
+                    value={formData.lifeStage}
+                    onChange={handleChange}
+                >
+                    {LIFE_STAGES.map(stage => (
+                        <option value={stage} key={stage}>{stage}</option>
+                    ))}
+                </SelectField>
 
-                <div className={styles.field}>
-                    <label htmlFor="familyRole">Family role:</label>
-                    <select name="familyRoleId" id="familyRole" value={formData.familyRoleId} onChange={handleChange}>
-                        {familyRoles.map(role => (
-                            <option value={role.familyRoleId} key={role.familyRoleId}>{role.name}</option>
-                        ))}
-                    </select>
-                </div>
+                <SelectField
+                    id="familyRole"
+                    name="familyRoleId"
+                    label="Family role: "
+                    value={formData.familyRoleId}
+                    onChange={handleChange}
+                >
+                    {familyRoles.map(role => (
+                        <option value={role.familyRoleId} key={role.familyRoleId}>{role.name}</option>
+                    ))}
+                </SelectField>
 
                 <div className={styles.buttons}>
                     <Button variant="secondary" onClick={onClose} type="button">Cancel</Button>

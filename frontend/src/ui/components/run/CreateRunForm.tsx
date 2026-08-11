@@ -5,6 +5,8 @@ import type {Stage} from "../../../types/database.ts";
 import {getChallengeStages} from "../../../service/stageService.ts";
 import styles from "./CreateRunForm.module.css";
 import Button from "../shared/Button.tsx";
+import InputField from "../shared/InputField.tsx";
+import SelectField from "../shared/SelectField.tsx";
 
 interface CreateRunFormProps {
     challengeId?: string;
@@ -68,30 +70,25 @@ const CreateRunForm = ({challengeId, onSuccess, onClose}: CreateRunFormProps) =>
     return (
         <>
             <form onSubmit={saveRun} className={styles.form}>
-                <div className={styles.field}>
-                    <label htmlFor="budget">Budget: </label>
-                    <input
-                        id="budget"
-                        type="number"
-                        placeholder="5000"
-                        value={budget}
-                        onChange={(e) => setBudget(e.target.value)}
-                    />
-                </div>
+                <InputField
+                    id="budget"
+                    label="Budget: "
+                    inputType="number"
+                    placeholder="5000"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                />
 
-                <div className={styles.field}>
-                    <label htmlFor="stage">Stage: </label>
-                    <select
-                        name="stage"
-                        id="stage"
-                        value={selectedStage}
-                        onChange={(e) => setSelectedStage(Number(e.target.value))}
-                    >
-                        {stages.map(stage => (
-                            <option value={stage.stageId} key={stage.stageId}>{stage.name}</option>
-                        ))}
-                    </select>
-                </div>
+                <SelectField
+                    id="stage"
+                    label="Stage: "
+                    value={selectedStage}
+                    onChange={(e) => setSelectedStage(Number(e.target.value))}
+                >
+                    {stages.map(stage => (
+                        <option value={stage.stageId} key={stage.stageId}>{stage.name}</option>
+                    ))}
+                </SelectField>
 
                 <div className={styles.buttons}>
                     <Button variant="secondary" onClick={onClose} type="button">Cancel</Button>

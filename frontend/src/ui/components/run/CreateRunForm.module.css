@@ -5,27 +5,6 @@
     width: 100%;
 }
 
-.form .field {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 5px 0;
-}
-
-.form .field label {
-    color: var(--text-muted);
-    margin-bottom: 5px;
-}
-
-.form .field input, .form .field select {
-    padding: 10px 15px;
-    border-radius: 5px;
-    border: 1px solid var(--border);
-    outline: none;
-    color: var(--text);
-    background: var(--surface);
-}
-
 .form .buttons {
     display: flex;
     flex-direction: row;
