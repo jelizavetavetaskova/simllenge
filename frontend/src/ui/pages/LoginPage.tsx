@@ -3,7 +3,7 @@ import InputField from "../components/shared/InputField.tsx";
 import {useState, type SubmitEvent, type ChangeEvent} from "react";
 import type {Login} from "../../types/app.ts";
 import Button from "../components/shared/Button.tsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const LoginPage = () => {
     const [loginData, setLoginData] = useState<Login>({
@@ -47,7 +47,7 @@ const LoginPage = () => {
                     label="Email: "
                     value={loginData.email}
                     onChange={handleChange}
-                    inputType="text"
+                    inputType="email"
                 />
 
                 <InputField
@@ -61,6 +61,7 @@ const LoginPage = () => {
 
                 <Button type="submit" variant="primary">Login</Button>
             </form>
+            <p>Don't have an account? <Link to="/register">Create an account</Link></p>
 
             {error && <p>{error}</p>}
         </div>

@@ -4,6 +4,7 @@ import dev.vulpden.simllenge.auth.dto.LoginDto;
 import dev.vulpden.simllenge.auth.dto.RegisterDto;
 import dev.vulpden.simllenge.auth.service.RegisterService;
 import dev.vulpden.simllenge.user.dto.UserDto;
+import dev.vulpden.simllenge.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -15,20 +16,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
     private final RegisterService registerService;
     private final AuthenticationManager authenticationManager;
+    private final UserService userService;
 
-    public AuthController(RegisterService registerService, AuthenticationManager authenticationManager) {
+    public AuthController(RegisterService registerService, AuthenticationManager authenticationManager, UserService userService) {
         this.registerService = registerService;
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
     }
 
     @PostMapping("/register")
@@ -50,5 +50,11 @@ public class AuthController {
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or/and password");
         }
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<Object> me(Authentication auth) {
+        UserDto user = userService.getUserByUsername(auth.getName());
+        return ResponseEntity.ok(user);
     }
 }
