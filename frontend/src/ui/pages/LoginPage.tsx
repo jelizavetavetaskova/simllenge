@@ -1,9 +1,9 @@
-import {login} from "../../service/authService.ts";
 import InputField from "../components/shared/InputField.tsx";
 import {useState, type SubmitEvent, type ChangeEvent} from "react";
 import type {Login} from "../../types/app.ts";
 import Button from "../components/shared/Button.tsx";
 import {Link, useNavigate} from "react-router-dom";
+import {useAuth} from "../../auth/AuthProvider.tsx";
 
 const LoginPage = () => {
     const [loginData, setLoginData] = useState<Login>({
@@ -15,12 +15,13 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
 
+    const {signIn} = useAuth();
+
     const handleLogin = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError("");
 
         try {
-            await login(loginData);
+            await signIn(loginData);
             navigate("/challenges");
         } catch (e) {
             (e instanceof Error) ? setError(e.message) : setError(String(e));
@@ -28,6 +29,7 @@ const LoginPage = () => {
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setError("");
         const {name, value} = e.target;
 
         setLoginData((prev) => ({
