@@ -28,4 +28,7 @@ export const login = async (loginData: Login) => {
     });
 
     if (!res.ok) throw Error(await res.text());
+
+    const data: User = await res.json();
+    return data;
 }

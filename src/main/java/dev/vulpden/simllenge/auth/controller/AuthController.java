@@ -46,7 +46,9 @@ public class AuthController {
             SecurityContextHolder.getContext().setAuthentication(auth);
             HttpSession session = httpReq.getSession(true);
             session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-            return ResponseEntity.ok().build();
+
+            UserDto user = userService.getUserByUsername(auth.getName());
+            return ResponseEntity.ok(user);
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or/and password");
         }
