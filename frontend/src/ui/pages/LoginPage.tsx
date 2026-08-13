@@ -4,6 +4,7 @@ import type {Login} from "../../types/app.ts";
 import Button from "../components/shared/Button.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useAuth} from "../../auth/AuthProvider.tsx";
+import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
     const [loginData, setLoginData] = useState<Login>({
@@ -39,10 +40,10 @@ const LoginPage = () => {
     }
 
     return (
-        <div>
-            <h1>Login</h1>
+        <div className={styles.loginPage}>
+            <h1 className={styles.heading}>Login</h1>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} className={styles.loginForm}>
                 <InputField
                     id="email"
                     name="email"
@@ -63,7 +64,7 @@ const LoginPage = () => {
 
                 <Button type="submit" variant="primary">Login</Button>
             </form>
-            <p>Don't have an account? <Link to="/register">Create an account</Link></p>
+            <p className={styles.registerLink}>Don't have an account? <Link to="/register" className={styles.link}>Create an account</Link></p>
 
             {error && <p>{error}</p>}
         </div>
