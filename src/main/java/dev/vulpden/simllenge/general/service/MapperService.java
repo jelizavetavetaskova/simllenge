@@ -16,6 +16,8 @@ import dev.vulpden.simllenge.stage.dto.StageDto;
 import dev.vulpden.simllenge.stage.model.Stage;
 import dev.vulpden.simllenge.trait.dto.TraitDto;
 import dev.vulpden.simllenge.trait.model.Trait;
+import dev.vulpden.simllenge.user.dto.UserDto;
+import dev.vulpden.simllenge.user.model.User;
 
 public interface MapperService {
     SkillDto skillToDto(Skill skill);
@@ -33,4 +35,6 @@ public interface MapperService {
     RunDto runToDto(Run run);
 
     SimDto simToDto(Sim sim);
+
+    UserDto userToDto(User user);
 }

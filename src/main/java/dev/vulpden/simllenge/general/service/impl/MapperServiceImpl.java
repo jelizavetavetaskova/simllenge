@@ -17,6 +17,8 @@ import dev.vulpden.simllenge.stage.dto.StageDto;
 import dev.vulpden.simllenge.stage.model.Stage;
 import dev.vulpden.simllenge.trait.dto.TraitDto;
 import dev.vulpden.simllenge.trait.model.Trait;
+import dev.vulpden.simllenge.user.dto.UserDto;
+import dev.vulpden.simllenge.user.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -94,6 +96,15 @@ public class MapperServiceImpl implements MapperService {
         dto.setFamilyRole(familyRoleToDto(sim.getFamilyRole()));
         dto.setLifeStage(sim.getLifeStage());
         dto.setAlive(sim.isAlive());
+        return dto;
+    }
+
+    @Override
+    public UserDto userToDto(User user) {
+        UserDto dto = new UserDto();
+        dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
+        dto.setAuthority(user.getAuthority());
         return dto;
     }
 }

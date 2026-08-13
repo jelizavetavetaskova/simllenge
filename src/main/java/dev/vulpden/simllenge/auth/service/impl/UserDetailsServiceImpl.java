@@ -1,9 +1,8 @@
-package dev.vulpden.simllenge.user.service;
+package dev.vulpden.simllenge.auth.service.impl;
 
-import dev.vulpden.simllenge.config.MyUserDetails;
+import dev.vulpden.simllenge.auth.config.MyUserDetails;
 import dev.vulpden.simllenge.user.model.User;
 import dev.vulpden.simllenge.user.repo.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

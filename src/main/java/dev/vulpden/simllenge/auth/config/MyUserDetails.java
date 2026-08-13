@@ -1,4 +1,4 @@
-package dev.vulpden.simllenge.config;
+package dev.vulpden.simllenge.auth.config;
 
 import dev.vulpden.simllenge.user.model.User;
 import org.jspecify.annotations.Nullable;
