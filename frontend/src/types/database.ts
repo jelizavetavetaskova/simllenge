@@ -49,3 +49,9 @@ export type Sim = {
     lifeStage: LifeStage;
     alive: boolean;
 }
+
+export type User = {
+    username: string;
+    email: string;
+    authority: "ADMIN"|"USER";
+}
