@@ -10,6 +10,8 @@ import dev.vulpden.simllenge.run.repo.RunRepo;
 import dev.vulpden.simllenge.run.service.RunService;
 import dev.vulpden.simllenge.stage.model.Stage;
 import dev.vulpden.simllenge.stage.repo.StageRepo;
+import dev.vulpden.simllenge.user.model.User;
+import dev.vulpden.simllenge.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +24,15 @@ public class RunServiceImpl implements RunService {
     private final StageRepo stageRepo;
 
     private final MapperService mapperService;
+    private final UserService userService;
 
-    public RunServiceImpl(ChallengeRepo challengeRepo, RunRepo runRepo, StageRepo stageRepo, MapperService mapperService) {
+    public RunServiceImpl(ChallengeRepo challengeRepo, RunRepo runRepo, StageRepo stageRepo,
+                          MapperService mapperService, UserService userService) {
         this.challengeRepo = challengeRepo;
         this.runRepo = runRepo;
         this.stageRepo = stageRepo;
         this.mapperService = mapperService;
+        this.userService = userService;
     }
 
     @Override
@@ -49,17 +54,20 @@ public class RunServiceImpl implements RunService {
     }
 
     @Override
-    public RunDto createRun(int challengeId, CreateRunDto runDto) {
+    public RunDto createRun(int challengeId, CreateRunDto runDto, String email) {
         Challenge challenge = challengeRepo.findById(challengeId)
                 .orElseThrow(() -> new NoSuchElementException("Challenge does not exist"));
 
         Stage stage = stageRepo.findById(runDto.getStageId())
                 .orElseThrow(() -> new NoSuchElementException("Stage does not exist"));
 
+        User user = userService.getUserByEmail(email);
+
         Run run = new Run();
         run.setChallenge(challenge);
         run.setBudget(runDto.getBudget());
         run.setStage(stage);
+        run.setUser(user);
 
         return mapperService.runToDto(runRepo.save(run));
     }

@@ -10,5 +10,5 @@ public interface RunService {
 
     RunDto getRunById(int runId);
 
-    RunDto createRun(int challengeId, CreateRunDto runDto);
+    RunDto createRun(int challengeId, CreateRunDto runDto, String email);
 }

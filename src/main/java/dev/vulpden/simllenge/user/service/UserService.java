@@ -1,7 +1,7 @@
 package dev.vulpden.simllenge.user.service;
 
-import dev.vulpden.simllenge.user.dto.UserDto;
+import dev.vulpden.simllenge.user.model.User;
 
 public interface UserService {
-    UserDto getUserByUsername(String username);
+    User getUserByEmail(String username);
 }
