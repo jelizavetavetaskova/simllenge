@@ -29,12 +29,14 @@ const AuthProvider = ({children}: {children: ReactNode}) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const res = await fetch("/api/auth/me");
+                const res = await fetch("/api/auth/me", {
+                    credentials: "include"
+                });
 
                 if (res.ok) {
                     const data: User = await res.json();
                     setUser(data);
-                } else if (res.status === 401) {
+                } else {
                     setUser(null);
                 }
             } finally {
