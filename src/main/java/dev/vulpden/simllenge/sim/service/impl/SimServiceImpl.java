@@ -9,7 +9,6 @@ import dev.vulpden.simllenge.sim.dto.CreateSimDto;
 import dev.vulpden.simllenge.sim.dto.SimDto;
 import dev.vulpden.simllenge.sim.dto.UpdateSimDto;
 import dev.vulpden.simllenge.sim.model.Sim;
-import dev.vulpden.simllenge.sim.model.enums.LifeStage;
 import dev.vulpden.simllenge.sim.repo.SimRepo;
 import dev.vulpden.simllenge.sim.service.SimService;
 import org.springframework.stereotype.Service;
@@ -33,8 +32,13 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public List<SimDto> getSimsByRun(int runId) {
-        if (!runRepo.existsById(runId)) throw new NoSuchElementException("Run does not exist");
+    public List<SimDto> getSimsByRun(int runId, String email) {
+        Run run = runRepo.findById(runId)
+                .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
+
+        if (!run.getUser().getEmail().equals(email)) {
+            throw new NoSuchElementException("User does not have a run with this id");
+        }
 
         return simRepo.findAllByRunRunId(runId)
                 .stream()
@@ -43,9 +47,14 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public SimDto createSim(int runId, CreateSimDto simDto) {
+    public SimDto createSim(int runId, CreateSimDto simDto, String email) {
         Run run = runRepo.findById(runId)
                 .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
+
+        if (!run.getUser().getEmail().equals(email)) {
+            throw new NoSuchElementException("User does not have a run with this id");
+        }
+
         FamilyRole familyRole = familyRoleRepo.findById(simDto.getFamilyRoleId())
                 .orElseThrow(() -> new NoSuchElementException("Family role does not exist"));
 
@@ -60,9 +69,14 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public SimDto updateSim(int simId, UpdateSimDto simDto) {
+    public SimDto updateSim(int simId, UpdateSimDto simDto, String email) {
         Sim sim = simRepo.findById(simId)
                 .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+
+        if (!sim.getRun().getUser().getEmail().equals(email)) {
+            throw new NoSuchElementException("User does not have a run with this id");
+        }
+
         FamilyRole familyRole = familyRoleRepo.findById(simDto.getFamilyRoleId())
                         .orElseThrow(() -> new NoSuchElementException("Family role does not exist"));
 
@@ -73,9 +87,13 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public SimDto markSimAsDead(int simId) {
+    public SimDto markSimAsDead(int simId, String email) {
         Sim sim = simRepo.findById(simId)
                 .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+
+        if (!sim.getRun().getUser().getEmail().equals(email)) {
+            throw new NoSuchElementException("User does not have a run with this id");
+        }
 
         if (!sim.isAlive()) return mapperService.simToDto(sim);
 
@@ -84,9 +102,13 @@ public class SimServiceImpl implements SimService {
     }
 
     @Override
-    public SimDto ageUp(int simId) {
+    public SimDto ageUp(int simId, String email) {
         Sim sim = simRepo.findById(simId)
                 .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+
+        if (!sim.getRun().getUser().getEmail().equals(email)) {
+            throw new NoSuchElementException("User does not have a run with this id");
+        }
 
         if (!sim.isAlive()) throw new IllegalStateException("Dead sim cannot age up");
 

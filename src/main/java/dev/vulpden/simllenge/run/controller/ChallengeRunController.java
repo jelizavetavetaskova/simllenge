@@ -21,8 +21,9 @@ public class ChallengeRunController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RunDto>> getRuns(@PathVariable int challengeId) {
-        List<RunDto> runs = runService.getChallengeRuns(challengeId);
+    public ResponseEntity<List<RunDto>> getRuns(@PathVariable int challengeId, Authentication auth) {
+        String email = auth.getName();
+        List<RunDto> runs = runService.getChallengeRuns(challengeId, email);
         return ResponseEntity.ok(runs);
     }
 

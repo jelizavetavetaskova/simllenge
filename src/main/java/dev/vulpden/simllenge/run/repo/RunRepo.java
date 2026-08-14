@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RunRepo extends JpaRepository<Run, Integer> {
-    List<Run> findAllByChallengeChallengeId(int challengeId);
+    List<Run> findAllByChallengeChallengeIdAndUserEmail(int challengeId, String email);
 }

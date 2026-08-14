@@ -6,6 +6,7 @@ import dev.vulpden.simllenge.sim.service.SimService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,14 +21,16 @@ public class RunSimController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SimDto>> getSims(@PathVariable int runId) {
-        List<SimDto> sims = simService.getSimsByRun(runId);
+    public ResponseEntity<List<SimDto>> getSims(@PathVariable int runId, Authentication auth) {
+        String email = auth.getName();
+        List<SimDto> sims = simService.getSimsByRun(runId, email);
         return ResponseEntity.ok(sims);
     }
 
     @PostMapping
-    public ResponseEntity<SimDto> createSim(@PathVariable int runId, @Valid @RequestBody CreateSimDto simDto) {
-        SimDto sim = simService.createSim(runId, simDto);
+    public ResponseEntity<SimDto> createSim(@PathVariable int runId, @Valid @RequestBody CreateSimDto simDto, Authentication auth) {
+        String email = auth.getName();
+        SimDto sim = simService.createSim(runId, simDto, email);
         return ResponseEntity.status(HttpStatus.CREATED).body(sim);
     }
 }
