@@ -4,15 +4,24 @@ import RunPage from "./ui/pages/RunPage.tsx";
 import RegisterPage from "./ui/pages/RegisterPage.tsx";
 import LoginPage from "./ui/pages/LoginPage.tsx";
 import AuthProvider from "./auth/AuthProvider.tsx";
+import ProtectedRoute from "./ui/components/router/ProtectedRoute.tsx";
 
 const App = () => {
     return (
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/challenges" element={<h1>Challenges</h1>}/>
-                    <Route path="/challenges/:challengeId/runs" element={<RunsList />} />
-                    <Route path="/challenges/:challengeId/runs/:runId" element={<RunPage />} />
+                    <Route path="/challenges" element={<h1>Challenges</h1>}/> {/* заглушка */}
+                    <Route path="/challenges/:challengeId/runs" element={
+                        <ProtectedRoute>
+                            <RunsList />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/challenges/:challengeId/runs/:runId" element={
+                        <ProtectedRoute>
+                            <RunPage />
+                        </ProtectedRoute>
+                    } />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/login" element={<LoginPage />}/>
                 </Routes>
