@@ -4,6 +4,8 @@ import dev.vulpden.simllenge.career.dto.CareerBranchDto;
 import dev.vulpden.simllenge.career.dto.CareerDto;
 import dev.vulpden.simllenge.career.model.Career;
 import dev.vulpden.simllenge.career.model.CareerBranch;
+import dev.vulpden.simllenge.challenge.dto.ChallengeDto;
+import dev.vulpden.simllenge.challenge.model.Challenge;
 import dev.vulpden.simllenge.familyRole.dto.FamilyRoleDto;
 import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.run.dto.RunDto;
@@ -37,4 +39,6 @@ public interface MapperService {
     SimDto simToDto(Sim sim);
 
     UserDto userToDto(User user);
+
+    ChallengeDto challengeToDto(Challenge challenge);
 }
