@@ -1,32 +1,38 @@
 import {useAuth} from "../../../auth/AuthProvider.tsx";
 import {Link} from "react-router-dom";
 import Button from "./Button.tsx";
+import styles from "./Navbar.module.css";
+import {User} from "lucide-react";
 
 const Navbar = () => {
-    const {loading, user, signOut} = useAuth();
+    const {user, signOut} = useAuth();
 
     return (
-        <div>
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <div>
-                    <Link to="/challenges">Challenges</Link>
+        <div className={styles.navbar}>
+            <div className={styles.siteName}>
+                SIMLLENGE
+            </div>
 
-                    {user ? (
+            <div className={styles.navigation}>
+                <Link to="/challenges">Challenges</Link>
+            </div>
+
+            <div className={styles.auth}>
+                {user ? (
+                    <>
+                        <User/>
+                        <p>{user.username}</p>
                         <Button variant="secondary" onClick={signOut}>Log out</Button>
-                    ) : (
-                        <>
-                            <Link to="/login">Login</Link>
-                            <Link to="/register">Create an account</Link>
-                        </>
-                    )}
-                </div>
-            )
-
-            }
+                    </>
+                ) : (
+                    <>
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Create an account</Link>
+                    </>
+                )}
+            </div>
         </div>
-    )
+    );
 }
 
 export default Navbar;
