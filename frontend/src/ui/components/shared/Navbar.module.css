@@ -27,7 +27,7 @@
 }
 
 .navbar .auth a {
-    color: var(--accent-blue);
+    color: var(--accent-purple);
     text-decoration: none;
     transition: 0.2s;
 }
