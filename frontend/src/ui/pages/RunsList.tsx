@@ -4,9 +4,10 @@ import {Link, useParams} from "react-router-dom";
 import {getChallengeRuns} from "../../service/runService.ts";
 import CreateRunForm from "../components/run/CreateRunForm.tsx";
 import {ArrowRight} from "lucide-react";
-import styles from "./RunsList.module.css";
 import Button from "../components/shared/Button.tsx";
 import Modal from "../components/shared/Modal.tsx";
+import PageLayout from "../components/shared/PageLayout.tsx";
+import styles from "./RunsList.module.css";
 
 const RunsList = () => {
     const [runs, setRuns] = useState<Run[]>([]);
@@ -41,9 +42,9 @@ const RunsList = () => {
     }, [challengeId]);
 
     return (
-        <div className={styles.page}>
-            <div className={styles.run}>
-                <h1>Runs</h1>
+        <PageLayout
+            heading="Runs"
+            action={
                 <Button
                     variant="add"
                     type="button"
@@ -51,7 +52,8 @@ const RunsList = () => {
                 >
                     + Create a run
                 </Button>
-            </div>
+            }
+        >
 
             {loading ? (
                 <p>Loading...</p>
@@ -60,7 +62,7 @@ const RunsList = () => {
             ) : runs.length === 0 ? (
                 <p>No runs</p>
             ) : (
-                <table>
+                <table className={styles.runsTable}>
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -89,7 +91,7 @@ const RunsList = () => {
                     onClose={() => setModalOpen(false)}
                 />
             </Modal>
-        </div>
+        </PageLayout>
     )
 }
 

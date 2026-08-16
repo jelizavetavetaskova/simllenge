@@ -1,13 +1,3 @@
-.page {
-    padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
-}
-
-.heading {
-    text-align: left;
-    font-size: var(--fs-heading);
-    margin-bottom: var(--space-lg);
-}
-
 .challengeList {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

@@ -1,0 +1,15 @@
+.page {
+    padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
+}
+
+.heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.heading h1 {
+    font-size: var(--fs-heading);
+}

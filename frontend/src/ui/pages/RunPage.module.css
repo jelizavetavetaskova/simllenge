@@ -1,21 +1,4 @@
-.page {
-    padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
-}
-
-.page h1 {
-    text-align: left;
-    margin-bottom: var(--space-md);
-    font-size: var(--fs-heading);
-}
-
-.page .run {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.page .runInfo {
-    width: 50%;
+.runInfo {
     display: flex;
     flex-direction: row;
     gap: var(--space-md);
@@ -23,7 +6,7 @@
     margin-bottom: var(--space-md);
 }
 
-.page .runInfo .budget {
+.runInfo .budget {
     color: var(--accent);
     background: var(--accent-soft);
     font-weight: bold;
@@ -32,7 +15,7 @@
     font-size: var(--fs-label);
 }
 
-.page .runInfo .stage {
+.runInfo .stage {
     border-radius: var(--radius-pill);
     background: var(--accent-purple-soft);
     color: var(--accent-purple);
@@ -40,21 +23,21 @@
     font-weight: bold;
 }
 
-.page .cards {
+.cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: var(--space-xl);
 }
 
-.page .dead {
+.dead {
     opacity: 0.6;
 }
 
-.page .sim_block {
+.sim_block {
     margin-bottom: var(--space-4xl);
 }
 
-.page .sim_block h2 {
+.sim_block h2 {
     margin-bottom: var(--space-lg);
     font-size: var(--fs-section-heading);
 }
