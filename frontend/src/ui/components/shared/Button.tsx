@@ -2,15 +2,16 @@ import type {ReactNode} from "react";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
-    variant: "primary"|"secondary"
+    variant: "primary"|"secondary"|"add"
     onClick?: () => void;
     children: ReactNode;
     type?: "button"|"submit";
 }
 
 const Button = ({variant, onClick, children, type = "button"}: ButtonProps) => {
+
     return (
-        <button onClick={onClick} className={variant === "primary" ? styles.primary : styles.secondary} type={type}>
+        <button onClick={onClick} className={styles[variant]} type={type}>
             {children}
         </button>
     )

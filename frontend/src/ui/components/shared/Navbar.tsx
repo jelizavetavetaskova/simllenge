@@ -18,16 +18,17 @@ const Navbar = () => {
             </div>
 
             <div className={styles.auth}>
+
                 {user ? (
                     <>
-                        <User/>
-                        <p>{user.username}</p>
+                        <User className={styles.userIcon}/>
+                        <p className={styles.username}>{user.username}</p>
                         <Button variant="secondary" onClick={signOut}>Log out</Button>
                     </>
                 ) : (
                     <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Create an account</Link>
+                        <Link to="/login" className={styles.login}>Login</Link>
+                        <Link to="/register" className={styles.register}>Create an account</Link>
                     </>
                 )}
             </div>

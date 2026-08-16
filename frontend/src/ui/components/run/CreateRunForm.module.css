@@ -1,5 +1,5 @@
 .form {
-    padding: 10px;
+    padding: var(--space-md);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -8,6 +8,6 @@
 .form .buttons {
     display: flex;
     flex-direction: row;
-    gap: 5px;
-    margin-top: 10px;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
 }

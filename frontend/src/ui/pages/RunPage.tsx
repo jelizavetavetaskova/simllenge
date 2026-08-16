@@ -93,12 +93,10 @@ const RunPage = () => {
                 <p>{error}</p>
             ) : run && (
                 <div>
-                    <h1>Run: {run.stage.name}</h1>
-
                     <div className={styles.run}>
-                        <p className={styles.budget}>Budget: ${run.budget}</p>
+                        <h1>Run: {run.stage.name}</h1>
                         <Button
-                            variant="primary"
+                            variant="add"
                             type="button"
                             onClick={() => {
                                 setEditingSim(null);
@@ -107,6 +105,11 @@ const RunPage = () => {
                         >
                             + Add a sim
                         </Button>
+                    </div>
+
+                    <div className={styles.runInfo}>
+                        <p className={styles.stage}>Stage {run.stage.stageOrder} - {run.stage.name}</p>
+                        <p className={styles.budget}>Budget: ${run.budget}</p>
                     </div>
 
                     <div className={styles.sim_block}>

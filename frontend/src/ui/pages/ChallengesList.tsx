@@ -36,11 +36,11 @@ const ChallengesList = () => {
             ) : challenges.length === 0 ? (
                 <p>No challenges</p>
             ) : (
-                <ul className={styles.challengeList}>
+                <div className={styles.challengeList}>
                     {challenges.map(challenge => (
-                        <li key={challenge.challengeId} className={styles.challenge}><Link to={`/challenges/${challenge.challengeId}/runs`}>{challenge.title}</Link></li>
+                        <div key={challenge.challengeId} className={styles.challenge}><Link to={`/challenges/${challenge.challengeId}/runs`}>{challenge.title}</Link></div>
                     ))}
-                </ul>
+                </div>
             )}
         </div>
     )

@@ -1,8 +1,8 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    font-size: 20px;
-    padding: 20px;
+    gap: var(--space-2xl);
+    padding: var(--space-xl) var(--space-2xl);
     background: var(--surface);
     align-items: center;
 }
@@ -10,7 +10,7 @@
 .navbar .siteName {
     color: var(--accent);
     font-weight: bold;
-    font-size: 30px;
+    font-size: var(--fs-title);
 }
 
 .navbar .navigation a {
@@ -22,14 +22,30 @@
 .navbar .auth {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: var(--space-md);
     align-items: center;
+}
+
+.navbar .auth .userIcon {
+    margin-right: var(--space-xs);
 }
 
 .navbar .auth a {
     color: var(--accent-purple);
     text-decoration: none;
     transition: 0.2s;
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-lg);
+}
+
+.navbar .auth .login {
+    background: var(--accent);
+    color: white;
+}
+
+.navbar .auth .register {
+    border: 1px solid var(--border);
+    color: var(--text);
 }
 
 .navbar .navigation a:hover {

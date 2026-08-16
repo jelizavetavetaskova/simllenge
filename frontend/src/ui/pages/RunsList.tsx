@@ -45,7 +45,7 @@ const RunsList = () => {
             <div className={styles.run}>
                 <h1>Runs</h1>
                 <Button
-                    variant="primary"
+                    variant="add"
                     type="button"
                     onClick={() => setModalOpen(true)}
                 >

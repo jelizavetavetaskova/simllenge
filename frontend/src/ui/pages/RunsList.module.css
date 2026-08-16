@@ -1,9 +1,10 @@
 .page {
-    margin: 20px;
+    padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
 }
 
 .page h1 {
-    text-align: center;
+    text-align: left;
+    font-size: var(--fs-heading);
 }
 
 .page .run {
@@ -11,20 +12,24 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-lg);
 }
 
 .page tr, .page th, .page td {
     border-bottom: 1px solid var(--border);
 }
 
+.page tr {
+    padding: var(--space-xl) var(--space-2xl);
+}
+
 .page table {
-    width: 80%;
-    margin: 10px auto;
-    font-size: 20px;
+    width: 100%;
+    margin: var(--space-md) auto;
+    font-size: var(--fs-base);
     background: var(--surface);
-    padding: 0 15px;
-    border-radius: 15px;
+    padding: 0 var(--space-lg);
+    border-radius: var(--radius-lg);
 }
 
 .page tr:last-child td {
@@ -32,12 +37,12 @@
 }
 
 .page table tr th {
-    padding: 10px;
+    padding: var(--space-md);
     text-align: left;
 }
 
 .page td {
-    padding: 10px 5px;
+    padding: var(--space-lg) var(--space-sm);
     color: var(--text);
 }
 

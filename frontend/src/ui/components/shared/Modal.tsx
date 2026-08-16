@@ -18,7 +18,7 @@ const Modal = ({open, onOpenChange, title, children}: ModalProps) => {
 
                 <Dialog.Content className={styles.content}>
                     <div className={styles.header}>
-                        <Dialog.Title>{title}</Dialog.Title>
+                        <Dialog.Title className={styles.title}>{title}</Dialog.Title>
                         <Dialog.Close asChild>
                             <button className={styles.close}><X size={15}/></button>
                         </Dialog.Close>
