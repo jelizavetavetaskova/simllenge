@@ -5,13 +5,14 @@ import RegisterPage from "./ui/pages/RegisterPage.tsx";
 import LoginPage from "./ui/pages/LoginPage.tsx";
 import AuthProvider from "./auth/AuthProvider.tsx";
 import ProtectedRoute from "./ui/components/router/ProtectedRoute.tsx";
+import ChallengesList from "./ui/pages/ChallengesList.tsx";
 
 const App = () => {
     return (
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/challenges" element={<h1>Challenges</h1>}/> {/* заглушка */}
+                    <Route path="/challenges" element={<ChallengesList />} />
                     <Route path="/challenges/:challengeId/runs" element={
                         <ProtectedRoute>
                             <RunsList />

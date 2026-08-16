@@ -55,3 +55,8 @@ export type User = {
     email: string;
     authority: "ADMIN"|"USER";
 }
+
+export type Challenge = {
+    challengeId: number;
+    title: string;
+}
