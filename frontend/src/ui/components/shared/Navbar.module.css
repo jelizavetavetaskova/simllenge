@@ -1,0 +1,41 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 20px;
+    background: var(--surface);
+    align-items: center;
+}
+
+.navbar .siteName {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.navbar .navigation a {
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.navbar .auth {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.navbar .auth a {
+    color: var(--accent-purple);
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.navbar .navigation a:hover {
+    color: var(--text-muted);
+}
+
+.navbar .auth a:hover {
+    filter: brightness(1.3);
+}

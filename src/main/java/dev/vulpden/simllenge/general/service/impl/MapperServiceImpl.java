@@ -4,6 +4,8 @@ import dev.vulpden.simllenge.career.dto.CareerBranchDto;
 import dev.vulpden.simllenge.career.dto.CareerDto;
 import dev.vulpden.simllenge.career.model.Career;
 import dev.vulpden.simllenge.career.model.CareerBranch;
+import dev.vulpden.simllenge.challenge.dto.ChallengeDto;
+import dev.vulpden.simllenge.challenge.model.Challenge;
 import dev.vulpden.simllenge.familyRole.dto.FamilyRoleDto;
 import dev.vulpden.simllenge.familyRole.model.FamilyRole;
 import dev.vulpden.simllenge.general.service.MapperService;
@@ -17,6 +19,8 @@ import dev.vulpden.simllenge.stage.dto.StageDto;
 import dev.vulpden.simllenge.stage.model.Stage;
 import dev.vulpden.simllenge.trait.dto.TraitDto;
 import dev.vulpden.simllenge.trait.model.Trait;
+import dev.vulpden.simllenge.user.dto.UserDto;
+import dev.vulpden.simllenge.user.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -94,6 +98,23 @@ public class MapperServiceImpl implements MapperService {
         dto.setFamilyRole(familyRoleToDto(sim.getFamilyRole()));
         dto.setLifeStage(sim.getLifeStage());
         dto.setAlive(sim.isAlive());
+        return dto;
+    }
+
+    @Override
+    public UserDto userToDto(User user) {
+        UserDto dto = new UserDto();
+        dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
+        dto.setAuthority(user.getAuthority());
+        return dto;
+    }
+
+    @Override
+    public ChallengeDto challengeToDto(Challenge challenge) {
+        ChallengeDto dto = new ChallengeDto();
+        dto.setChallengeId(challenge.getChallengeId());
+        dto.setTitle(challenge.getTitle());
         return dto;
     }
 }

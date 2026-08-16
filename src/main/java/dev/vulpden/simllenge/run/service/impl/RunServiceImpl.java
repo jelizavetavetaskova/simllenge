@@ -10,6 +10,8 @@ import dev.vulpden.simllenge.run.repo.RunRepo;
 import dev.vulpden.simllenge.run.service.RunService;
 import dev.vulpden.simllenge.stage.model.Stage;
 import dev.vulpden.simllenge.stage.repo.StageRepo;
+import dev.vulpden.simllenge.user.model.User;
+import dev.vulpden.simllenge.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,44 +24,54 @@ public class RunServiceImpl implements RunService {
     private final StageRepo stageRepo;
 
     private final MapperService mapperService;
+    private final UserService userService;
 
-    public RunServiceImpl(ChallengeRepo challengeRepo, RunRepo runRepo, StageRepo stageRepo, MapperService mapperService) {
+    public RunServiceImpl(ChallengeRepo challengeRepo, RunRepo runRepo, StageRepo stageRepo,
+                          MapperService mapperService, UserService userService) {
         this.challengeRepo = challengeRepo;
         this.runRepo = runRepo;
         this.stageRepo = stageRepo;
         this.mapperService = mapperService;
+        this.userService = userService;
     }
 
     @Override
-    public List<RunDto> getChallengeRuns(int challengeId) {
+    public List<RunDto> getChallengeRuns(int challengeId, String email) {
         if (!challengeRepo.existsById(challengeId)) throw new NoSuchElementException("Challenge does not exist");
 
-        return runRepo.findAllByChallengeChallengeId(challengeId)
+        return runRepo.findAllByChallengeChallengeIdAndUserEmail(challengeId, email)
                 .stream()
                 .map(mapperService::runToDto)
                 .toList();
     }
 
     @Override
-    public RunDto getRunById(int runId) {
+    public RunDto getRunById(int runId, String email) {
         Run run = runRepo.findById(runId)
                 .orElseThrow(() -> new NoSuchElementException("Run does not exist"));
+
+        if (!run.getUser().getEmail().equals(email)) {
+            throw new NoSuchElementException("User does not have a run with this id");
+        }
 
         return mapperService.runToDto(run);
     }
 
     @Override
-    public RunDto createRun(int challengeId, CreateRunDto runDto) {
+    public RunDto createRun(int challengeId, CreateRunDto runDto, String email) {
         Challenge challenge = challengeRepo.findById(challengeId)
                 .orElseThrow(() -> new NoSuchElementException("Challenge does not exist"));
 
         Stage stage = stageRepo.findById(runDto.getStageId())
                 .orElseThrow(() -> new NoSuchElementException("Stage does not exist"));
 
+        User user = userService.getUserByEmail(email);
+
         Run run = new Run();
         run.setChallenge(challenge);
         run.setBudget(runDto.getBudget());
         run.setStage(stage);
+        run.setUser(user);
 
         return mapperService.runToDto(runRepo.save(run));
     }

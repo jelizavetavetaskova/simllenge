@@ -2,7 +2,9 @@ import type {CreateRun} from "../types/app.ts";
 import type {Run} from "../types/database.ts";
 
 export const getChallengeRuns = async (challengeId: string) => {
-    const res = await fetch(`/api/challenges/${challengeId}/runs`);
+    const res = await fetch(`/api/challenges/${challengeId}/runs`, {
+        credentials: "include"
+    });
 
     if (!res.ok) throw Error(await res.text());
 
@@ -11,7 +13,9 @@ export const getChallengeRuns = async (challengeId: string) => {
 }
 
 export const getRunById = async (runId: string) => {
-    const res = await fetch(`/api/runs/${runId}`);
+    const res = await fetch(`/api/runs/${runId}`, {
+        credentials: "include"
+    });
 
     if (!res.ok) throw Error(await res.text());
 
@@ -25,7 +29,8 @@ export const createRun = async (challengeId: string, run: CreateRun) => {
         body: JSON.stringify(run),
         headers: {
             "Content-Type": "application/json"
-        }
+        },
+        credentials: "include"
     });
 
     if (!res.ok) throw Error(await res.text());

@@ -1,0 +1,49 @@
+import {useEffect, useState} from "react";
+import type {Challenge} from "../../types/database.ts";
+import {getAllChallenges} from "../../service/challengeService.ts";
+import {Link} from "react-router-dom";
+import styles from "./ChallengesList.module.css";
+
+const ChallengesList = () => {
+    const [challenges, setChallenges] = useState<Challenge[]>([]);
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchChallenges = async () => {
+            try {
+                setLoading(true);
+                setChallenges(await getAllChallenges());
+            } catch (e) {
+                (e instanceof Error) ? setError(e.message) : setError(String(e));
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchChallenges();
+    }, []);
+
+    return (
+        <div className={styles.page}>
+            <h1 className={styles.heading}>Challenges</h1>
+
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : challenges.length === 0 ? (
+                <p>No challenges</p>
+            ) : (
+                <ul className={styles.challengeList}>
+                    {challenges.map(challenge => (
+                        <li key={challenge.challengeId} className={styles.challenge}><Link to={`/challenges/${challenge.challengeId}/runs`}>{challenge.title}</Link></li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    )
+}
+
+export default ChallengesList;

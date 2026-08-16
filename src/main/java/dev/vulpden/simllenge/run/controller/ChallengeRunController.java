@@ -6,6 +6,7 @@ import dev.vulpden.simllenge.run.service.RunService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,14 +21,16 @@ public class ChallengeRunController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RunDto>> getRuns(@PathVariable int challengeId) {
-        List<RunDto> runs = runService.getChallengeRuns(challengeId);
+    public ResponseEntity<List<RunDto>> getRuns(@PathVariable int challengeId, Authentication auth) {
+        String email = auth.getName();
+        List<RunDto> runs = runService.getChallengeRuns(challengeId, email);
         return ResponseEntity.ok(runs);
     }
 
     @PostMapping
-    public ResponseEntity<Object> createRun(@PathVariable int challengeId, @Valid @RequestBody CreateRunDto runDto) {
-        RunDto createdRun = runService.createRun(challengeId, runDto);
+    public ResponseEntity<Object> createRun(@PathVariable int challengeId, @Valid @RequestBody CreateRunDto runDto, Authentication auth) {
+        String email = auth.getName();
+        RunDto createdRun = runService.createRun(challengeId, runDto, email);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRun);
     }
 }

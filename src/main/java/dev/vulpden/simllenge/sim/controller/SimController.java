@@ -5,6 +5,7 @@ import dev.vulpden.simllenge.sim.dto.UpdateSimDto;
 import dev.vulpden.simllenge.sim.service.SimService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,20 +18,23 @@ public class SimController {
     }
 
     @PutMapping("/{simId}")
-    public ResponseEntity<SimDto> updateSim(@PathVariable int simId, @Valid @RequestBody UpdateSimDto simDto) {
-        SimDto updatedSim = simService.updateSim(simId, simDto);
+    public ResponseEntity<SimDto> updateSim(@PathVariable int simId, @Valid @RequestBody UpdateSimDto simDto, Authentication auth) {
+        String email = auth.getName();
+        SimDto updatedSim = simService.updateSim(simId, simDto, email);
         return ResponseEntity.ok(updatedSim);
     }
 
     @PostMapping("/{simId}/kill")
-    public ResponseEntity<SimDto> killSim(@PathVariable int simId) {
-        SimDto killed = simService.markSimAsDead(simId);
+    public ResponseEntity<SimDto> killSim(@PathVariable int simId, Authentication auth) {
+        String email = auth.getName();
+        SimDto killed = simService.markSimAsDead(simId, email);
         return ResponseEntity.ok(killed);
     }
 
     @PostMapping("/{simId}/age-up")
-    public ResponseEntity<SimDto> ageUp(@PathVariable int simId) {
-        SimDto aged = simService.ageUp(simId);
+    public ResponseEntity<SimDto> ageUp(@PathVariable int simId, Authentication auth) {
+        String email = auth.getName();
+        SimDto aged = simService.ageUp(simId, email);
         return ResponseEntity.ok(aged);
     }
 }

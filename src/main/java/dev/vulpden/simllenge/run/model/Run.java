@@ -3,6 +3,7 @@ package dev.vulpden.simllenge.run.model;
 import dev.vulpden.simllenge.challenge.model.Challenge;
 import dev.vulpden.simllenge.sim.model.Sim;
 import dev.vulpden.simllenge.stage.model.Stage;
+import dev.vulpden.simllenge.user.model.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -36,4 +37,8 @@ public class Run {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stage_id")
     private Stage stage;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

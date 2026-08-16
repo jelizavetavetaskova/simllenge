@@ -1,0 +1,17 @@
+.loginPage {
+    margin: 20px 60px;
+}
+
+.heading, .registerLink {
+    text-align: center;
+}
+
+.loginForm {
+    width: 40%;
+    margin: auto;
+}
+
+.registerLink .link {
+    color: var(--accent);
+    font-weight: bold;
+}
