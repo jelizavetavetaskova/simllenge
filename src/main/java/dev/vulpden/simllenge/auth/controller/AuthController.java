@@ -62,4 +62,15 @@ public class AuthController {
         UserDto user = mapperService.userToDto(userService.getUserByEmail(auth.getName()));
         return ResponseEntity.ok(user);
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.ok().build();
+    }
 }

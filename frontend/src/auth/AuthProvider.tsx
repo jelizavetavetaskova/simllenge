@@ -1,7 +1,7 @@
 import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
 import type {User} from "../types/database.ts";
 import type {Login} from "../types/app.ts";
-import {login} from "../service/authService.ts";
+import {login, logout} from "../service/authService.ts";
 
 interface AuthContextType {
     user: User | null;
@@ -54,9 +54,9 @@ const AuthProvider = ({children}: {children: ReactNode}) => {
         setUser(user);
     }
 
-    const signOut = () => {
+    const signOut = async () => {
+        await logout();
         setUser(null);
-        // TODO logout
     }
 
     return (

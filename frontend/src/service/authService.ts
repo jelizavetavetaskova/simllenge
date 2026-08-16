@@ -32,3 +32,12 @@ export const login = async (loginData: Login) => {
     const data: User = await res.json();
     return data;
 }
+
+export const logout = async () => {
+    const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
+    if (!res.ok) throw Error(await res.text());
+}
