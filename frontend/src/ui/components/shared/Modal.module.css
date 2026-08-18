@@ -14,7 +14,7 @@
     justify-content: space-between;
 }
 
-.header .title, .header .close {
+.header .title {
     margin: 0 0 var(--space-xl);
 }
 
@@ -45,11 +45,6 @@
     position: fixed;
     inset: 0;
     background: var(--overlay);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: var(--space-xl);
 }
 
 .content {
