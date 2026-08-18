@@ -1,22 +1,18 @@
-.loginPage {
-    margin: auto;
-    padding: var(--space-4xl) var(--space-2xl);
-}
-
-.heading, .registerLink {
-    text-align: center;
-}
-
 .loginForm {
-    width: 40%;
-    margin: auto;
-    padding: var(--space-2xl);
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
 }
 
-.registerLink .link {
+.register {
+    text-align: center;
+    font-size: var(--fs-label);
+    color: var(--text-muted);
+    margin: var(--space-xl) 0 0;
+}
+
+.register a {
     color: var(--accent);
-    font-weight: bold;
+    font-weight: 600;
+    text-decoration: none;
 }

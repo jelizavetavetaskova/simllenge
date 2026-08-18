@@ -5,6 +5,7 @@ import Button from "../components/shared/Button.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useAuth} from "../../auth/AuthProvider.tsx";
 import styles from "./LoginPage.module.css";
+import LoginLayout from "../components/auth/LoginLayout.tsx";
 
 const LoginPage = () => {
     const [loginData, setLoginData] = useState<Login>({
@@ -40,9 +41,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div className={styles.loginPage}>
-            <h1 className={styles.heading}>Login</h1>
-
+        <LoginLayout type="login" subheading="Log in to continue your challenges">
             <form onSubmit={handleLogin} className={styles.loginForm}>
                 <InputField
                     id="email"
@@ -64,10 +63,10 @@ const LoginPage = () => {
 
                 <Button type="submit" variant="primary">Login</Button>
             </form>
-            <p className={styles.registerLink}>Don't have an account? <Link to="/register" className={styles.link}>Create an account</Link></p>
+            <p className={styles.register}>Don't have an account? <Link to="/register" className={styles.link}>Create an account</Link></p>
 
             {error && <p>{error}</p>}
-        </div>
+        </LoginLayout>
     )
 }
 

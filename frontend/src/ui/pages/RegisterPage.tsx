@@ -4,7 +4,8 @@ import type {Register} from "../../types/app.ts";
 import InputField from "../components/shared/InputField.tsx";
 import Button from "../components/shared/Button.tsx";
 import styles from "./RegisterPage.module.css";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import LoginLayout from "../components/auth/LoginLayout.tsx";
 
 const RegisterPage = () => {
     const [userData, setUserData] = useState<Register>({
@@ -51,9 +52,7 @@ const RegisterPage = () => {
     }
 
     return (
-        <div className={styles.page}>
-            <h1 className={styles.heading}>Register</h1>
-
+        <LoginLayout type="register" subheading="Start tracking your challenges">
             <form onSubmit={handleRegister} className={styles.registerForm}>
                 <InputField
                     id="username"
@@ -90,11 +89,13 @@ const RegisterPage = () => {
                     inputType="password"
                 />
 
-                <Button variant="primary" type="submit">Create an account</Button>
+                <Button variant="add" type="submit">Create an account</Button>
             </form>
 
+            <p className={styles.login}>Already have an account? <Link to="/login">Log in</Link></p>
+
             {error && <p>{error}</p>}
-        </div>
+        </LoginLayout>
     )
 }
 
