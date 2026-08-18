@@ -1,5 +1,5 @@
 .primary, .secondary, .add {
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-sm) var(--space-lg);
     font-size: var(--fs-button-lg);
     border: none;
     border-radius: var(--radius-sm);
