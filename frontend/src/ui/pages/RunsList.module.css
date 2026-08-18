@@ -1,32 +1,56 @@
-.runsTable tr, .runsTable th, .runsTable td {
+.runs {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.runs .header, .runs .content {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 60px;
+    padding: var(--space-lg) var(--space-xl);
     border-bottom: 1px solid var(--border);
 }
 
-.runsTable {
-    width: 100%;
-    margin: var(--space-md) auto;
-    font-size: var(--fs-base);
-    background: var(--surface);
-    padding: 0 var(--space-lg);
-    border-radius: var(--radius-lg);
+.runs .header {
+    font-size: var(--fs-label);
+    color: var(--text-muted);
 }
 
-.runsTable tr:last-child td {
-    border: none;
+.runs .content {
+    align-items: center;
 }
 
-.runsTable tr th, .runsTable tr td {
-    padding: var(--space-xl) var(--space-2xl);
+.runs .content .runId {
+    color: var(--text-muted);
 }
 
-.runsTable tr th {
-    text-align: left;
+.runs .content .budget span, .runs .content .stage span {
+    font-size: var(--fs-label);
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-pill);
 }
 
-.runsTable td {
+.runs .content .budget span {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.runs .content .stage span {
+    background: var(--accent-purple-soft);
+    color: var(--accent-purple);
+}
+
+.runs .content .link a {
     color: var(--text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.runsTable td a {
-    color: var(--text);
+.noRuns {
+    color: var(--text-muted);
+    font-size: var(--fs-button-lg);
 }

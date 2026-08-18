@@ -60,28 +60,25 @@ const RunsList = () => {
             ) : error ? (
                 <p>{error}</p>
             ) : runs.length === 0 ? (
-                <p>No runs</p>
+                <p className={styles.noRuns}>No runs</p>
             ) : (
-                <table className={styles.runsTable}>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Budget</th>
-                        <th>Stage</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div className={styles.runs}>
+                    <div className={styles.header}>
+                        <div>ID</div>
+                        <div>Budget</div>
+                        <div>Stage</div>
+                        <div></div>
+                    </div>
+
                     {runs.map(run => (
-                        <tr key={run.runId}>
-                            <td>#{run.runId}</td>
-                            <td>${run.budget}</td>
-                            <td>{run.stage.name}</td>
-                            <td><Link to={`/challenges/${challengeId}/runs/${run.runId}`}><ArrowRight /></Link></td>
-                        </tr>
+                        <div key={run.runId} className={styles.content}>
+                            <div className={styles.runId}>#{run.runId}</div>
+                            <div className={styles.budget}><span>${run.budget}</span></div>
+                            <div className={styles.stage}><span>Stage {run.stage.stageOrder} - {run.stage.name}</span></div>
+                            <div className={styles.link}><Link to={`/challenges/${challengeId}/runs/${run.runId}`}><ArrowRight /></Link></div>
+                        </div>
                     ))}
-                    </tbody>
-                </table>
+                </div>
             )}
 
             <Modal open={isModalOpen} onOpenChange={setModalOpen} title="Create a run">

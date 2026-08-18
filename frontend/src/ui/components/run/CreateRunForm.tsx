@@ -86,7 +86,7 @@ const CreateRunForm = ({challengeId, onSuccess, onClose}: CreateRunFormProps) =>
                     onChange={(e) => setSelectedStage(Number(e.target.value))}
                 >
                     {stages.map(stage => (
-                        <option value={stage.stageId} key={stage.stageId}>{stage.name}</option>
+                        <option value={stage.stageId} key={stage.stageId}>Stage {stage.stageOrder} - {stage.name}</option>
                     ))}
                 </SelectField>
 

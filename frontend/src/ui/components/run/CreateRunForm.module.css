@@ -1,8 +1,7 @@
 .form {
-    padding: var(--space-md);
     display: flex;
     flex-direction: column;
-    width: 100%;
+    gap: var(--space-lg);
 }
 
 .form .buttons {
