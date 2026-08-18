@@ -37,7 +37,9 @@ const ChallengesList = () => {
             ) : (
                 <div className={styles.challengeList}>
                     {challenges.map(challenge => (
-                        <div key={challenge.challengeId} className={styles.challenge}><Link to={`/challenges/${challenge.challengeId}/runs`}>{challenge.title}</Link></div>
+                        <Link className={styles.challenge} to={`/challenges/${challenge.challengeId}/runs`}>
+                            <div className={styles.title}>{challenge.title}</div>
+                        </Link>
                     ))}
                 </div>
             )}
