@@ -1,5 +1,5 @@
 import type {Sim} from "../../../types/database.ts";
-import {Cake, Pencil, Skull} from "lucide-react";
+import {Cake, Pencil, Skull, Users} from "lucide-react";
 import styles from "./SimCard.module.css";
 
 interface SimCardProps {
@@ -17,7 +17,7 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath}: SimCardProps) => {
                 <span className={styles.age}>{sim.lifeStage}</span>
             </div>
 
-            <span className={styles.role}>{sim.familyRole.name}</span>
+            <span className={styles.role}><Users /> {sim.familyRole.name}</span>
 
             {sim.alive &&
                 <div className={styles.actions}>

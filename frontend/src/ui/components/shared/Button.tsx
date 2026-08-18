@@ -6,12 +6,13 @@ interface ButtonProps {
     onClick?: () => void;
     children: ReactNode;
     type?: "button"|"submit";
+    className?: string
 }
 
-const Button = ({variant, onClick, children, type = "button"}: ButtonProps) => {
+const Button = ({variant, onClick, children, type = "button", className}: ButtonProps) => {
 
     return (
-        <button onClick={onClick} className={styles[variant]} type={type}>
+        <button onClick={onClick} className={`${styles[variant]} ${className}`} type={type}>
             {children}
         </button>
     )

@@ -3,7 +3,7 @@
     font-size: var(--fs-button-lg);
     border: none;
     border-radius: var(--radius-sm);
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
     transition: filter 0.2s;
 }
@@ -25,5 +25,5 @@
 
 .add {
     border-radius: var(--radius-md);
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-md) var(--space-xl);
 }

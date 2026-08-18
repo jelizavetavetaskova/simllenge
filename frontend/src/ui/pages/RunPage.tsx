@@ -88,7 +88,7 @@ const RunPage = () => {
 
     return (
         <PageLayout
-            heading={`Run: ${run?.stage.name}`}
+            heading="The Kingdom: Path to the Throne" // TODO get a challenge from backend
             action={
                 <Button
                     variant="add"

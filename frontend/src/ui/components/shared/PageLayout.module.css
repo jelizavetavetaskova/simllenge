@@ -1,15 +1,19 @@
 .page {
     padding: var(--space-4xl) var(--space-2xl) var(--space-5xl);
+    margin: 0 auto;
 }
 
-.heading {
+.head {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-lg);
+    align-items: flex-end;
+    margin-bottom: var(--space-3xl);
 }
 
 .heading h1 {
     font-size: var(--fs-heading);
+    margin-bottom: var(--space-sm);
 }

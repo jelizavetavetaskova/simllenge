@@ -1,36 +1,27 @@
 .runInfo {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
     gap: var(--space-md);
-    align-items: center;
-    margin-bottom: var(--space-md);
+}
+
+.runInfo .stage, .runInfo .budget {
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-xl);
+    font-size: var(--fs-label);
+    border-radius: var(--radius-pill);
 }
 
 .runInfo .budget {
     color: var(--accent);
     background: var(--accent-soft);
-    font-weight: bold;
-    padding: var(--space-xs) var(--space-xl);
-    border-radius: var(--radius-pill);
-    font-size: var(--fs-label);
 }
 
 .runInfo .stage {
-    border-radius: var(--radius-pill);
     background: var(--accent-purple-soft);
     color: var(--accent-purple);
-    padding: var(--space-xs) var(--space-xl);
-    font-weight: bold;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--space-xl);
-}
-
-.dead {
-    opacity: 0.6;
 }
 
 .sim_block {
@@ -40,4 +31,18 @@
 .sim_block h2 {
     margin-bottom: var(--space-lg);
     font-size: var(--fs-section-heading);
+    font-weight: 600;
+}
+
+.cards {
+    display: grid;
+    justify-content: flex-start;
+    align-items: stretch;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-4xl);
+}
+
+.dead {
+    opacity: 0.6;
 }

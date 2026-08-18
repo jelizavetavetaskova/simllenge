@@ -14,14 +14,14 @@ const PageLayout = ({heading, action, subheading, children}: PageLayoutProps) =>
             <div className={styles.head}>
                 <div className={styles.heading}>
                     <h1>{heading}</h1>
-                    {action}
+                    {subheading &&
+                        <div className={styles.subheading}>
+                            {subheading}
+                        </div>
+                    }
                 </div>
 
-                {subheading &&
-                    <div className={styles.subheading}>
-                        {subheading}
-                    </div>
-                }
+                {action}
             </div>
 
             {children}

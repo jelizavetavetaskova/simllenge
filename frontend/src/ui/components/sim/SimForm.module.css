@@ -1,13 +1,23 @@
-form {
-    padding: var(--space-md);
+.form {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: var(--space-md);
 }
 
-form .buttons {
+.form .fields {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.form .buttons {
+    display: flex;
     gap: var(--space-sm);
-    margin-top: var(--space-md);
+    margin-top: var(--space-2xl);
+}
+
+.form .buttons button {
+    flex: 1;
 }

@@ -1,17 +1,40 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: var(--space-xl);
+}
+
 .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+.header .title, .header .close {
+    margin: 0 0 var(--space-xl);
+}
+
 .header .title {
     font-size: var(--fs-title);
+    font-weight: 600;
+    margin: 0 0 var(--space-xl);
 }
 
 .header .close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 28px;
+    height: 28px;
+    background: none;
     border: none;
-    background: var(--surface);
-    color: var(--text);
+    cursor: pointer;
+    padding: 0;
+    color: var(--text-muted);
 }
 
 .header .close:hover {
@@ -22,16 +45,19 @@
     position: fixed;
     inset: 0;
     background: var(--overlay);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-xl);
 }
 
 .content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background: var(--surface);
-    color: var(--text);
-    padding: var(--space-2xl);
     border-radius: var(--radius-xl);
-    min-width: 400px;
+    padding: var(--space-2xl);
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    top: 0;
 }

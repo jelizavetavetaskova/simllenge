@@ -14,17 +14,19 @@ const Modal = ({open, onOpenChange, title, children}: ModalProps) => {
     return (
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
             <Dialog.Portal>
-                <Dialog.Overlay className={styles.overlay} />
+                <div className={styles.modal}>
+                    <Dialog.Overlay className={styles.overlay} />
 
-                <Dialog.Content className={styles.content}>
-                    <div className={styles.header}>
-                        <Dialog.Title className={styles.title}>{title}</Dialog.Title>
-                        <Dialog.Close asChild>
-                            <button className={styles.close}><X size={15}/></button>
-                        </Dialog.Close>
-                    </div>
-                    {children}
-                </Dialog.Content>
+                    <Dialog.Content className={styles.content}>
+                        <div className={styles.header}>
+                            <Dialog.Title className={styles.title}>{title}</Dialog.Title>
+                            <Dialog.Close asChild className={styles.closeContainer}>
+                                <button className={styles.close}><X size={20}/></button>
+                            </Dialog.Close>
+                        </div>
+                        {children}
+                    </Dialog.Content>
+                </div>
             </Dialog.Portal>
         </Dialog.Root>
     )
