@@ -14,4 +14,5 @@ public class RunDto {
     private int runId;
     private int budget;
     private StageDto stage;
+    private String challengeTitle;
 }

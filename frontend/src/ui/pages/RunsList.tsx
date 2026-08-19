@@ -43,7 +43,7 @@ const RunsList = () => {
 
     return (
         <PageLayout
-            heading="Runs"
+            heading="My runs"
             action={
                 <Button
                     variant="add"
