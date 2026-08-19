@@ -87,6 +87,7 @@ public class MapperServiceImpl implements MapperService {
         dto.setRunId(run.getRunId());
         dto.setBudget(run.getBudget());
         dto.setStage(stageToDto(run.getStage()));
+        dto.setChallengeTitle(run.getChallenge().getTitle());
         return dto;
     }
 

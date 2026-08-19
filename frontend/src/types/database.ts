@@ -40,6 +40,7 @@ export type Run = {
     runId: number;
     budget: number;
     stage: Stage;
+    challengeTitle: string;
 }
 
 export type Sim = {

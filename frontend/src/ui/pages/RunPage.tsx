@@ -8,6 +8,7 @@ import SimCard from "../components/sim/SimCard.tsx";
 import styles from "./RunPage.module.css";
 import Button from "../components/shared/Button.tsx";
 import Modal from "../components/shared/Modal.tsx";
+import PageLayout from "../components/shared/PageLayout.tsx";
 
 
 const RunPage = () => {
@@ -86,29 +87,35 @@ const RunPage = () => {
     }, [runId]);
 
     return (
-        <div className={styles.page}>
+        <PageLayout
+            heading={run?.challengeTitle ?? ""}
+            action={
+                <Button
+                    variant="add"
+                    type="button"
+                    onClick={() => {
+                        setEditingSim(null);
+                        setModalOpen(true);
+                    }}
+                >
+                    + Add a sim
+                </Button>
+            }
+            subheading={
+                run ?
+                <div className={styles.runInfo}>
+                    <p className={styles.stage}>Stage {run.stage.stageOrder} - {run.stage.name}</p>
+                    <p className={styles.budget}>Budget: ${run.budget}</p>
+                </div>
+                    : undefined
+            }
+        >
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : run && (
                 <div>
-                    <h1>Run: {run.stage.name}</h1>
-
-                    <div className={styles.run}>
-                        <p className={styles.budget}>Budget: ${run.budget}</p>
-                        <Button
-                            variant="primary"
-                            type="button"
-                            onClick={() => {
-                                setEditingSim(null);
-                                setModalOpen(true);
-                            }}
-                        >
-                            + Add a sim
-                        </Button>
-                    </div>
-
                     <div className={styles.sim_block}>
                         <h2>Family</h2>
                         <div className={styles.cards}>
@@ -149,7 +156,7 @@ const RunPage = () => {
                 </div>
             )
             }
-        </div>
+        </PageLayout>
     )
 }
 

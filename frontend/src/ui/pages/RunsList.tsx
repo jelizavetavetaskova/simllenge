@@ -4,9 +4,10 @@ import {Link, useParams} from "react-router-dom";
 import {getChallengeRuns} from "../../service/runService.ts";
 import CreateRunForm from "../components/run/CreateRunForm.tsx";
 import {ArrowRight} from "lucide-react";
-import styles from "./RunsList.module.css";
 import Button from "../components/shared/Button.tsx";
 import Modal from "../components/shared/Modal.tsx";
+import PageLayout from "../components/shared/PageLayout.tsx";
+import styles from "./RunsList.module.css";
 
 const RunsList = () => {
     const [runs, setRuns] = useState<Run[]>([]);
@@ -41,45 +42,43 @@ const RunsList = () => {
     }, [challengeId]);
 
     return (
-        <div className={styles.page}>
-            <div className={styles.run}>
-                <h1>Runs</h1>
+        <PageLayout
+            heading="My runs"
+            action={
                 <Button
-                    variant="primary"
+                    variant="add"
                     type="button"
                     onClick={() => setModalOpen(true)}
                 >
                     + Create a run
                 </Button>
-            </div>
+            }
+        >
 
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : runs.length === 0 ? (
-                <p>No runs</p>
+                <p className={styles.noRuns}>No runs</p>
             ) : (
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Budget</th>
-                        <th>Stage</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div className={styles.runs}>
+                    <div className={styles.header}>
+                        <div>ID</div>
+                        <div>Budget</div>
+                        <div>Stage</div>
+                        <div></div>
+                    </div>
+
                     {runs.map(run => (
-                        <tr key={run.runId}>
-                            <td>#{run.runId}</td>
-                            <td>${run.budget}</td>
-                            <td>{run.stage.name}</td>
-                            <td><Link to={`/challenges/${challengeId}/runs/${run.runId}`}><ArrowRight /></Link></td>
-                        </tr>
+                        <div key={run.runId} className={styles.content}>
+                            <div className={styles.runId}>#{run.runId}</div>
+                            <div className={styles.budget}><span>${run.budget}</span></div>
+                            <div className={styles.stage}><span>Stage {run.stage.stageOrder} - {run.stage.name}</span></div>
+                            <div className={styles.link}><Link to={`/challenges/${challengeId}/runs/${run.runId}`}><ArrowRight /></Link></div>
+                        </div>
                     ))}
-                    </tbody>
-                </table>
+                </div>
             )}
 
             <Modal open={isModalOpen} onOpenChange={setModalOpen} title="Create a run">
@@ -89,7 +88,7 @@ const RunsList = () => {
                     onClose={() => setModalOpen(false)}
                 />
             </Modal>
-        </div>
+        </PageLayout>
     )
 }
 

@@ -1,12 +1,18 @@
-.page {
-    margin: 20px 60px;
-}
-
-.heading {
-    text-align: center;
-}
-
 .registerForm {
-    width: 40%;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.login {
+    text-align: center;
+    font-size: var(--fs-label);
+    color: var(--text-muted);
+    margin: var(--space-xl) 0 0;
+}
+
+.login a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
 }

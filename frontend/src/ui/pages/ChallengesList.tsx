@@ -3,6 +3,7 @@ import type {Challenge} from "../../types/database.ts";
 import {getAllChallenges} from "../../service/challengeService.ts";
 import {Link} from "react-router-dom";
 import styles from "./ChallengesList.module.css";
+import PageLayout from "../components/shared/PageLayout.tsx";
 
 const ChallengesList = () => {
     const [challenges, setChallenges] = useState<Challenge[]>([]);
@@ -26,9 +27,7 @@ const ChallengesList = () => {
     }, []);
 
     return (
-        <div className={styles.page}>
-            <h1 className={styles.heading}>Challenges</h1>
-
+        <PageLayout heading="Challenges">
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
@@ -36,13 +35,15 @@ const ChallengesList = () => {
             ) : challenges.length === 0 ? (
                 <p>No challenges</p>
             ) : (
-                <ul className={styles.challengeList}>
+                <div className={styles.challengeList}>
                     {challenges.map(challenge => (
-                        <li key={challenge.challengeId} className={styles.challenge}><Link to={`/challenges/${challenge.challengeId}/runs`}>{challenge.title}</Link></li>
+                        <Link className={styles.challenge} to={`/challenges/${challenge.challengeId}/runs`}>
+                            <div className={styles.title}>{challenge.title}</div>
+                        </Link>
                     ))}
-                </ul>
+                </div>
             )}
-        </div>
+        </PageLayout>
     )
 }
 

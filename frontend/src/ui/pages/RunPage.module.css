@@ -1,42 +1,48 @@
-.page {
-    margin: 20px;
-}
-
-.page h1 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.page .run {
+.runInfo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: var(--space-md);
 }
 
-.page .run .budget {
+.runInfo .stage, .runInfo .budget {
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-xl);
+    font-size: var(--fs-label);
+    border-radius: var(--radius-pill);
+}
+
+.runInfo .budget {
     color: var(--accent);
     background: var(--accent-soft);
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 10px;
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
-.page .cards {
+.runInfo .stage {
+    background: var(--accent-purple-soft);
+    color: var(--accent-purple);
+}
+
+.sim_block {
+    margin-bottom: var(--space-4xl);
+}
+
+.sim_block h2 {
+    margin-bottom: var(--space-lg);
+    font-size: var(--fs-section-heading);
+    font-weight: 600;
+}
+
+.cards {
     display: grid;
+    justify-content: flex-start;
+    align-items: stretch;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-4xl);
 }
 
-.page .dead {
+.dead {
     opacity: 0.6;
-}
-
-.page .sim_block {
-    margin: 10px 0;
-}
-
-.page .sim_block h2 {
-    margin-bottom: 10px;
 }

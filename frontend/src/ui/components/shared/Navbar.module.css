@@ -1,28 +1,37 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    font-size: 20px;
-    padding: 20px;
+    padding: var(--space-xl) var(--space-2xl);
     background: var(--surface);
     align-items: center;
+    border-bottom: 1px solid var(--border);
 }
 
 .navbar .siteName {
     color: var(--accent);
     font-weight: bold;
-    font-size: 30px;
+    font-size: var(--fs-title);
+}
+
+.navbar .navigation {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: var(--space-2xl);
 }
 
 .navbar .navigation a {
     color: var(--text);
     text-decoration: none;
     transition: 0.2s;
+    font-weight: 600;
 }
 
 .navbar .auth {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    justify-content: flex-end;
+    gap: var(--space-md);
     align-items: center;
 }
 
@@ -30,6 +39,19 @@
     color: var(--accent-purple);
     text-decoration: none;
     transition: 0.2s;
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-lg);
+    font-weight: 600;
+}
+
+.navbar .auth .login {
+    background: var(--accent);
+    color: white;
+}
+
+.navbar .auth .register {
+    border: 1px solid var(--border);
+    color: var(--text);
 }
 
 .navbar .navigation a:hover {
@@ -38,4 +60,24 @@
 
 .navbar .auth a:hover {
     filter: brightness(1.3);
+}
+
+.navbar .auth .user {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-sm);
+    align-items: center;
+    margin-right: var(--space-xs);
+}
+
+.navbar .auth .user .userIcon {
+    margin-right: var(--space-xs);
+}
+
+.navbar .auth .user .username {
+    font-weight: 600;
+}
+
+.theme {
+    border: none;
 }

@@ -1,11 +1,14 @@
-import {useAuth} from "../../../auth/AuthProvider.tsx";
+import {useAuth} from "../../../context/auth/AuthProvider.tsx";
 import {Link} from "react-router-dom";
 import Button from "./Button.tsx";
 import styles from "./Navbar.module.css";
-import {User} from "lucide-react";
+import {Moon, Sun, User} from "lucide-react";
+import {useTheme} from "../../../context/theme/ThemeProvider.tsx";
 
 const Navbar = () => {
     const {user, signOut} = useAuth();
+
+    const {darkMode, toggleTheme} = useTheme();
 
     return (
         <div className={styles.navbar}>
@@ -18,16 +21,26 @@ const Navbar = () => {
             </div>
 
             <div className={styles.auth}>
+                <Button
+                    variant="secondary"
+                    className={styles.theme}
+                    onClick={toggleTheme}
+                >
+                    {darkMode ? <Sun size={28}/> : <Moon size={28}/>}
+                </Button>
+
                 {user ? (
                     <>
-                        <User/>
-                        <p>{user.username}</p>
+                        <div className={styles.user}>
+                            <User className={styles.userIcon} size={24}/>
+                            <p className={styles.username}>{user.username}</p>
+                        </div>
                         <Button variant="secondary" onClick={signOut}>Log out</Button>
                     </>
                 ) : (
                     <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Create an account</Link>
+                        <Link to="/register" className={styles.register}>Create an account</Link>
+                        <Link to="/login" className={styles.login}>Log in</Link>
                     </>
                 )}
             </div>

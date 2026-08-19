@@ -1,63 +1,56 @@
-.page {
-    margin: 20px;
+.runs {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
 }
 
-.page h1 {
-    text-align: center;
-}
-
-.page .run {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.page tr, .page th, .page td {
+.runs .header, .runs .content {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 60px;
+    padding: var(--space-lg) var(--space-xl);
     border-bottom: 1px solid var(--border);
 }
 
-.page table {
-    width: 80%;
-    margin: 10px auto;
-    font-size: 20px;
-    background: var(--surface);
-    padding: 0 15px;
-    border-radius: 15px;
+.runs .header {
+    font-size: var(--fs-label);
+    color: var(--text-muted);
 }
 
-.page tr:last-child td {
-    border: none;
-}
-
-.page table tr th {
-    padding: 10px;
-    text-align: left;
-}
-
-.page td {
-    padding: 10px 5px;
-    color: var(--text);
-}
-
-.page td a {
-    color: var(--text);
-}
-
-.header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.runs .content {
     align-items: center;
 }
 
-.header .close {
-    border: none;
-    background: var(--surface);
-    color: var(--text);
+.runs .content .runId {
+    color: var(--text-muted);
 }
 
-.header .close:hover {
-    cursor: pointer;
+.runs .content .budget span, .runs .content .stage span {
+    font-size: var(--fs-label);
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-pill);
+}
+
+.runs .content .budget span {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.runs .content .stage span {
+    background: var(--accent-purple-soft);
+    color: var(--accent-purple);
+}
+
+.runs .content .link a {
+    color: var(--text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noRuns {
+    color: var(--text-muted);
+    font-size: var(--fs-button-lg);
 }

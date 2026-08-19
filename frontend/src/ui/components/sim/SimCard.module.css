@@ -1,64 +1,78 @@
 .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 15px 20px;
-    width: 100%;
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-md);
 }
 
 .card .data {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-md);
 }
 
-.card .name {
-    font-size: 23px;
-    font-weight: bold;
+.card .data .name {
+    font-size: var(--fs-card-title);
+    font-weight: 600;
 }
 
 .card .role {
-    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: var(--fs-chip);
+    font-weight: 600;
+    margin-top: var(--space-xs);
+    gap: var(--space-sm);
 }
 
-.card .age {
-    font-size: 15px;
-    color: var(--accent-purple);
+.card .data .age {
     background: var(--accent-purple-soft);
-    border-radius: 15px;
-    padding: 5px 10px;
+    color: var(--accent-purple);
+    font-size: var(--fs-chip);
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
 }
 
 .card .actions {
-    margin-top: 10px;
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
 }
 
 .card .actions button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     outline: none;
-    border: none;
-    padding: 5px;
+    padding: var(--space-sm);
     cursor: pointer;
-    border-radius: 5px;
-}
-
-.card .actions .edit {
-    background: var(--surface);
+    border-radius: var(--radius-sm);
     border: 1px solid var(--border);
-}
-
-.card .actions .age_up {
-    background: var(--accent);
+    background: var(--surface);
 }
 
 .card .actions button:hover {
     filter: brightness(1.1);
 }
 
+.card .actions .age_up {
+    color: var(--accent);
+}
+
 .card .actions .death {
-    background: var(--danger);
+    color: var(--danger);
 }
 
 .card .actions button:disabled {
@@ -67,4 +81,3 @@
     border: 1px solid var(--border);
     cursor: auto;
 }
-

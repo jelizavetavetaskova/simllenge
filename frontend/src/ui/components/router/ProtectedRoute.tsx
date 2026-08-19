@@ -1,4 +1,4 @@
-import {useAuth} from "../../../auth/AuthProvider.tsx";
+import {useAuth} from "../../../context/auth/AuthProvider.tsx";
 import {Navigate} from "react-router-dom";
 import type {ReactNode} from "react";
 

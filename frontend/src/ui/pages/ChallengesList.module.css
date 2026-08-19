@@ -1,24 +1,18 @@
-.page {
-    margin: 20px;
-}
-
-.heading {
-    text-align: center;
-}
-
 .challengeList {
-    width: 80%;
-    margin: 20px auto auto;
-    background: var(--surface);
-    border-radius: 10px;
-    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-xl);
 }
 
 .challenge {
-    font-size: 20px;
-    padding: 10px 15px;
-    border-radius: 10px;
-    transition: background-color 0.2s;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl) var(--space-xl);
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    transition: 0.2s;
 }
 
 .challenge:hover {
@@ -27,9 +21,7 @@
     cursor: pointer;
 }
 
-.challenge a {
-    text-decoration: none;
-    color: var(--text);
-    display: inline-block;
-    width: 100%;
+.challenge .title {
+    font-size: var(--fs-card-title);
+    font-weight: 600;
 }

@@ -1,18 +1,18 @@
-.primary, .secondary {
-    padding: 10px 15px;
-    font-size: 15px;
+.primary, .secondary, .add {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--fs-button-lg);
     border: none;
-    border-radius: 10px;
-    font-weight: bold;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
     cursor: pointer;
     transition: filter 0.2s;
 }
 
-.primary:hover, .secondary:hover {
+.primary:hover, .secondary:hover, .add:hover {
     filter: brightness(1.1);
 }
 
-.primary {
+.primary, .add {
     background: var(--accent);
     color: white;
 }
@@ -21,4 +21,9 @@
     background: var(--surface);
     color: var(--text);
     border: 1px solid var(--border);
+}
+
+.add {
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-xl);
 }
