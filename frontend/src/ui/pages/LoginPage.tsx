@@ -3,7 +3,7 @@ import {useState, type SubmitEvent, type ChangeEvent} from "react";
 import type {Login} from "../../types/app.ts";
 import Button from "../components/shared/Button.tsx";
 import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "../../auth/AuthProvider.tsx";
+import {useAuth} from "../../context/auth/AuthProvider.tsx";
 import styles from "./LoginPage.module.css";
 import LoginLayout from "../components/auth/LoginLayout.tsx";
 

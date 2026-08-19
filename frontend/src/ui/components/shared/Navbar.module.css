@@ -77,3 +77,7 @@
 .navbar .auth .user .username {
     font-weight: 600;
 }
+
+.theme {
+    border: none;
+}

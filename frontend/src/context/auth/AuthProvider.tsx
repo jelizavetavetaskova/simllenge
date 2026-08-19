@@ -1,7 +1,7 @@
 import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
-import type {User} from "../types/database.ts";
-import type {Login} from "../types/app.ts";
-import {login, logout} from "../service/authService.ts";
+import type {User} from "../../types/database.ts";
+import type {Login} from "../../types/app.ts";
+import {login, logout} from "../../service/authService.ts";
 
 interface AuthContextType {
     user: User | null;
@@ -16,7 +16,7 @@ export const useAuth = () => {
     const context = useContext(AuthContext);
 
     if (!context) {
-        throw new Error("useAuth must be used within AuthProvider");
+        throw Error("useAuth must be used within AuthProvider");
     }
 
     return context;
@@ -42,8 +42,6 @@ const AuthProvider = ({children}: {children: ReactNode}) => {
             } finally {
                 setLoading(false);
             }
-
-
         }
 
         checkAuth();
