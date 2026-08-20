@@ -4,4 +4,5 @@ import dev.vulpden.simllenge.sim.model.SimSkill;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SimSkillRepo extends JpaRepository<SimSkill, Integer> {
+    boolean existsBySimSimIdAndSkillSkillId(int simId, int skillId);
 }

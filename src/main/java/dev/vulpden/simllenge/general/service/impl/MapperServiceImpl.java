@@ -12,7 +12,9 @@ import dev.vulpden.simllenge.general.service.MapperService;
 import dev.vulpden.simllenge.run.dto.RunDto;
 import dev.vulpden.simllenge.run.model.Run;
 import dev.vulpden.simllenge.sim.dto.SimDto;
+import dev.vulpden.simllenge.sim.dto.SimSkillDto;
 import dev.vulpden.simllenge.sim.model.Sim;
+import dev.vulpden.simllenge.sim.model.SimSkill;
 import dev.vulpden.simllenge.skill.dto.SkillDto;
 import dev.vulpden.simllenge.skill.model.Skill;
 import dev.vulpden.simllenge.stage.dto.StageDto;
@@ -116,6 +118,16 @@ public class MapperServiceImpl implements MapperService {
         ChallengeDto dto = new ChallengeDto();
         dto.setChallengeId(challenge.getChallengeId());
         dto.setTitle(challenge.getTitle());
+        return dto;
+    }
+
+    @Override
+    public SimSkillDto simSkillToDto(SimSkill simSkill) {
+        SimSkillDto dto = new SimSkillDto();
+        dto.setSimSkillId(simSkill.getSimSkillId());
+        dto.setSkill(skillToDto(simSkill.getSkill()));
+        dto.setLevel(simSkill.getLevel());
+        dto.setUpdatedAt(simSkill.getUpdatedAt());
         return dto;
     }
 }
