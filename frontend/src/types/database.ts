@@ -61,3 +61,10 @@ export type Challenge = {
     challengeId: number;
     title: string;
 }
+
+export type SimSkill = {
+    simSkillId: number;
+    skill: Skill;
+    level: number;
+    updatedAt: string;
+}

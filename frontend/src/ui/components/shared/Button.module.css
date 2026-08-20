@@ -1,4 +1,4 @@
-.primary, .secondary, .add {
+.primary, .secondary, .add, .add_secondary {
     padding: var(--space-sm) var(--space-lg);
     font-size: var(--fs-button-lg);
     border: none;
@@ -8,7 +8,7 @@
     transition: filter 0.2s;
 }
 
-.primary:hover, .secondary:hover, .add:hover {
+.primary:hover, .secondary:hover, .add:hover, .add_secondary:hover {
     filter: brightness(1.1);
 }
 
@@ -26,4 +26,14 @@
 .add {
     border-radius: var(--radius-md);
     padding: var(--space-md) var(--space-xl);
+}
+
+.add_secondary {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: var(--space-sm);
+    border: 1px dashed var(--border);
+    color: var(--text-muted);
+    background: none;
 }

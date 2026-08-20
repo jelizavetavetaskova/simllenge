@@ -2,7 +2,7 @@ import type {ReactNode} from "react";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
-    variant: "primary"|"secondary"|"add"
+    variant: "primary"|"secondary"|"add"|"add_secondary";
     onClick?: () => void;
     children: ReactNode;
     type?: "button"|"submit";

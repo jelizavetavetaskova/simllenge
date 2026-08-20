@@ -27,3 +27,7 @@ export interface Login {
     email: string;
     password: string;
 }
+
+export interface AddSimSkill {
+    skillId: number;
+}
