@@ -1,6 +1,10 @@
 package dev.vulpden.simllenge.sim.service.impl;
 
 import dev.vulpden.simllenge.general.service.MapperService;
+import dev.vulpden.simllenge.requirement.model.Requirement;
+import dev.vulpden.simllenge.requirement.model.enums.MetricType;
+import dev.vulpden.simllenge.requirement.model.enums.Scope;
+import dev.vulpden.simllenge.run.model.Run;
 import dev.vulpden.simllenge.sim.dto.AddSimSkillDto;
 import dev.vulpden.simllenge.sim.dto.SimSkillDto;
 import dev.vulpden.simllenge.sim.model.Sim;
@@ -8,12 +12,14 @@ import dev.vulpden.simllenge.sim.model.SimSkill;
 import dev.vulpden.simllenge.sim.repo.SimRepo;
 import dev.vulpden.simllenge.sim.repo.SimSkillRepo;
 import dev.vulpden.simllenge.sim.service.SimSkillService;
+import dev.vulpden.simllenge.skill.dto.SkillDto;
 import dev.vulpden.simllenge.skill.model.Skill;
 import dev.vulpden.simllenge.skill.repo.SkillRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SimSkillServiceImpl implements SimSkillService {
@@ -54,5 +60,44 @@ public class SimSkillServiceImpl implements SimSkillService {
 
 
         return mapperService.simSkillToDto(simSkillRepo.save(simSkill));
+    }
+
+    @Override
+    public List<SkillDto> getSuggestedSkills(int simId, String email) {
+        Sim sim = simRepo.findById(simId)
+                .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+
+        if (!sim.getRun().getUser().getEmail().equals(email)) {
+            throw new NoSuchElementException("User does not have a run with this id");
+        }
+
+        Run run = sim.getRun();
+        List<Requirement> requirements = run.getStage().getRequirements()
+                .stream()
+                .filter(r -> r.getMetricType() == MetricType.SKILL)
+                .toList();
+
+        Set<Skill> skills = new HashSet<>();
+        for (Requirement requirement: requirements) {
+            if (requirement.getScope() == Scope.ROLE) {
+                if (sim.getFamilyRole().getFamilyRoleId() == requirement.getRole().getFamilyRoleId()) {
+                    skills.addAll(requirement.getSkills());
+                }
+            } else if (requirement.getScope() == Scope.EACH_MEMBER) {
+                if (sim.getLifeStage().ordinal() >= requirement.getMinLifeStage().ordinal()) {
+                    skills.addAll(requirement.getSkills());
+                }
+            }
+        }
+
+        Set<Integer> ownedSimSkills = sim.getSkills()
+                .stream()
+                .map(skill -> skill.getSkill().getSkillId())
+                .collect(Collectors.toSet());
+
+        return skills.stream()
+                .filter(skill -> !ownedSimSkills.contains(skill.getSkillId()))
+                .map(mapperService::skillToDto)
+                .toList();
     }
 }
