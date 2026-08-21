@@ -1,5 +1,5 @@
 import type {AddSimSkill} from "../types/app.ts";
-import type {SimSkill} from "../types/database.ts";
+import type {SimSkill, Skill} from "../types/database.ts";
 
 export const addSimSkill = async (simId: number, simSkill: AddSimSkill) => {
     const res = await fetch(`/api/sims/${simId}/skills`, {
@@ -14,5 +14,16 @@ export const addSimSkill = async (simId: number, simSkill: AddSimSkill) => {
     if (!res.ok) throw Error(await res.text());
 
     const data: SimSkill = await res.json();
+    return data;
+}
+
+export const getSuggestedSkills = async (simId: number) => {
+    const res = await fetch(`/api/sims/${simId}/skills/suggested`, {
+        credentials: "include"
+    });
+
+    if (!res.ok) throw Error(await res.text());
+
+    const data: Skill[] = await res.json();
     return data;
 }

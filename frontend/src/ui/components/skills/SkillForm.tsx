@@ -1,7 +1,6 @@
 import {useEffect, useState, type SubmitEvent} from "react";
 import type {Skill} from "../../../types/database.ts";
-import {getAllSkills} from "../../../service/skillService.ts";
-import {addSimSkill} from "../../../service/simSkillService.ts";
+import {addSimSkill, getSuggestedSkills} from "../../../service/simSkillService.ts";
 import Button from "../shared/Button.tsx";
 import styles from "./SkillForm.module.css";
 
@@ -33,7 +32,7 @@ const SkillForm = ({simId, onClose, onSuccess}: SkillFormProps) => {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                setSkills(await getAllSkills());
+                setSkills(await getSuggestedSkills(simId));
             } catch (e) {
                 (e instanceof Error) ? setError(e.message) : setError(String(e));
             } finally {
