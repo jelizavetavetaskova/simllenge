@@ -7,6 +7,7 @@ import dev.vulpden.simllenge.requirement.model.enums.Scope;
 import dev.vulpden.simllenge.run.model.Run;
 import dev.vulpden.simllenge.sim.dto.AddSimSkillDto;
 import dev.vulpden.simllenge.sim.dto.SimSkillDto;
+import dev.vulpden.simllenge.sim.dto.UpdateSimSkillDto;
 import dev.vulpden.simllenge.sim.model.Sim;
 import dev.vulpden.simllenge.sim.model.SimSkill;
 import dev.vulpden.simllenge.sim.repo.SimRepo;
@@ -99,5 +100,26 @@ public class SimSkillServiceImpl implements SimSkillService {
                 .filter(skill -> !ownedSimSkills.contains(skill.getSkillId()))
                 .map(mapperService::skillToDto)
                 .toList();
+    }
+
+    @Override
+    public SimSkillDto updateSkillLevel(int simSkillId, int simId, String email, UpdateSimSkillDto dto) {
+        Sim sim = simRepo.findById(simId)
+                .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+        if (!sim.getRun().getUser().getEmail().equals(email))
+            throw new NoSuchElementException("User does not have a run with this id");
+
+        SimSkill skill = simSkillRepo.findById(simSkillId)
+                .orElseThrow(() -> new NoSuchElementException("Skill does not exist"));
+        if (skill.getSim().getSimId() != sim.getSimId())
+            throw new IllegalArgumentException("Skill does not belong to this sim");
+
+        if (dto.getLevel() > skill.getSkill().getLevelCap())
+            throw new IllegalArgumentException("Level must be from 1 to " + skill.getSkill().getLevelCap());
+
+        skill.setLevel(dto.getLevel());
+        skill.setUpdatedAt(LocalDateTime.now());
+
+        return mapperService.simSkillToDto(simSkillRepo.save(skill));
     }
 }
