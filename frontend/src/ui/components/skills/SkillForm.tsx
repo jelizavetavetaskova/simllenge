@@ -1,7 +1,7 @@
 import {useEffect, useState, type SubmitEvent} from "react";
 import type {Skill} from "../../../types/database.ts";
 import {addSimSkill, getSuggestedSkills} from "../../../service/simSkillService.ts";
-import Button from "../shared/Button.tsx";
+import Button from "../shared/common/Button.tsx";
 import styles from "./SkillForm.module.css";
 
 interface SkillFormProps {

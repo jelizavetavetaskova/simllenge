@@ -1,12 +1,12 @@
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import RunsList from "./ui/pages/RunsList.tsx";
-import RunPage from "./ui/pages/RunPage.tsx";
-import RegisterPage from "./ui/pages/RegisterPage.tsx";
-import LoginPage from "./ui/pages/LoginPage.tsx";
+import RunsList from "./ui/pages/run/RunsList.tsx";
+import RunPage from "./ui/pages/run/RunPage.tsx";
+import RegisterPage from "./ui/pages/auth/RegisterPage.tsx";
+import LoginPage from "./ui/pages/auth/LoginPage.tsx";
 import AuthProvider from "./context/auth/AuthProvider.tsx";
 import ProtectedRoute from "./ui/components/router/ProtectedRoute.tsx";
-import ChallengesList from "./ui/pages/ChallengesList.tsx";
-import Navbar from "./ui/components/shared/Navbar.tsx";
+import ChallengesList from "./ui/pages/challenge/ChallengesList.tsx";
+import Navbar from "./ui/components/shared/common/Navbar.tsx";
 import {ThemeProvider} from "./context/theme/ThemeProvider.tsx";
 
 const App = () => {

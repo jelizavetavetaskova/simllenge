@@ -122,4 +122,19 @@ public class SimSkillServiceImpl implements SimSkillService {
 
         return mapperService.simSkillToDto(simSkillRepo.save(skill));
     }
+
+    @Override
+    public void removeSkill(int simSkillId, int simId, String email) {
+        Sim sim = simRepo.findById(simId)
+                .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+        if (!sim.getRun().getUser().getEmail().equals(email))
+            throw new NoSuchElementException("User does not have a run with this id");
+
+        SimSkill skill = simSkillRepo.findById(simSkillId)
+                .orElseThrow(() -> new NoSuchElementException("Skill does not exist"));
+        if (skill.getSim().getSimId() != sim.getSimId())
+            throw new IllegalArgumentException("Skill does not belong to this sim");
+
+        simSkillRepo.delete(skill);
+    }
 }

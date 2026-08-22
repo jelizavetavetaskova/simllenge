@@ -4,9 +4,9 @@ import type {CreateRun} from "../../../types/app.ts";
 import type {Stage} from "../../../types/database.ts";
 import {getChallengeStages} from "../../../service/stageService.ts";
 import styles from "./CreateRunForm.module.css";
-import Button from "../shared/Button.tsx";
-import InputField from "../shared/InputField.tsx";
-import SelectField from "../shared/SelectField.tsx";
+import Button from "../shared/common/Button.tsx";
+import InputField from "../shared/fields/InputField.tsx";
+import SelectField from "../shared/fields/SelectField.tsx";
 
 interface CreateRunFormProps {
     challengeId?: string;

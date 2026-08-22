@@ -1,12 +1,12 @@
 import type {Sim} from "../../../types/database.ts";
 import {Cake, Pencil, Skull, Users} from "lucide-react";
 import styles from "./SimCard.module.css";
-import Button from "../shared/Button.tsx";
-import Modal from "../shared/Modal.tsx";
+import Button from "../shared/common/Button.tsx";
+import Modal from "../shared/dialogs/Modal.tsx";
 import {useState} from "react";
 import SkillForm from "../skills/SkillForm.tsx";
 import SkillCard from "../skills/SkillCard.tsx";
-import {updateSimSkillLevel} from "../../../service/simSkillService.ts";
+import {removeSimSkill, updateSimSkillLevel} from "../../../service/simSkillService.ts";
 
 interface SimCardProps {
     sim: Sim;
@@ -34,6 +34,16 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillChanged}: SimCardProps) 
         }
     }
 
+    const removeSkill = async (simSkillId: number) => {
+        try {
+            setError("");
+            await removeSimSkill(sim.simId, simSkillId);
+            onSkillChanged();
+        } catch (e) {
+            (e instanceof Error) ? setError(e.message) : setError(String(e));
+        }
+    }
+
     return (
         <div className={styles.card}>
             <div className={styles.data}>
@@ -50,6 +60,7 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillChanged}: SimCardProps) 
                             <SkillCard
                                 skill={skill}
                                 onLevelChange={updateSkillLevel}
+                                onRemoveSkill={removeSkill}
                                 key={skill.simSkillId}
                                 isUpdating={updatingSkillId === skill.simSkillId}
                             />

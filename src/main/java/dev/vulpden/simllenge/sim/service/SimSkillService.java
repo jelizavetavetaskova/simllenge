@@ -13,4 +13,6 @@ public interface SimSkillService {
     List<SkillDto> getSuggestedSkills(int simId, String email);
 
     SimSkillDto updateSkillLevel(int simSkillId, int simId, String email, UpdateSimSkillDto dto);
+
+    void removeSkill(int simSkillId, int simId, String email);
 }

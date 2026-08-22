@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import type {Run} from "../../types/database.ts";
+import type {Run} from "../../../types/database.ts";
 import {Link, useParams} from "react-router-dom";
-import {getChallengeRuns} from "../../service/runService.ts";
-import CreateRunForm from "../components/run/CreateRunForm.tsx";
+import {getChallengeRuns} from "../../../service/runService.ts";
+import CreateRunForm from "../../components/run/CreateRunForm.tsx";
 import {ArrowRight} from "lucide-react";
-import Button from "../components/shared/Button.tsx";
-import Modal from "../components/shared/Modal.tsx";
-import PageLayout from "../components/shared/PageLayout.tsx";
+import Button from "../../components/shared/common/Button.tsx";
+import Modal from "../../components/shared/dialogs/Modal.tsx";
+import PageLayout from "../../components/shared/common/PageLayout.tsx";
 import styles from "./RunsList.module.css";
 
 const RunsList = () => {

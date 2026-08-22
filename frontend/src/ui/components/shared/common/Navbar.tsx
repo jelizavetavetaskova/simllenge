@@ -1,9 +1,9 @@
-import {useAuth} from "../../../context/auth/AuthProvider.tsx";
+import {useAuth} from "../../../../context/auth/AuthProvider.tsx";
 import {Link} from "react-router-dom";
 import Button from "./Button.tsx";
 import styles from "./Navbar.module.css";
 import {Moon, Sun, User} from "lucide-react";
-import {useTheme} from "../../../context/theme/ThemeProvider.tsx";
+import {useTheme} from "../../../../context/theme/ThemeProvider.tsx";
 
 const Navbar = () => {
     const {user, signOut} = useAuth();

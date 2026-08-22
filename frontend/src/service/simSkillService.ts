@@ -44,3 +44,12 @@ export const updateSimSkillLevel =
     const data: SimSkill = await res.json();
     return data;
 }
+
+export const removeSimSkill = async (simId: number, simSkillId: number) => {
+    const res = await fetch(`/api/sims/${simId}/skills/${simSkillId}`, {
+        method: "DELETE",
+        credentials: "include"
+    });
+
+    if (!res.ok) throw Error(await res.text());
+}

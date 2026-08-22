@@ -4,9 +4,9 @@ import {type FamilyRole, LIFE_STAGES, type Sim} from "../../../types/database.ts
 import {getAllFamilyRoles} from "../../../service/familyRoleService.ts";
 import {createSim, updateSim} from "../../../service/simService.ts";
 import styles from "./SimForm.module.css";
-import Button from "../shared/Button.tsx";
-import InputField from "../shared/InputField.tsx";
-import SelectField from "../shared/SelectField.tsx";
+import Button from "../shared/common/Button.tsx";
+import InputField from "../shared/fields/InputField.tsx";
+import SelectField from "../shared/fields/SelectField.tsx";
 
 interface CreateSimFormProps {
     sim?: Sim

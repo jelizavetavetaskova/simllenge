@@ -1,0 +1,43 @@
+.confirm {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+    padding: 20px;
+}
+
+.content {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    width: 100%;
+    max-width: 380px;
+}
+
+.title {
+    font-size: var(--fs-title);
+    font-weight: 600;
+    margin: 0 0 var(--space-md);
+}
+
+.description {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.buttons {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-2xl);
+}
+
+.buttons button {
+    flex: 1;
+}
+
+.action {
+    background: var(--danger);
+}

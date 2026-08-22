@@ -41,4 +41,11 @@ public class SimSkillController {
         SimSkillDto skill = simSkillService.updateSkillLevel(simSkillId, simId, auth.getName(), dto);
         return ResponseEntity.ok(skill);
     }
+
+    @DeleteMapping("/{simSkillId}")
+    public ResponseEntity<Void> removeSimSkill(@PathVariable int simId, @PathVariable int simSkillId,
+                                               Authentication auth) {
+        simSkillService.removeSkill(simSkillId, simId, auth.getName());
+        return ResponseEntity.noContent().build();
+    }
 }

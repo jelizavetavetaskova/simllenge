@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
-import type {Run, Sim} from "../../types/database.ts";
+import type {Run, Sim} from "../../../types/database.ts";
 import {useParams} from "react-router-dom";
-import {getRunById} from "../../service/runService.ts";
-import SimForm from "../components/sim/SimForm.tsx";
-import {ageUp, getSimsByRun, markSimAsDead} from "../../service/simService.ts";
-import SimCard from "../components/sim/SimCard.tsx";
+import {getRunById} from "../../../service/runService.ts";
+import SimForm from "../../components/sim/SimForm.tsx";
+import {ageUp, getSimsByRun, markSimAsDead} from "../../../service/simService.ts";
+import SimCard from "../../components/sim/SimCard.tsx";
 import styles from "./RunPage.module.css";
-import Button from "../components/shared/Button.tsx";
-import Modal from "../components/shared/Modal.tsx";
-import PageLayout from "../components/shared/PageLayout.tsx";
+import Button from "../../components/shared/common/Button.tsx";
+import Modal from "../../components/shared/dialogs/Modal.tsx";
+import PageLayout from "../../components/shared/common/PageLayout.tsx";
 
 
 const RunPage = () => {
