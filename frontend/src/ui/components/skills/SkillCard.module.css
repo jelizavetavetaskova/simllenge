@@ -1,0 +1,24 @@
+.skill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.level {
+    font-weight: 600;
+    min-width: 16px;
+    text-align: center;
+}
+
+.remove {
+    border: none;
+    margin-left: calc(var(--space-xs) / 2);
+    padding: 0;
+}

@@ -5,6 +5,7 @@ import Button from "../shared/Button.tsx";
 import Modal from "../shared/Modal.tsx";
 import {useState} from "react";
 import SkillForm from "../skills/SkillForm.tsx";
+import SkillCard from "../skills/SkillCard.tsx";
 
 interface SimCardProps {
     sim: Sim;
@@ -31,6 +32,10 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillAdded}: SimCardProps) =>
             {sim.alive &&
                 <>
                     <div className={styles.skills}>
+                        {sim.skills.map(skill => (
+                            <SkillCard skill={skill} key={skill.simSkillId} />
+                        ))}
+
                         <Button variant="add_secondary" className={styles.addSkill} onClick={() => setAddSkillModalOpen(true)}>
                             + skill
                         </Button>

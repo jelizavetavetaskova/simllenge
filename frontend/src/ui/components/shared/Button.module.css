@@ -8,7 +8,7 @@
     transition: filter 0.2s;
 }
 
-.primary:hover, .secondary:hover, .add:hover, .add_secondary:hover {
+.primary:hover, .secondary:hover, .add:hover, .add_secondary:hover, .level:hover {
     filter: brightness(1.1);
 }
 
@@ -36,4 +36,22 @@
     border: 1px dashed var(--border);
     color: var(--text-muted);
     background: none;
+}
+
+.level {
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    background: none;
+}
+
+.disabled {
+    color: var(--text-muted);
+    cursor: default;
 }
