@@ -4,6 +4,7 @@ import Button from "../shared/common/Button.tsx";
 import {X} from "lucide-react";
 import {useState} from "react";
 import ConfirmDialog from "../shared/dialogs/ConfirmDialog.tsx";
+import dayjs from "dayjs";
 
 interface SkillCardProps {
     skill: SimSkill;
@@ -18,8 +19,10 @@ const SkillCard =
 
     return (
         <div className={styles.skill}>
-            <span className={styles.skillName}>{skill.skill.name}</span>
-
+            <div className={styles.skillData}>
+                <span className={styles.skillName}>{skill.skill.name}</span>
+                <span className={styles.updateTime}>{dayjs(skill.updatedAt).fromNow()}</span>
+            </div>
             <div className={styles.actions}>
                 <Button
                     variant="level"
@@ -28,7 +31,9 @@ const SkillCard =
                 >
                     −
                 </Button>
+
                 <span className={styles.level}>{skill.level}</span>
+
                 <Button
                     variant="level"
                     onClick={() => onLevelChange(skill.simSkillId, skill.level + 1)}
