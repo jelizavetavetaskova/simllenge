@@ -10,7 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,7 +46,8 @@ public class Sim {
     private FamilyRole familyRole;
 
     @OneToMany(mappedBy = "sim")
-    private Set<SimSkill> skills = new HashSet<>();
+    @OrderBy("simSkillId ASC")
+    private List<SimSkill> skills = new ArrayList<>();
 
     @OneToMany(mappedBy = "sim")
     private Set<SimCareer> careers = new HashSet<>();

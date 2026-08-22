@@ -126,7 +126,7 @@ const RunPage = () => {
                                     onEdit={() => handleEdit(sim)}
                                     onAgeUp={handleAgeUp}
                                     onDeath={handleDeath}
-                                    onSkillAdded={fetchSims}
+                                    onSkillChanged={fetchSims}
                                 />
                             ))}
                         </div>
@@ -137,7 +137,7 @@ const RunPage = () => {
                             <h2>Deceased</h2>
                             <div className={`${styles.cards} ${styles.dead}`}>
                                 {dead.map(sim => (
-                                    <SimCard key={sim.simId} sim={sim} onSkillAdded={() => {}}/>
+                                    <SimCard key={sim.simId} sim={sim} onSkillChanged={() => {}}/>
                                 ))}
                             </div>
                         </div>

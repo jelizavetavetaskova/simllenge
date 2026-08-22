@@ -25,8 +25,6 @@ import dev.vulpden.simllenge.user.dto.UserDto;
 import dev.vulpden.simllenge.user.model.User;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
-
 @Service
 public class MapperServiceImpl implements MapperService {
     @Override
@@ -103,7 +101,7 @@ public class MapperServiceImpl implements MapperService {
         dto.setFamilyRole(familyRoleToDto(sim.getFamilyRole()));
         dto.setLifeStage(sim.getLifeStage());
         dto.setAlive(sim.isAlive());
-        dto.setSkills(sim.getSkills().stream().map(this::simSkillToDto).collect(Collectors.toSet()));
+        dto.setSkills(sim.getSkills().stream().map(this::simSkillToDto).toList());
         return dto;
     }
 

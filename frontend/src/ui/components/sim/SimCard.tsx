@@ -6,17 +6,33 @@ import Modal from "../shared/Modal.tsx";
 import {useState} from "react";
 import SkillForm from "../skills/SkillForm.tsx";
 import SkillCard from "../skills/SkillCard.tsx";
+import {updateSimSkillLevel} from "../../../service/simSkillService.ts";
 
 interface SimCardProps {
     sim: Sim;
     onEdit?: (sim: Sim) => void;
     onAgeUp?: (simId: number) => void;
     onDeath?: (simId: number) => void;
-    onSkillAdded: () => void;
+    onSkillChanged: () => void;
 }
 
-const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillAdded}: SimCardProps) => {
+const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillChanged}: SimCardProps) => {
     const [addSkillModalOpen, setAddSkillModalOpen] = useState(false);
+    const [error, setError] = useState("");
+    const [updatingSkillId, setUpdatingSkillId] = useState<number|null>(null);
+
+    const updateSkillLevel = async (skillId: number, level: number) => {
+        try {
+            setError("");
+            setUpdatingSkillId(skillId);
+            await updateSimSkillLevel(sim.simId, skillId, level);
+            onSkillChanged();
+        } catch (e) {
+            (e instanceof Error) ? setError(e.message) : setError(String(e));
+        } finally {
+            setUpdatingSkillId(null);
+        }
+    }
 
     return (
         <div className={styles.card}>
@@ -27,13 +43,16 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillAdded}: SimCardProps) =>
 
             <span className={styles.role}><Users /> {sim.familyRole.name}</span>
 
-
-
             {sim.alive &&
                 <>
                     <div className={styles.skills}>
                         {sim.skills.map(skill => (
-                            <SkillCard skill={skill} key={skill.simSkillId} />
+                            <SkillCard
+                                skill={skill}
+                                onLevelChange={updateSkillLevel}
+                                key={skill.simSkillId}
+                                isUpdating={updatingSkillId === skill.simSkillId}
+                            />
                         ))}
 
                         <Button variant="add_secondary" className={styles.addSkill} onClick={() => setAddSkillModalOpen(true)}>
@@ -50,8 +69,10 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillAdded}: SimCardProps) =>
             }
 
             <Modal open={addSkillModalOpen} onOpenChange={setAddSkillModalOpen} title={`Add skills: ${sim.name}`}>
-                <SkillForm simId={sim.simId} onClose={() => setAddSkillModalOpen(false)} onSuccess={onSkillAdded}/>
+                <SkillForm simId={sim.simId} onClose={() => setAddSkillModalOpen(false)} onSuccess={onSkillChanged}/>
             </Modal>
+
+            {error && <p>{error}</p>}
         </div>
     )
 }

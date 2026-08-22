@@ -27,3 +27,20 @@ export const getSuggestedSkills = async (simId: number) => {
     const data: Skill[] = await res.json();
     return data;
 }
+
+export const updateSimSkillLevel =
+    async (simId: number, simSkillId: number, level: number) => {
+    const res = await fetch(`/api/sims/${simId}/skills/${simSkillId}`, {
+        method: "PATCH",
+        credentials: "include",
+        body: JSON.stringify({level}),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (!res.ok) throw Error(await res.text());
+
+    const data: SimSkill = await res.json();
+    return data;
+}
