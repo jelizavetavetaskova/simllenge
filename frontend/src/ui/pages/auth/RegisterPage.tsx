@@ -1,11 +1,11 @@
-import {register} from "../../service/authService.ts";
+import {register} from "../../../service/authService.ts";
 import {type ChangeEvent, type SubmitEvent, useState} from "react";
-import type {Register} from "../../types/app.ts";
-import InputField from "../components/shared/InputField.tsx";
-import Button from "../components/shared/Button.tsx";
+import type {Register} from "../../../types/app.ts";
+import InputField from "../../components/shared/fields/InputField.tsx";
+import Button from "../../components/shared/common/Button.tsx";
 import styles from "./RegisterPage.module.css";
 import {Link, useNavigate} from "react-router-dom";
-import LoginLayout from "../components/auth/LoginLayout.tsx";
+import LoginLayout from "../../components/auth/LoginLayout.tsx";
 
 const RegisterPage = () => {
     const [userData, setUserData] = useState<Register>({

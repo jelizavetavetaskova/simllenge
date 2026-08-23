@@ -81,3 +81,15 @@
     border: 1px solid var(--border);
     cursor: auto;
 }
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-md);
+}
+
+.addSkill {
+    margin-top: var(--space-xs);
+}

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,4 +19,5 @@ public class SimDto {
     private LifeStage lifeStage;
     private FamilyRoleDto familyRole;
     private boolean alive;
+    private List<SimSkillDto> skills;
 }

@@ -1,11 +1,11 @@
-import InputField from "../components/shared/InputField.tsx";
+import InputField from "../../components/shared/fields/InputField.tsx";
 import {useState, type SubmitEvent, type ChangeEvent} from "react";
-import type {Login} from "../../types/app.ts";
-import Button from "../components/shared/Button.tsx";
+import type {Login} from "../../../types/app.ts";
+import Button from "../../components/shared/common/Button.tsx";
 import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "../../context/auth/AuthProvider.tsx";
+import {useAuth} from "../../../context/auth/AuthProvider.tsx";
 import styles from "./LoginPage.module.css";
-import LoginLayout from "../components/auth/LoginLayout.tsx";
+import LoginLayout from "../../components/auth/LoginLayout.tsx";
 
 const LoginPage = () => {
     const [loginData, setLoginData] = useState<Login>({

@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import type {Challenge} from "../../types/database.ts";
-import {getAllChallenges} from "../../service/challengeService.ts";
+import type {Challenge} from "../../../types/database.ts";
+import {getAllChallenges} from "../../../service/challengeService.ts";
 import {Link} from "react-router-dom";
 import styles from "./ChallengesList.module.css";
-import PageLayout from "../components/shared/PageLayout.tsx";
+import PageLayout from "../../components/shared/common/PageLayout.tsx";
 
 const ChallengesList = () => {
     const [challenges, setChallenges] = useState<Challenge[]>([]);

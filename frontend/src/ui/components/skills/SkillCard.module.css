@@ -1,0 +1,36 @@
+.skill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+}
+
+.skillData {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--space-xs) / 4);
+    min-width: 0;
+}
+
+.updateTime {
+    font-size: var(--fs-chip);
+    color: var(--text-muted);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.level {
+    font-weight: 600;
+    min-width: 16px;
+    text-align: center;
+}
+
+.remove {
+    border: none;
+    margin-left: calc(var(--space-xs) / 2);
+    padding: 0;
+}
