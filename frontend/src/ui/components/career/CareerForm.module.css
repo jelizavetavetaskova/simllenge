@@ -1,0 +1,41 @@
+.sectionTitle {
+    font-size: var(--fs-chip);
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    max-height: 280px;
+    overflow-y: auto;
+    margin-bottom: var(--space-lg);
+}
+
+.option {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: var(--radius-pill);
+    padding: var(--space-sm) var(--space-xl);
+    font-weight: 600;
+    user-select: none;
+    cursor: pointer;
+}
+
+.checked {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: white;
+}
+
+.option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}

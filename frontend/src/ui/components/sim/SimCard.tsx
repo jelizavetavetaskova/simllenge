@@ -7,26 +7,30 @@ import {useState} from "react";
 import SkillForm from "../skills/SkillForm.tsx";
 import SkillCard from "../skills/SkillCard.tsx";
 import {removeSimSkill, updateSimSkillLevel} from "../../../service/simSkillService.ts";
+import CareerForm from "../career/CareerForm.tsx";
 
 interface SimCardProps {
     sim: Sim;
     onEdit?: (sim: Sim) => void;
     onAgeUp?: (simId: number) => void;
     onDeath?: (simId: number) => void;
-    onSkillChanged: () => void;
+    onDataChanged: () => void;
 }
 
-const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillChanged}: SimCardProps) => {
-    const [addSkillModalOpen, setAddSkillModalOpen] = useState(false);
-    const [error, setError] = useState("");
+const SimCard = ({sim, onEdit, onAgeUp, onDeath, onDataChanged}: SimCardProps) => {
     const [updatingSkillId, setUpdatingSkillId] = useState<number|null>(null);
+
+    const [addSkillModalOpen, setAddSkillModalOpen] = useState(false);
+    const [addCareerModalOpen, setAddCareerModalOpen] = useState(false);
+
+    const [error, setError] = useState("");
 
     const updateSkillLevel = async (skillId: number, level: number) => {
         try {
             setError("");
             setUpdatingSkillId(skillId);
             await updateSimSkillLevel(sim.simId, skillId, level);
-            onSkillChanged();
+            onDataChanged();
         } catch (e) {
             (e instanceof Error) ? setError(e.message) : setError(String(e));
         } finally {
@@ -38,11 +42,13 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillChanged}: SimCardProps) 
         try {
             setError("");
             await removeSimSkill(sim.simId, simSkillId);
-            onSkillChanged();
+            onDataChanged();
         } catch (e) {
             (e instanceof Error) ? setError(e.message) : setError(String(e));
         }
     }
+
+
 
     return (
         <div className={styles.card}>
@@ -55,6 +61,18 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillChanged}: SimCardProps) 
 
             {sim.alive &&
                 <>
+                    <div className={styles.career}>
+                        {sim.career ?
+                            <div className={styles.job}></div>
+                            :
+                            <div className={styles.addCareer}>
+                                <Button variant="add_secondary" onClick={() => setAddCareerModalOpen(true)}>
+                                    + Career
+                                </Button>
+                            </div>
+                        }
+                    </div>
+
                     <div className={styles.skills}>
                         {sim.skills.map(skill => (
                             <SkillCard
@@ -66,21 +84,43 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onSkillChanged}: SimCardProps) 
                             />
                         ))}
 
-                        <Button variant="add_secondary" className={styles.addSkill} onClick={() => setAddSkillModalOpen(true)}>
+                        <Button
+                            variant="add_secondary"
+                            className={styles.addSkill}
+                            onClick={() => setAddSkillModalOpen(true)}
+                        >
                             + skill
                         </Button>
                     </div>
 
                     <div className={styles.actions}>
                         <button onClick={() => onEdit?.(sim)} className={styles.edit}><Pencil/></button>
-                        <button onClick={() => onAgeUp?.(sim.simId)} disabled={sim.lifeStage === "ELDER"} className={styles.age_up}><Cake/></button>
+                        <button
+                            onClick={() => onAgeUp?.(sim.simId)}
+                            disabled={sim.lifeStage === "ELDER"}
+                            className={styles.age_up}
+                        >
+                            <Cake/>
+                        </button>
                         <button onClick={() => onDeath?.(sim.simId)} className={styles.death}><Skull/></button>
                     </div>
                 </>
             }
 
             <Modal open={addSkillModalOpen} onOpenChange={setAddSkillModalOpen} title={`Add skills: ${sim.name}`}>
-                <SkillForm simId={sim.simId} onClose={() => setAddSkillModalOpen(false)} onSuccess={onSkillChanged}/>
+                <SkillForm
+                    simId={sim.simId}
+                    onClose={() => setAddSkillModalOpen(false)}
+                    onSuccess={onDataChanged}
+                />
+            </Modal>
+
+            <Modal open={addCareerModalOpen} onOpenChange={setAddCareerModalOpen} title={`Add career: ${sim.name}`}>
+                <CareerForm
+                    simId={sim.simId}
+                    onClose={() => setAddCareerModalOpen(false)}
+                    onSuccess={onDataChanged}
+                />
             </Modal>
 
             {error && <p>{error}</p>}
