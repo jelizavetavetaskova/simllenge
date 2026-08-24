@@ -62,7 +62,7 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onDataChanged}: SimCardProps) =
             {sim.alive &&
                 <>
                     <div className={styles.career}>
-                        {sim.career ?
+                        {sim.careers.length > 0 ?
                             <div className={styles.job}></div>
                             :
                             <div className={styles.addCareer}>

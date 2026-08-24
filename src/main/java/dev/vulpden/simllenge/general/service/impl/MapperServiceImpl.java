@@ -104,6 +104,7 @@ public class MapperServiceImpl implements MapperService {
         dto.setLifeStage(sim.getLifeStage());
         dto.setAlive(sim.isAlive());
         dto.setSkills(sim.getSkills().stream().map(this::simSkillToDto).toList());
+        dto.setCareers(sim.getCareers().stream().map(this::simCareerToDto).toList());
         return dto;
     }
 

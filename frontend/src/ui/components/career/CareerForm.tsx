@@ -1,6 +1,6 @@
 import {useEffect, useState, type SubmitEvent} from "react";
 import type {Career, CareerBranch} from "../../../types/database.ts";
-import {getSuggestedCareers} from "../../../service/simCareerService.ts";
+import {addCareer, getSuggestedCareers} from "../../../service/simCareerService.ts";
 import styles from "./CareerForm.module.css";
 import Button from "../shared/common/Button.tsx";
 
@@ -24,7 +24,13 @@ const CareerForm = ({simId, onSuccess, onClose}: CareerFormProps) => {
         e.preventDefault();
         try {
             setSaving(true);
-            // TODO add career
+
+            if (!chosenBranch) {
+                setError("Choose a branch!");
+                return;
+            }
+
+            await addCareer(simId, {careerBranchId: chosenBranch.careerBranchId})
             onSuccess();
             onClose();
         } catch (e) {
@@ -102,7 +108,7 @@ const CareerForm = ({simId, onSuccess, onClose}: CareerFormProps) => {
                             </>
                         }
 
-                        <Button variant="primary" disabled={!chosenBranch || saving}>
+                        <Button variant="primary" disabled={!chosenBranch || saving} type="submit">
                             {saving ? "Saving..." : "Save"}
                         </Button>
 
