@@ -7,7 +7,8 @@ import {useState} from "react";
 import SkillForm from "../skills/SkillForm.tsx";
 import SkillCard from "../skills/SkillCard.tsx";
 import {removeSimSkill, updateSimSkillLevel} from "../../../service/simSkillService.ts";
-import CareerForm from "../career/CareerForm.tsx";
+import SimCareerForm from "../career/SimCareerForm.tsx";
+import SimCareerCard from "../career/SimCareerCard.tsx";
 
 interface SimCardProps {
     sim: Sim;
@@ -19,6 +20,7 @@ interface SimCardProps {
 
 const SimCard = ({sim, onEdit, onAgeUp, onDeath, onDataChanged}: SimCardProps) => {
     const [updatingSkillId, setUpdatingSkillId] = useState<number|null>(null);
+    const [isCareerUpdating, setCareerUpdating] = useState(false);
 
     const [addSkillModalOpen, setAddSkillModalOpen] = useState(false);
     const [addCareerModalOpen, setAddCareerModalOpen] = useState(false);
@@ -48,7 +50,13 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onDataChanged}: SimCardProps) =
         }
     }
 
+    const updateCareerLevel = async (simCareerId: number, level: number) => {
 
+    }
+
+    const removeCareer = (simCareerId: number) => {
+
+    }
 
     return (
         <div className={styles.card}>
@@ -63,7 +71,12 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onDataChanged}: SimCardProps) =
                 <>
                     <div className={styles.career}>
                         {sim.careers.length > 0 ?
-                            <div className={styles.job}></div>
+                            <SimCareerCard
+                                career={sim.careers[0]}
+                                isUpdating={isCareerUpdating}
+                                onLevelChange={updateCareerLevel}
+                                onRemoveCareer={removeCareer}
+                            />
                             :
                             <div className={styles.addCareer}>
                                 <Button variant="add_secondary" onClick={() => setAddCareerModalOpen(true)}>
@@ -116,7 +129,7 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onDataChanged}: SimCardProps) =
             </Modal>
 
             <Modal open={addCareerModalOpen} onOpenChange={setAddCareerModalOpen} title={`Add career: ${sim.name}`}>
-                <CareerForm
+                <SimCareerForm
                     simId={sim.simId}
                     onClose={() => setAddCareerModalOpen(false)}
                     onSuccess={onDataChanged}

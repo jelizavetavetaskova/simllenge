@@ -1,7 +1,6 @@
 package dev.vulpden.simllenge.sim.dto;
 
 import dev.vulpden.simllenge.career.dto.CareerBranchDto;
-import dev.vulpden.simllenge.career.dto.CareerDto;
 import dev.vulpden.simllenge.career.model.enums.CareerType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

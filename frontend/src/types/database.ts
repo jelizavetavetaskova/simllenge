@@ -73,7 +73,9 @@ export type SimSkill = {
 
 export type SimCareer = {
     simCareerId: number;
-    careerBranch: CareerBranch;
+    careerBranch: CareerBranch
+    careerName: string;
+    careerType: "FULL_TIME"|"PART_TIME"|"FREELANCE";
     level: number;
     updatedAt: string;
 }

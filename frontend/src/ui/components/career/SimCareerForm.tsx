@@ -1,7 +1,7 @@
 import {useEffect, useState, type SubmitEvent} from "react";
 import type {Career, CareerBranch} from "../../../types/database.ts";
 import {addCareer, getSuggestedCareers} from "../../../service/simCareerService.ts";
-import styles from "./CareerForm.module.css";
+import styles from "./SimCareerForm.module.css";
 import Button from "../shared/common/Button.tsx";
 
 interface CareerFormProps {
@@ -10,7 +10,7 @@ interface CareerFormProps {
     onSuccess: () => void;
 }
 
-const CareerForm = ({simId, onSuccess, onClose}: CareerFormProps) => {
+const SimCareerForm = ({simId, onSuccess, onClose}: CareerFormProps) => {
     const [careers, setCareers] = useState<Career[]>([]);
 
     const [chosenCareer, setChosenCareer] = useState<Career|null>(null);
@@ -120,4 +120,4 @@ const CareerForm = ({simId, onSuccess, onClose}: CareerFormProps) => {
     )
 }
 
-export default CareerForm;
+export default SimCareerForm;
