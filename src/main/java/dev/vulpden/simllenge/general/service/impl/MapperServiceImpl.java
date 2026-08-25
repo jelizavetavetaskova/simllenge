@@ -140,6 +140,8 @@ public class MapperServiceImpl implements MapperService {
         SimCareerDto dto = new SimCareerDto();
         dto.setSimCareerId(simCareer.getSimCareerId());
         dto.setCareerBranch(careerBranchToDto(simCareer.getCareerBranch()));
+        dto.setCareerName(simCareer.getCareerBranch().getCareer().getName());
+        dto.setCareerType(simCareer.getCareerBranch().getCareer().getCareerType());
         dto.setLevel(simCareer.getLevel());
         dto.setUpdatedAt(simCareer.getUpdatedAt());
         return dto;
