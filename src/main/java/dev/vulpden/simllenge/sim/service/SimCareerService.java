@@ -13,4 +13,6 @@ public interface SimCareerService {
     SimCareerDto addCareer(int simId, AddSimCareerDto dto, String email);
 
     SimCareerDto updateCareerLevel(int simId, int simCareerId, String email, UpdateSimCareerDto dto);
+
+    void removeCareer(int simId, int simCareerId, String email);
 }

@@ -29,14 +29,24 @@ public class SimCareerController {
     }
 
     @PostMapping
-    public ResponseEntity<SimCareerDto> addCareer(@PathVariable int simId, @Valid @RequestBody AddSimCareerDto dto, Authentication auth) {
+    public ResponseEntity<SimCareerDto> addCareer(@PathVariable int simId, @Valid @RequestBody AddSimCareerDto dto,
+                                                  Authentication auth) {
         SimCareerDto career = simCareerService.addCareer(simId, dto, auth.getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(career);
     }
 
     @PatchMapping("/{simCareerId}")
-    public ResponseEntity<SimCareerDto> updateSimCareerLevel(@PathVariable int simId, @PathVariable int simCareerId, @Valid @RequestBody UpdateSimCareerDto dto, Authentication auth) {
+    public ResponseEntity<SimCareerDto> updateSimCareerLevel(@PathVariable int simId, @PathVariable int simCareerId,
+                                                             @Valid @RequestBody UpdateSimCareerDto dto,
+                                                             Authentication auth) {
         SimCareerDto career = simCareerService.updateCareerLevel(simId, simCareerId, auth.getName(), dto);
         return ResponseEntity.ok(career);
+    }
+
+    @DeleteMapping("/{simCareerId}")
+    public ResponseEntity<Void> removeCareer(@PathVariable int simId, @PathVariable int simCareerId,
+                                             Authentication auth) {
+        simCareerService.removeCareer(simId, simCareerId, auth.getName());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

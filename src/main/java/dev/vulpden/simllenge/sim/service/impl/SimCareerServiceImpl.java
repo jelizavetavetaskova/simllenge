@@ -128,4 +128,20 @@ public class SimCareerServiceImpl implements SimCareerService {
 
         return mapperService.simCareerToDto(simCareerRepo.save(career));
     }
+
+    @Override
+    public void removeCareer(int simId, int simCareerId, String email) {
+        Sim sim = simRepo.findById(simId)
+                .orElseThrow(() -> new NoSuchElementException("Sim does not exist"));
+
+        if (!sim.getRun().getUser().getEmail().equals(email))
+            throw new NoSuchElementException("User does not have a run with this id");
+
+        SimCareer career = simCareerRepo.findById(simCareerId)
+                .orElseThrow(() -> new NoSuchElementException("Career does not exist"));
+        if (career.getSim().getSimId() != simId)
+            throw new IllegalArgumentException("Career does not belong to this sim");
+
+        simCareerRepo.delete(career);
+    }
 }
