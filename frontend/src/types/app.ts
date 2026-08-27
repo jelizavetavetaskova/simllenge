@@ -31,3 +31,7 @@ export interface Login {
 export interface AddSimSkill {
     skillId: number;
 }
+
+export interface AddSimCareer {
+    careerBranchId: number;
+}

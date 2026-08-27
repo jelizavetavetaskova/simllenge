@@ -93,3 +93,8 @@
 .addSkill {
     margin-top: var(--space-xs);
 }
+
+.career {
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-lg);
+}

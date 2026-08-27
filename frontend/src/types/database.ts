@@ -50,6 +50,7 @@ export type Sim = {
     lifeStage: LifeStage;
     alive: boolean;
     skills: SimSkill[];
+    careers: SimCareer[];
 }
 
 export type User = {
@@ -66,6 +67,15 @@ export type Challenge = {
 export type SimSkill = {
     simSkillId: number;
     skill: Skill;
+    level: number;
+    updatedAt: string;
+}
+
+export type SimCareer = {
+    simCareerId: number;
+    careerBranch: CareerBranch
+    careerName: string;
+    careerType: "FULL_TIME"|"PART_TIME"|"FREELANCE";
     level: number;
     updatedAt: string;
 }

@@ -20,4 +20,5 @@ public class SimDto {
     private FamilyRoleDto familyRole;
     private boolean alive;
     private List<SimSkillDto> skills;
+    private List<SimCareerDto> careers;
 }
