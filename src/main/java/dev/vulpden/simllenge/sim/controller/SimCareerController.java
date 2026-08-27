@@ -3,6 +3,7 @@ package dev.vulpden.simllenge.sim.controller;
 import dev.vulpden.simllenge.career.dto.CareerDto;
 import dev.vulpden.simllenge.sim.dto.AddSimCareerDto;
 import dev.vulpden.simllenge.sim.dto.SimCareerDto;
+import dev.vulpden.simllenge.sim.dto.UpdateSimCareerDto;
 import dev.vulpden.simllenge.sim.service.SimCareerService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,11 @@ public class SimCareerController {
     public ResponseEntity<SimCareerDto> addCareer(@PathVariable int simId, @Valid @RequestBody AddSimCareerDto dto, Authentication auth) {
         SimCareerDto career = simCareerService.addCareer(simId, dto, auth.getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(career);
+    }
+
+    @PatchMapping("/{simCareerId}")
+    public ResponseEntity<SimCareerDto> updateSimCareerLevel(@PathVariable int simId, @PathVariable int simCareerId, @Valid @RequestBody UpdateSimCareerDto dto, Authentication auth) {
+        SimCareerDto career = simCareerService.updateCareerLevel(simId, simCareerId, auth.getName(), dto);
+        return ResponseEntity.ok(career);
     }
 }
