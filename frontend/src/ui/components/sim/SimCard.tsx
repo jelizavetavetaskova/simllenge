@@ -9,7 +9,7 @@ import SkillCard from "../skills/SkillCard.tsx";
 import {removeSimSkill, updateSimSkillLevel} from "../../../service/simSkillService.ts";
 import SimCareerForm from "../career/SimCareerForm.tsx";
 import SimCareerCard from "../career/SimCareerCard.tsx";
-import {updateSimCareerLevel} from "../../../service/simCareerService.ts";
+import {removeSimCareer, updateSimCareerLevel} from "../../../service/simCareerService.ts";
 
 interface SimCardProps {
     sim: Sim;
@@ -65,8 +65,14 @@ const SimCard = ({sim, onEdit, onAgeUp, onDeath, onDataChanged}: SimCardProps) =
         }
     }
 
-    const removeCareer = (simCareerId: number) => {
-
+    const removeCareer = async (simCareerId: number) => {
+        try {
+            setError("");
+            await removeSimCareer(sim.simId, simCareerId);
+            onDataChanged();
+        } catch (e) {
+            (e instanceof Error) ? setError(e.message) : setError(String(e));
+        }
     }
 
     return (

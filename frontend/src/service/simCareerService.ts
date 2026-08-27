@@ -44,3 +44,12 @@ export const updateSimCareerLevel =
     const data: SimCareer = await res.json();
     return data;
 }
+
+export const removeSimCareer = async (simId: number, simCareerId: number) => {
+    const res = await fetch(`/api/sims/${simId}/careers/${simCareerId}`, {
+        method: "DELETE",
+        credentials: "include"
+    });
+
+    if (!res.ok) throw Error(await res.text());
+}
