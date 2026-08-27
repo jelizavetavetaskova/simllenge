@@ -13,6 +13,12 @@ interface SimCareerCardProps {
     isUpdating: boolean
 }
 
+const maxLevel = {
+    FULL_TIME: 10,
+    PART_TIME: 5,
+    FREELANCE: 0
+}
+
 const SimCareerCard =
     ({career, onLevelChange, onRemoveCareer, isUpdating}: SimCareerCardProps) => {
 
@@ -29,23 +35,27 @@ const SimCareerCard =
             </div>
 
             <div className={styles.actions}>
-                <Button
-                    variant="level"
-                    onClick={() => onLevelChange(career.simCareerId, career.level - 1)}
-                    disabled={career.level === 1 || isUpdating}
-                >
-                    −
-                </Button>
+                {career.careerType !== "FREELANCE" &&
+                    <>
+                        <Button
+                            variant="level"
+                            onClick={() => onLevelChange(career.simCareerId, career.level - 1)}
+                            disabled={career.level === 1 || isUpdating}
+                        >
+                            −
+                        </Button>
 
-                <span className={styles.level}>{career.level}</span>
+                        <span className={styles.level}>{career.level}</span>
 
-                <Button
-                    variant="level"
-                    onClick={() => onLevelChange(career.simCareerId, career.level + 1)}
-                    disabled={career.level === 10 || isUpdating} // TODO get actual maximum
-                >
-                    +
-                </Button>
+                        <Button
+                            variant="level"
+                            onClick={() => onLevelChange(career.simCareerId, career.level + 1)}
+                            disabled={career.level === maxLevel[career.careerType] || isUpdating}
+                        >
+                            +
+                        </Button>
+                    </>
+            }
 
                 <Button variant="secondary" className={styles.remove} onClick={() => setConfirmOpen(true)}>
                     <X size={15}/>

@@ -27,3 +27,20 @@ export const addCareer = async (simId: number, simCareer: AddSimCareer) => {
     const data: SimCareer = await res.json();
     return data;
 }
+
+export const updateSimCareerLevel =
+    async (simId: number, simCareerId: number, level: number) => {
+    const res = await fetch(`/api/sims/${simId}/careers/${simCareerId}`, {
+        method: "PATCH",
+        credentials: "include",
+        body: JSON.stringify({level}),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (!res.ok) throw Error(await res.text());
+
+    const data: SimCareer = await res.json();
+    return data;
+}
