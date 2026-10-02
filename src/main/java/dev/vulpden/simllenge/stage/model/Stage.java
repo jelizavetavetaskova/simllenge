@@ -32,6 +32,9 @@ public class Stage {
     @Column(name = "tax_applies")
     private boolean taxApplies = true;
 
+    @Column(name = "tax_rate")
+    private int taxRate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "challenge_id")
     private Challenge challenge;
